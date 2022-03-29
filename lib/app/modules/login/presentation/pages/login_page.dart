@@ -1,5 +1,6 @@
 import 'package:camp_final/app/modules/login/presentation/pages/login_state.dart';
 import 'package:camp_final/app/modules/login/presentation/pages/login_store.dart';
+import 'package:camp_final/app/modules/login/presentation/widgets/input_text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_triple/flutter_triple.dart';
@@ -62,10 +63,21 @@ class BodySucess extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
           body: Center(
-        child: TextButton(
-            onPressed: () => store.login(
-                email: 'squad8.test@gmail.com', password: '12345678'),
-            child: const Text('LOGIN')),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const InputTextWidget(
+              hintText: 'Email',
+            ),
+            const InputTextWidget(
+              hintText: 'Senha',
+            ),
+            TextButton(
+                onPressed: () => store.login(
+                    email: 'squad8.test@gmail.com', password: '12345678'),
+                child: const Text('LOGIN')),
+          ],
+        ),
       )), //TODO: CASO DE SUCESSO
     );
   }

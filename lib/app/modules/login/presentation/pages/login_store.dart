@@ -14,7 +14,7 @@ class LoginStore extends StreamStore<Failure, LoginState> {
     final result = await _loginUsecase(
         AuthenticateEntity(email: email, password: password));
     result.fold(setError, (response) async {
-      //TODO: CASO DE SUCESSO;
+      update(LoginState(email: '', password: ''));
     });
     setLoading(false);
   }
