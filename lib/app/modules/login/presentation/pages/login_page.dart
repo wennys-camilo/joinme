@@ -1,10 +1,10 @@
-import 'package:camp_final/app/modules/login/presentation/pages/login_state.dart';
-import 'package:camp_final/app/modules/login/presentation/pages/login_store.dart';
-import 'package:camp_final/app/modules/login/presentation/widgets/input_text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_triple/flutter_triple.dart';
 import '../../../../shared/domain/helpers/errors/failure.dart';
+import '../pages/login_state.dart';
+import '../pages/login_store.dart';
+import '../widgets/input_text_widget.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -73,7 +73,7 @@ class BodySucess extends StatelessWidget {
               hintText: 'Senha',
             ),
             TextButton(
-                onPressed: () => store.login(
+                onPressed: () async => await store.login(
                     email: 'squad8.test@gmail.com', password: '12345678'),
                 child: const Text('LOGIN')),
           ],
