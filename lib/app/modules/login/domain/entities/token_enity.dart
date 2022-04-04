@@ -1,8 +1,5 @@
 class TokenEnity {
-  String token;
-  String refreshToken;
-  TokenEnity({
-    required this.token,
-    required this.refreshToken,
-  });
+  final String token;
+  final String refreshToken;
+  const TokenEnity({required this.token, required this.refreshToken});
 }

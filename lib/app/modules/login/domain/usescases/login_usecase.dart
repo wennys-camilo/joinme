@@ -1,9 +1,9 @@
-import 'package:camp_final/app/modules/login/domain/entities/authenticate_entity.dart';
-import 'package:camp_final/app/modules/login/domain/repositories/login_repository.dart';
-import 'package:camp_final/app/modules/login/domain/usescases/login_usecase_impl.dart';
-import 'package:camp_final/app/modules/login/domain/entities/response_auth_entity.dart';
 import 'package:dartz/dartz.dart';
 import '../../../../shared/domain/helpers/errors/failure.dart';
+import '../entities/authenticate_entity.dart';
+import '../entities/response_auth_entity.dart';
+import '../repositories/login_repository.dart';
+import 'login_usecase_impl.dart';
 
 class LoginUsecaseImpl implements LoginUsecase {
   final LoginRepository _repository;

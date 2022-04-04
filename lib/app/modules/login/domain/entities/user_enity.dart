@@ -6,7 +6,7 @@ class UserEntity {
   final String createdAt;
   final String? updatedAt;
   final String? deletedAt;
-  UserEntity({
+  const UserEntity({
     required this.id,
     required this.firstName,
     required this.lastName,

@@ -2,7 +2,7 @@ import 'token_enity.dart';
 import 'user_enity.dart';
 
 class ResponseAuthEntity {
-  TokenEnity token;
-  UserEntity user;
-  ResponseAuthEntity({required this.token, required this.user});
+  final TokenEnity token;
+  final UserEntity user;
+  const ResponseAuthEntity({required this.token, required this.user});
 }

@@ -15,7 +15,7 @@ class LoginRemoteDatasourceImpl implements LoginRemoteDatasource {
       {required AuthenticateEntity userAuth}) async {
     try {
       final Response response = await _httpClient.post(
-        'https://thiagosgdev.com/users/signin',
+        '/users/signin',
         data: {"email": userAuth.email, "password": userAuth.password},
       );
       print(response.data);
@@ -23,7 +23,7 @@ class LoginRemoteDatasourceImpl implements LoginRemoteDatasource {
     } on Failure {
       rethrow;
     } on DioError catch (error, stackTrace) {
-      throw ApiFailure(stackTrace: stackTrace);
+      throw ApiFailure(stackTrace: stackTrace, message: error.message);
     } catch (error, stackTrace) {
       throw DatasourceFailure(
           message: error.toString(), stackTrace: stackTrace);
