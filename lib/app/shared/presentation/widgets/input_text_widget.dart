@@ -8,7 +8,7 @@ class InputTextWidget extends StatelessWidget {
   final String? Function(String?)? validator;
   final bool obscureText;
   final Widget? suffixIcon;
-
+  final TextEditingController? controller;
   const InputTextWidget({
     Key? key,
     this.hintText,
@@ -16,6 +16,7 @@ class InputTextWidget extends StatelessWidget {
     this.validator,
     this.ontopHint,
     this.suffixIcon,
+    this.controller,
     this.obscureText = false,
   }) : super(key: key);
 
@@ -35,6 +36,7 @@ class InputTextWidget extends StatelessWidget {
           ),
           TextFormField(
             autovalidateMode: AutovalidateMode.onUserInteraction,
+            controller: controller,
             decoration: InputDecoration(
               hintText: hintText,
               contentPadding: const EdgeInsets.all(23.0),

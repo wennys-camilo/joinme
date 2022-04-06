@@ -1,3 +1,7 @@
+import 'package:camp_final/app/modules/signup/domain/entities/user_signup_entity.dart';
+
+import '../../domain/entities/interests_entity.dart';
+
 class SignupState {
   final bool policiesTerms;
   final String name;
@@ -7,6 +11,9 @@ class SignupState {
   final String emergencyName;
   final String emergencyPhone;
   final String phone;
+  final List<InterestsEntity> interestsList;
+  final List<InterestsEntity> selectedInterests;
+  final UserSignupEntity userSignupResponse;
   SignupState({
     required this.policiesTerms,
     required this.name,
@@ -16,6 +23,9 @@ class SignupState {
     required this.emergencyName,
     required this.emergencyPhone,
     required this.phone,
+    required this.interestsList,
+    required this.selectedInterests,
+    required this.userSignupResponse,
   });
 
   SignupState copyWith({
@@ -27,6 +37,9 @@ class SignupState {
     String? emergencyName,
     String? emergencyPhone,
     String? phone,
+    List<InterestsEntity>? interestsList,
+    List<InterestsEntity>? selectedInterests,
+    UserSignupEntity? userSignupResponse,
   }) {
     return SignupState(
       policiesTerms: policiesTerms ?? this.policiesTerms,
@@ -37,6 +50,9 @@ class SignupState {
       emergencyName: emergencyName ?? this.emergencyName,
       emergencyPhone: emergencyPhone ?? this.emergencyPhone,
       phone: phone ?? this.phone,
+      interestsList: interestsList ?? this.interestsList,
+      selectedInterests: selectedInterests ?? this.selectedInterests,
+      userSignupResponse: userSignupResponse ?? this.userSignupResponse,
     );
   }
 }

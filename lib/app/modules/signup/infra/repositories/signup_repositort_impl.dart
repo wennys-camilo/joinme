@@ -9,11 +9,11 @@ class SignupRepositoryImpl implements SignupRepository {
   SignupRepositoryImpl(this._remoteDatasource);
 
   @override
-  Future<Either<Failure, Unit>> singup(
+  Future<Either<Failure, UserSignupEntity>> singup(
       UserSignupEntity userSignupEntity) async {
     try {
-      await _remoteDatasource.signup(userSignupEntity);
-      return const Right(unit);
+      final response = await _remoteDatasource.signup(userSignupEntity);
+      return Right(response);
     } on Failure catch (error) {
       return Left(error);
     }

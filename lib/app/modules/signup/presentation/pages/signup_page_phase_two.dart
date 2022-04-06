@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:flutter_triple/flutter_triple.dart';
+
 import '../../../../shared/presentation/themes/app_theme.dart';
 import '../../../../shared/presentation/widgets/input_text_widget.dart';
 import '../../../../shared/presentation/widgets/rounded_button_widget.dart';
@@ -19,15 +19,12 @@ class _SignupPagePhaseTwoState
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      appBar: AppBar(
-        backgroundColor: AppTheme.colors.transparent,
-        elevation: 0,
-        iconTheme: IconThemeData(color: AppTheme.colors.primary),
-      ),
-      body: TripleBuilder(
-          store: store,
-          builder: (context, triple) {
-            return ListView(
+            appBar: AppBar(
+              backgroundColor: AppTheme.colors.transparent,
+              elevation: 0,
+              iconTheme: IconThemeData(color: AppTheme.colors.primary),
+            ),
+            body: ListView(
               physics: const BouncingScrollPhysics(),
               children: [
                 Container(
@@ -60,17 +57,26 @@ class _SignupPagePhaseTwoState
                   onChanged: store.onChangeEmergencyPhone,
                 ),
                 const SizedBox(height: 20),
+                GestureDetector(
+                  onTap: () {
+                    //TODO IMPLEMENT
+                  },
+                  child: Text(
+                    'pular',
+                    style: TextStyle(color: AppTheme.colors.primary),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                const SizedBox(height: 20),
                 Container(
                   padding: const EdgeInsets.fromLTRB(30, 8, 30, 20),
                   margin: const EdgeInsets.symmetric(horizontal: 100),
                   child: RoundedButtonWidget(
-                    onPressed: () async => await store.signup(),
-                    textButton: 'Criar conta',
+                    onPressed: () => Modular.to.navigate('./phaseThree'),
+                    textButton: 'Próximo',
                   ),
                 ),
               ],
-            );
-          }),
-    ));
+            )));
   }
 }

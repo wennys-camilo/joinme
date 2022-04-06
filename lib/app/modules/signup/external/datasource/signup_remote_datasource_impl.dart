@@ -1,4 +1,3 @@
-import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import '../../../../shared/domain/helpers/errors/failure.dart';
 import '../../domain/entities/user_signup_entity.dart';
@@ -10,13 +9,13 @@ class SignupRemoteDatasourceImpl implements SignupRemoteDatasource {
   const SignupRemoteDatasourceImpl(this._httpClient);
 
   @override
-  Future<Unit> signup(UserSignupEntity userSignupEntity) async {
+  Future<UserSignupEntity> signup(UserSignupEntity userSignupEntity) async {
     try {
-      await _httpClient.post(
+      final response = await _httpClient.post(
         '/users/signup',
         data: UserSignupMapper().to(userSignupEntity),
       );
-      return unit; //TODO: DEIXAR APENNAS NO REPOSITORIES
+      return UserSignupMapper().from(response.data);
     } on Failure {
       rethrow;
     } on DioError catch (error, stackTrace) {

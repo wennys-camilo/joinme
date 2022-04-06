@@ -31,160 +31,161 @@ class _LoginPageState extends ModularState<LoginPage, LoginStore> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-          body: Form(
-        key: _formKey,
-        child: ListView(
-          children: [
-            //TODO: COMPONENTIZAR
-            GestureDetector(
-              onTap: () {},
-              child: Container(
-                height: MediaQuery.of(context).size.height / 6,
-                //margin: const EdgeInsets.all(100)
-                margin: const EdgeInsets.fromLTRB(100, 20, 100, 70),
-                decoration: BoxDecoration(
-                  color: AppTheme.colors.grey,
-                  shape: BoxShape.circle,
+        body: Form(
+          key: _formKey,
+          child: ListView(
+            children: [
+              //TODO: COMPONENTIZAR
+              GestureDetector(
+                onTap: () {},
+                child: Container(
+                  height: MediaQuery.of(context).size.height / 6,
+                  //margin: const EdgeInsets.all(100)
+                  margin: const EdgeInsets.fromLTRB(100, 20, 100, 70),
+                  decoration: BoxDecoration(
+                    color: AppTheme.colors.grey,
+                    shape: BoxShape.circle,
+                  ),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(30, 8, 30, 20),
-              child: Text(
-                'Acesse sua conta?',
-                style: TextStyle(
-                  color: AppTheme.colors.primary.withOpacity(0.79),
-                  fontWeight: FontWeight.w600,
-                  fontSize: 20,
-                ),
-              ),
-            ),
-            InputTextWidget(
-              ontopHint: 'Seu e-mail?',
-              hintText: 'Email',
-              onChanged: store.onChangeEmail,
-              validator: Validatorless.multiple(
-                [
-                  Validatorless.email('E-mail invalido'),
-                  Validatorless.required('Campo obrigatório')
-                ],
-              ),
-            ),
-            TripleBuilder(
-              store: store,
-              builder: (context, triple) {
-                return InputTextWidget(
-                  ontopHint: 'Digite uma senha',
-                  hintText: 'Senha',
-                  onChanged: store.onChangePass,
-                  obscureText: store.state.obscurePass,
-                  suffixIcon: IconButton(
-                    icon: Icon(
-                      store.state.obscurePass
-                          ? Icons.visibility
-                          : Icons.visibility_off,
-                    ),
-                    onPressed: () => store.onChangeObscurePass(),
-                  ),
-                  validator: Validatorless.multiple([
-                    Validatorless.min(
-                        6, 'Sua senha deve possui no mínimo 6 caracteres'),
-                    Validatorless.required('Campo obrigatório'),
-                  ]),
-                );
-              },
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(40, 15, 30, 20),
-              child: Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(right: 12),
-                    child: TripleBuilder(
-                        store: store,
-                        builder: (context, triple) {
-                          return FlutterSwitch(
-                            activeColor: AppTheme.colors.primary,
-                            width: 42.0,
-                            height: 22.0,
-                            valueFontSize: 12.0,
-                            toggleSize: 18.0,
-                            value: store.state.rememberMe,
-                            padding: 2,
-                            onToggle: (_) => store.onChangeRememberMe(),
-                          );
-                        }),
-                  ),
-                  Text(
-                    'Permanecer conectado',
-                    style: TextStyle(
-                        fontSize: 16,
-                        color: AppTheme.colors.black.withOpacity(0.5)),
-                  )
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 25, bottom: 20),
-              child: Text(
-                'Esqueceu a senha?',
-                textAlign: TextAlign.center,
-                style: TextStyle(color: AppTheme.colors.primary),
-              ),
-            ),
-
-            TripleBuilder(
-              store: store,
-              builder: (context, triple) {
-                if (triple.isLoading) {
-                  return const Center(
-                      child: Padding(
-                    padding: EdgeInsets.only(bottom: 10),
-                    child: CircularProgressIndicator(),
-                  ));
-                }
-                return Container(
-                  padding: const EdgeInsets.fromLTRB(30, 8, 30, 20),
-                  margin: const EdgeInsets.symmetric(horizontal: 100),
-                  child: RoundedButtonWidget(
-                    onPressed: () async {
-                      if (_formKey.currentState!.validate()) {
-                        await store.login();
-                      }
-                    },
-                    textButton: 'entrar',
-                  ),
-                );
-              },
-            ),
-
-            GestureDetector(
-              onTap: () => Modular.to.navigate('/signup/'),
-              child: RichText(
-                textAlign: TextAlign.center,
-                text: TextSpan(
-                  text: "Não tem uma conta? ",
+              Padding(
+                padding: const EdgeInsets.fromLTRB(30, 8, 30, 20),
+                child: Text(
+                  'Acesse sua conta?',
                   style: TextStyle(
-                    fontSize: 15.0,
-                    color: AppTheme.colors.black.withOpacity(0.5),
+                    color: AppTheme.colors.primary.withOpacity(0.79),
+                    fontWeight: FontWeight.w600,
+                    fontSize: 20,
                   ),
-                  children: [
-                    TextSpan(
-                      text: "Cadastre-se aqui",
-                      style: TextStyle(
-                        fontSize: 15.0,
-                        color: AppTheme.colors.primary,
-                        fontWeight: FontWeight.w500,
-                        decoration: TextDecoration.underline,
+                ),
+              ),
+              InputTextWidget(
+                ontopHint: 'Seu e-mail?',
+                hintText: 'Email',
+                onChanged: store.onChangeEmail,
+                validator: Validatorless.multiple(
+                  [
+                    Validatorless.email('E-mail invalido'),
+                    Validatorless.required('Campo obrigatório')
+                  ],
+                ),
+              ),
+              TripleBuilder(
+                store: store,
+                builder: (context, triple) {
+                  return InputTextWidget(
+                    ontopHint: 'Digite uma senha',
+                    hintText: 'Senha',
+                    onChanged: store.onChangePass,
+                    obscureText: store.state.obscurePass,
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        store.state.obscurePass
+                            ? Icons.visibility
+                            : Icons.visibility_off,
                       ),
+                      onPressed: () => store.onChangeObscurePass(),
+                    ),
+                    validator: Validatorless.multiple([
+                      Validatorless.min(
+                          6, 'Sua senha deve possui no mínimo 6 caracteres'),
+                      Validatorless.required('Campo obrigatório'),
+                    ]),
+                  );
+                },
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(40, 15, 30, 20),
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(right: 12),
+                      child: TripleBuilder(
+                          store: store,
+                          builder: (context, triple) {
+                            return FlutterSwitch(
+                              activeColor: AppTheme.colors.primary,
+                              width: 42.0,
+                              height: 22.0,
+                              valueFontSize: 12.0,
+                              toggleSize: 18.0,
+                              value: store.state.rememberMe,
+                              padding: 2,
+                              onToggle: (_) => store.onChangeRememberMe(),
+                            );
+                          }),
+                    ),
+                    Text(
+                      'Permanecer conectado',
+                      style: TextStyle(
+                          fontSize: 16,
+                          color: AppTheme.colors.black.withOpacity(0.5)),
                     )
                   ],
                 ),
               ),
-            ),
-          ],
+              Padding(
+                padding: const EdgeInsets.only(top: 25, bottom: 20),
+                child: Text(
+                  'Esqueceu a senha?',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: AppTheme.colors.primary),
+                ),
+              ),
+
+              TripleBuilder(
+                store: store,
+                builder: (context, triple) {
+                  if (triple.isLoading) {
+                    return const Center(
+                        child: Padding(
+                      padding: EdgeInsets.only(bottom: 10),
+                      child: CircularProgressIndicator(),
+                    ));
+                  }
+                  return Container(
+                    padding: const EdgeInsets.fromLTRB(30, 8, 30, 20),
+                    margin: const EdgeInsets.symmetric(horizontal: 100),
+                    child: RoundedButtonWidget(
+                      onPressed: () async {
+                        if (_formKey.currentState!.validate()) {
+                          await store.login();
+                        }
+                      },
+                      textButton: 'entrar',
+                    ),
+                  );
+                },
+              ),
+
+              GestureDetector(
+                onTap: () => Modular.to.navigate('/signup/'),
+                child: RichText(
+                  textAlign: TextAlign.center,
+                  text: TextSpan(
+                    text: "Não tem uma conta? ",
+                    style: TextStyle(
+                      fontSize: 15.0,
+                      color: AppTheme.colors.black.withOpacity(0.5),
+                    ),
+                    children: [
+                      TextSpan(
+                        text: "Cadastre-se aqui",
+                        style: TextStyle(
+                          fontSize: 15.0,
+                          color: AppTheme.colors.primary,
+                          fontWeight: FontWeight.w500,
+                          decoration: TextDecoration.underline,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
-      )),
+      ),
     );
   }
 }
