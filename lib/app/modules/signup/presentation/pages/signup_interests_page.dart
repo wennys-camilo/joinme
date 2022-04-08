@@ -66,10 +66,10 @@ class _SignupInterestPageState extends State<SignupInterestPage> {
                       itemBuilder: (context, index) {
                         final interests = store.state.interestsList[index];
                         return GestureDetector(
-                          onTap: () => store.addInterest(interests),
+                          onTap: () => store.addInterest(interests.id),
                           child: InterestWidget(
                             selected: store.state.selectedInterests
-                                .contains(interests),
+                                .contains(interests.id),
                             name: interests.name,
                           ),
                         );
@@ -92,7 +92,7 @@ class _SignupInterestPageState extends State<SignupInterestPage> {
                 padding: const EdgeInsets.fromLTRB(30, 8, 30, 20),
                 margin: const EdgeInsets.symmetric(horizontal: 100),
                 child: RoundedButtonWidget(
-                  onPressed: () => {},
+                  onPressed: () => store.insertInterest(),
                   textButton: 'Próximo',
                 ),
               ),

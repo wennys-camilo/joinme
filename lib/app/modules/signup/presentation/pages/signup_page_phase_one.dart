@@ -162,11 +162,11 @@ class _SignUpPageState extends State<SignUpPage> {
                           child: Align(
                             child: RoundedButtonWidget(
                               onPressed: () async {
-                                Modular.to.navigate('./phaseThree');
-                                /* if (_formKey.currentState!.validate() &&
+                                //Modular.to.navigate('./phaseThree');
+                                if (_formKey.currentState!.validate() &&
                                     store.state.policiesTerms) {
                                   await store.signup();
-                                }*/
+                                }
                               },
                               textButton: 'Criar conta',
                             ),

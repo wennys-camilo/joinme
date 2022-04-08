@@ -1,8 +1,11 @@
+import 'package:camp_final/app/modules/home/presentation/home_page.dart';
+import 'package:camp_final/app/modules/home/submodules/profile/presentation/profile_page.dart';
+
 import '../../shared/presentation/themes/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'presentation/home_store.dart';
-import 'presentation/home_page.dart';
+import 'presentation/tab_page..dart';
 
 class ModuleTeste extends Module {
   @override
@@ -28,12 +31,13 @@ class HomeModule extends Module {
   @override
   final List<ModularRoute> routes = [
     ChildRoute(
-      Modular.initialRoute,
-      child: (_, args) => const HomePage(),
+      '/',
+      child: (_, args) => const TabPage(),
       children: [
-        ChildRoute('/perfil2',
-            child: (context, args) => Container(color: AppTheme.colors.white)),
-        // ModuleRoute('/teste', module: ModuleTeste())
+        ChildRoute('/homePage', child: (context, args) => const HomePage()),
+        ChildRoute('/perfil',
+            child: (context, args) => const Center(child: Text('2'))),
+        ChildRoute('/profile', child: (context, args) => const ProfilePage()),
       ],
     ),
   ];

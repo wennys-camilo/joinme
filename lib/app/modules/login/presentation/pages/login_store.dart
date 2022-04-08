@@ -17,7 +17,7 @@ class LoginStore extends StreamStore<Failure, LoginState> {
     final result = await _loginUsecase(
         AuthenticateEntity(email: state.email, password: state.password));
     result.fold(setError, (response) async {
-      Modular.to.navigate('/home/');
+      Modular.to.navigate('/home/homePage');
       update(LoginState(
           email: '', password: '', obscurePass: true, rememberMe: false));
     });

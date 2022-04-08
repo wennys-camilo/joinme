@@ -18,4 +18,15 @@ class SignupRepositoryImpl implements SignupRepository {
       return Left(error);
     }
   }
+
+  @override
+  Future<Either<Failure, UserSignupEntity>> update(
+      UserSignupEntity userSignupEntity) async {
+    try {
+      final response = await _remoteDatasource.update(userSignupEntity);
+      return Right(response);
+    } on Failure catch (error) {
+      return Left(error);
+    }
+  }
 }

@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import '../../../../shared/domain/helpers/errors/failure.dart';
+import '../../../../shared/external/adapters/http_client/http_client_adapter.dart';
 import '../../domain/entities/interests_entity.dart';
 import '../../domain/entities/user_interests_entity.dart';
 import '../../infra/datasources/interests_remote_datasource.dart';
@@ -7,14 +8,13 @@ import '../mappers/interests_mapper.dart';
 import '../mappers/user_interests_mapper.dart';
 
 class InterestsRemoteDatasourceImpl implements InterestsRemoteDatasource {
-  final Dio _httpClient;
+  final IHttpClientAdapter _httpClient;
   const InterestsRemoteDatasourceImpl(this._httpClient);
 
   @override
   Future<List<InterestsEntity>> fetch() async {
     try {
-      final Response response = await _httpClient.get('/activities/list');
-
+      final response = await _httpClient.get('/activities/list');
       return (response.data as List)
           .map((e) => InterestsMapper().to(e))
           .toList();
