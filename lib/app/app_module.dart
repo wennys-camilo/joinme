@@ -1,3 +1,4 @@
+import 'package:camp_final/app/modules/home/home_module.dart';
 import 'package:camp_final/app/modules/login/login_module.dart';
 import 'package:camp_final/app/modules/onboarding/onboard_module.dart';
 import 'package:camp_final/app/modules/signup/signup_module.dart';
@@ -17,5 +18,6 @@ class AppModule extends Module {
     ModuleRoute('/', module: OnboardModule()),
     ModuleRoute('/login', module: LoginModule()),
     ModuleRoute('/signup', module: SignUpModule()),
+    ModuleRoute('/home', module: HomeModule()),
   ];
 }
