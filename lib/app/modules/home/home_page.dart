@@ -38,11 +38,11 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                   child: Row(
                     children: [
                       GestureDetector(
-                        onTap: (() {}),
+                        onTap: (() => Modular.to.pushNamed('./userPage')),
                         child: Container(
                           decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              color: AppTheme.colors.grey),
+                              color: AppTheme.colors.primary),
                           height: 49,
                           width: 49,
                         ),
