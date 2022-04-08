@@ -1,8 +1,9 @@
+import 'presentation/home_page.dart';
+import 'submodules/profile/presentation/profile_page.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import '../home/home_store.dart';
-
-import 'home_page.dart';
-import 'user_page/user_page.dart';
+import 'presentation/home_store.dart';
+import 'presentation/tab_page..dart';
 
 class HomeModule extends Module {
   @override
@@ -12,7 +13,15 @@ class HomeModule extends Module {
 
   @override
   final List<ModularRoute> routes = [
-    ChildRoute(Modular.initialRoute, child: (_, args) => const HomePage()),
-    ChildRoute('/userPage', child: (_, args) => const UserPage()),
+    ChildRoute(
+      '/',
+      child: (_, args) => const TabPage(),
+      children: [
+        ChildRoute('/homePage', child: (context, args) => const HomePage()),
+        ChildRoute('/perfil',
+            child: (context, args) => const Center(child: Text('2'))),
+        ChildRoute('/profile', child: (context, args) => const ProfilePage()),
+      ],
+    ),
   ];
 }

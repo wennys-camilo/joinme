@@ -1,3 +1,6 @@
+import '../../domain/entities/interests_entity.dart';
+import '../../domain/entities/user_signup_entity.dart';
+
 class SignupState {
   final bool policiesTerms;
   final String name;
@@ -7,6 +10,10 @@ class SignupState {
   final String emergencyName;
   final String emergencyPhone;
   final String phone;
+  final List<InterestsEntity> interestsList;
+  final List<String> selectedInterests;
+  final UserSignupEntity userSignupResponse;
+  final List<String> interestsId;
   SignupState({
     required this.policiesTerms,
     required this.name,
@@ -16,7 +23,34 @@ class SignupState {
     required this.emergencyName,
     required this.emergencyPhone,
     required this.phone,
+    required this.interestsList,
+    required this.selectedInterests,
+    required this.userSignupResponse,
+    required this.interestsId,
   });
+
+  factory SignupState.empty() {
+    return SignupState(
+      policiesTerms: false,
+      name: "",
+      email: "",
+      password: "",
+      passwordConfirmation: "",
+      emergencyName: "",
+      emergencyPhone: "",
+      phone: "",
+      interestsList: const [],
+      selectedInterests: const [],
+      userSignupResponse: const UserSignupEntity(
+        email: '',
+        password: '',
+        id: '',
+        firstName: '',
+        passwordConfirmation: '',
+      ),
+      interestsId: [],
+    );
+  }
 
   SignupState copyWith({
     bool? policiesTerms,
@@ -27,6 +61,10 @@ class SignupState {
     String? emergencyName,
     String? emergencyPhone,
     String? phone,
+    List<InterestsEntity>? interestsList,
+    List<String>? selectedInterests,
+    UserSignupEntity? userSignupResponse,
+    List<String>? interestsId,
   }) {
     return SignupState(
       policiesTerms: policiesTerms ?? this.policiesTerms,
@@ -37,6 +75,10 @@ class SignupState {
       emergencyName: emergencyName ?? this.emergencyName,
       emergencyPhone: emergencyPhone ?? this.emergencyPhone,
       phone: phone ?? this.phone,
+      interestsList: interestsList ?? this.interestsList,
+      selectedInterests: selectedInterests ?? this.selectedInterests,
+      userSignupResponse: userSignupResponse ?? this.userSignupResponse,
+      interestsId: interestsId ?? this.interestsId,
     );
   }
 }

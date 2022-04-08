@@ -1,39 +1,61 @@
+import 'package:camp_final/app/modules/signup/domain/usecases/insert_interests_usecase.dart';
+import 'package:camp_final/app/shared/usecases/set_token_usecase.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_triple/flutter_triple.dart';
 import '../../../../shared/domain/helpers/errors/failure.dart';
+import '../../domain/entities/user_interests_entity.dart';
 import '../../domain/entities/user_signup_entity.dart';
-import '../../domain/usecases/signup_usecase_impl.dart';
+import '../../domain/usecases/fetch_interests_usecase.dart';
+import '../../domain/usecases/insert_emergency_contact_usecase.dart';
+import '../../domain/usecases/signup_usecase.dart';
 import 'signup_state.dart';
 
 class SignupStore extends StreamStore<Failure, SignupState> {
   final SignupUsecase _signupUsecase;
+  final FetchInterestsUsecase _interestsUsecase;
+  final InsertEmergencyContactUsecase _emergencyContactUsecase;
+  final SetTokenUsecase _setTokenUsecase;
+  final InsertInterestsUsecase _insertInterestsUsecase;
 
-  SignupStore(this._signupUsecase)
-      : super(SignupState(
-          policiesTerms: false,
-          name: '',
-          email: '',
-          password: '',
-          passwordConfirmation: '',
-          emergencyName: '',
-          emergencyPhone: '',
-          phone: '',
-        ));
+  SignupStore(
+    this._signupUsecase,
+    this._interestsUsecase,
+    this._emergencyContactUsecase,
+    this._setTokenUsecase,
+    this._insertInterestsUsecase,
+  ) : super(SignupState.empty());
 
   Future<void> signup() async {
     setLoading(true);
     final result = await _signupUsecase.singup(UserSignupEntity(
       firstName: state.name,
-      lastName: 'camilo',
       email: state.email,
       password: state.password,
       passwordConfirmation: state.passwordConfirmation,
-      phone: state.phone,
-      emergencyName: state.emergencyName,
-      emergencyPhone: state.emergencyPhone,
     ));
     result.fold(setError, (response) async {
-      Modular.to.navigate('/signup/confirmation');
+      update(state.copyWith(userSignupResponse: response));
+      var responseToken = await _setTokenUsecase(response.tokenEnity!.token);
+      responseToken.fold(setError, (r) {});
+      Modular.to.navigate('/signup/phaseTwo');
+    });
+    setLoading(false);
+  }
+
+  Future<void> insertContactEmergency() async {
+    setLoading(true);
+    final result = await _emergencyContactUsecase(UserSignupEntity(
+      firstName: state.name,
+      email: state.email,
+      password: state.password,
+      passwordConfirmation: state.passwordConfirmation,
+      emergencyName: state.emergencyName,
+      emergencyPhone: state.emergencyPhone,
+      phone: "",
+    ));
+    result.fold(setError, (response) {
+      update(state.copyWith(userSignupResponse: response));
+      Modular.to.pushNamed('/signup/phaseThree');
     });
     setLoading(false);
   }
@@ -64,5 +86,32 @@ class SignupStore extends StreamStore<Failure, SignupState> {
 
   onChangeEmergencyPhone(String value) {
     update(state.copyWith(emergencyPhone: value));
+  }
+
+  addInterest(String interestID) {
+    List<String> ids = [];
+
+    if (state.selectedInterests.contains(interestID)) {
+      ids.addAll([...state.selectedInterests]..remove(interestID));
+    } else {
+      ids.addAll([...state.selectedInterests, interestID]);
+    }
+
+    update(state.copyWith(selectedInterests: ids));
+  }
+
+  Future<void> insertInterest() async {
+    final response = await _insertInterestsUsecase(
+        UserInterestsEntity(activityIds: state.selectedInterests));
+    response.fold(setError, (r) {
+      Modular.to.pushNamed('./confirmation');
+    });
+  }
+
+  Future<void> fethInterests() async {
+    final response = await _interestsUsecase();
+    response.fold(setError, (result) {
+      update(state.copyWith(interestsList: result));
+    });
   }
 }
