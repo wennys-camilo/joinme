@@ -1,6 +1,6 @@
-import 'package:camp_final/app/shared/presentation/themes/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import '../../../shared/presentation/themes/app_theme.dart';
 
 class TabPage extends StatefulWidget {
   const TabPage({Key? key}) : super(key: key);

@@ -3,7 +3,7 @@ import 'submodules/profile/presentation/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'presentation/home_store.dart';
-import 'presentation/tab_page..dart';
+import 'presentation/tab_page.dart';
 
 class HomeModule extends Module {
   @override
