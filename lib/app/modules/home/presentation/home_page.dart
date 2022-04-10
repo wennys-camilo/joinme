@@ -1,20 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import '../../../shared/presentation/themes/app_theme.dart';
+import '../../../shared/presentation/utils/extension/string_extension_capitalize.dart';
+import '../../../shared/store/user/user_store.dart';
 import 'home_store.dart';
 import 'widgets/horizontal_grid_view.dart';
 import 'widgets/section_label_title_widget.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({
-    Key? key,
-  }) : super(key: key);
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends ModularState<HomePage, HomeStore> {
+  late final UserStore userStore;
+
+  @override
+  void initState() {
+    super.initState();
+    userStore = Modular.get<UserStore>();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -43,7 +51,7 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                       onTap: () {},
                       child: SizedBox(
                         child: Text(
-                          'Olá, Luma!',
+                          'Olá, ${userStore.state.user.name.capitalize()}!',
                           style: TextStyle(
                               fontSize: 23,
                               fontWeight: FontWeight.w700,

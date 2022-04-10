@@ -12,6 +12,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations: 
+    sdk: flutter 
   
   cupertino_icons: ^1.0.2
   flutter_modular: ^4.5.0
@@ -24,6 +26,8 @@ dependencies:
   flutter_svg: ^1.0.3
   flutter_secure_storage: ^5.0.2
   validatorless: ^1.2.1
+  flutter_form_builder: ^7.1.1
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:

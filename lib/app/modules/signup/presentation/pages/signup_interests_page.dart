@@ -90,7 +90,6 @@ class _SignupInterestPageState extends State<SignupInterestPage> {
               const SizedBox(height: 20),
               Container(
                 padding: const EdgeInsets.fromLTRB(30, 8, 30, 20),
-                margin: const EdgeInsets.symmetric(horizontal: 100),
                 child: RoundedButtonWidget(
                   onPressed: () => store.insertInterest(),
                   textButton: 'Próximo',

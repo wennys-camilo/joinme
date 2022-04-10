@@ -10,6 +10,7 @@ import 'shared/external/adapters/http_client/dio/interceptors/dio_interceptor.da
 import 'shared/external/adapters/http_client/http_client_adapter.dart';
 import 'shared/external/datasources/token_local_datasource_impl.dart';
 import 'shared/infra/repositories/token_repository_impl.dart';
+import 'shared/store/user/user_store.dart';
 import 'shared/usecases/get_token_usecase_impl.dart';
 
 class AppModule extends Module {
@@ -25,6 +26,7 @@ class AppModule extends Module {
     Bind((i) => Dio(i())),
     Bind.factory<BaseOptions>(
         (i) => BaseOptions(baseUrl: 'https://thiagosgdev.com')),
+    Bind((i) => UserStore()),
   ];
 
   @override

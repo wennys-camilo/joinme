@@ -1,6 +1,6 @@
-import 'package:camp_final/app/shared/presentation/themes/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import "../../../shared/presentation/themes/app_theme.dart";
 
 class TabPage extends StatefulWidget {
   const TabPage({Key? key}) : super(key: key);
@@ -41,21 +41,26 @@ class _TabPageState extends State<TabPage> {
               backgroundColor: AppTheme.colors.grey,
               currentIndex: value,
               onTap: (value) {
-                switch (value) {
-                  case 0:
-                    Modular.to.pushNamed('./homePage');
-                    break;
-                  case 1:
-                    Modular.to.pushNamed('./perfil');
-                    break;
-                  case 2:
-                    break;
-                  case 3:
-                    break;
-                  case 4:
-                    Modular.to.pushNamed('./profile');
-                    break;
-                  default:
+                if (value == currentIndex.value) {
+                  return;
+                } else {
+                  switch (value) {
+                    case 0:
+                      Modular.to.pushNamed('./homePage');
+                      break;
+                    case 1:
+                      Modular.to.pushNamed('./perfil');
+                      break;
+                    case 2:
+                      Modular.to.pushNamed('./add_events');
+                      break;
+                    case 3:
+                      break;
+                    case 4:
+                      Modular.to.pushNamed('./profile');
+                      break;
+                    default:
+                  }
                 }
                 _changeBar(value);
               },

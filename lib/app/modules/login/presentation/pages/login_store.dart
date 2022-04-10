@@ -1,3 +1,4 @@
+import 'package:camp_final/app/shared/store/user/user_store.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_triple/flutter_triple.dart';
 import '../../../../shared/domain/helpers/errors/failure.dart';
@@ -17,6 +18,7 @@ class LoginStore extends StreamStore<Failure, LoginState> {
     final result = await _loginUsecase(
         AuthenticateEntity(email: state.email, password: state.password));
     result.fold(setError, (response) async {
+      Modular.get<UserStore>().setUser(response.user);
       Modular.to.navigate('/home/homePage');
       update(LoginState(
           email: '', password: '', obscurePass: true, rememberMe: false));

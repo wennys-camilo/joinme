@@ -158,7 +158,6 @@ class _SignUpPageState extends State<SignUpPage> {
                   return !triple.isLoading
                       ? Container(
                           padding: const EdgeInsets.fromLTRB(30, 8, 30, 20),
-                          margin: const EdgeInsets.symmetric(horizontal: 100),
                           child: Align(
                             child: RoundedButtonWidget(
                               onPressed: () async {

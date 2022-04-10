@@ -75,7 +75,6 @@ class _SignupPagePhaseTwoState
             const SizedBox(height: 20),
             Container(
               padding: const EdgeInsets.fromLTRB(30, 8, 30, 20),
-              margin: const EdgeInsets.symmetric(horizontal: 100),
               child: RoundedButtonWidget(
                 onPressed: () async {
                   await store.insertContactEmergency();

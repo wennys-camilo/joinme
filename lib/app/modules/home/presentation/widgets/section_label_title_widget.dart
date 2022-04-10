@@ -27,7 +27,7 @@ class SectionLabelTitleWidget extends StatelessWidget {
             onPressed: onPressed,
             child: const Text(
               'Ver todos',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+              style: TextStyle(fontSize: 16),
             ),
           ),
         ],

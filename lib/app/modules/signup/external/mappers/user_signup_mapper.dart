@@ -1,5 +1,4 @@
-import 'package:camp_final/app/modules/login/domain/entities/token_enity.dart';
-
+import '../../../login/domain/entities/token_enity.dart';
 import '../../domain/entities/user_signup_entity.dart';
 
 class UserSignupMapper {

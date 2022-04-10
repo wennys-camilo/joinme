@@ -9,12 +9,16 @@ class InputTextWidget extends StatelessWidget {
   final bool obscureText;
   final Widget? suffixIcon;
   final TextEditingController? controller;
+  final double? height;
+  final int? maxLines;
   const InputTextWidget({
     Key? key,
     this.hintText,
     this.onChanged,
     this.validator,
     this.ontopHint,
+    this.height,
+    this.maxLines = 1,
     this.suffixIcon,
     this.controller,
     this.obscureText = false,
@@ -34,27 +38,31 @@ class InputTextWidget extends StatelessWidget {
           const SizedBox(
             height: 8,
           ),
-          TextFormField(
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            controller: controller,
-            decoration: InputDecoration(
-              hintText: hintText,
-              contentPadding: const EdgeInsets.all(23.0),
-              hintStyle:
-                  TextStyle(color: AppTheme.colors.grey.withOpacity(0.8)),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8.0),
+          SizedBox(
+            height: height,
+            child: TextFormField(
+              maxLines: maxLines,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              controller: controller,
+              decoration: InputDecoration(
+                hintText: hintText,
+                contentPadding: const EdgeInsets.all(23.0),
+                hintStyle:
+                    TextStyle(color: AppTheme.colors.grey.withOpacity(0.8)),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                  borderSide: BorderSide(
+                      width: 1, color: AppTheme.colors.grey.withOpacity(0.7)),
+                ),
+                suffixIcon: suffixIcon,
               ),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8.0),
-                borderSide: BorderSide(
-                    width: 1, color: AppTheme.colors.grey.withOpacity(0.7)),
-              ),
-              suffixIcon: suffixIcon,
+              onChanged: onChanged,
+              validator: validator,
+              obscureText: obscureText,
             ),
-            onChanged: onChanged,
-            validator: validator,
-            obscureText: obscureText,
           ),
         ],
       ),

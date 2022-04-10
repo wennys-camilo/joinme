@@ -41,7 +41,7 @@ class _LoginPageState extends ModularState<LoginPage, LoginStore> {
                 child: Container(
                   height: MediaQuery.of(context).size.height / 6,
                   //margin: const EdgeInsets.all(100)
-                  margin: const EdgeInsets.fromLTRB(100, 20, 100, 70),
+                  margin: const EdgeInsets.fromLTRB(100, 20, 100, 30),
                   decoration: BoxDecoration(
                     color: AppTheme.colors.grey,
                     shape: BoxShape.circle,
@@ -125,7 +125,7 @@ class _LoginPageState extends ModularState<LoginPage, LoginStore> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 25, bottom: 20),
+                padding: const EdgeInsets.only(top: 15, bottom: 15),
                 child: Text(
                   'Esqueceu a senha?',
                   textAlign: TextAlign.center,
@@ -145,7 +145,6 @@ class _LoginPageState extends ModularState<LoginPage, LoginStore> {
                   }
                   return Container(
                     padding: const EdgeInsets.fromLTRB(30, 8, 30, 20),
-                    margin: const EdgeInsets.symmetric(horizontal: 100),
                     child: RoundedButtonWidget(
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {
@@ -158,27 +157,30 @@ class _LoginPageState extends ModularState<LoginPage, LoginStore> {
                 },
               ),
 
-              GestureDetector(
-                onTap: () => Modular.to.navigate('/signup/'),
-                child: RichText(
-                  textAlign: TextAlign.center,
-                  text: TextSpan(
-                    text: "Não tem uma conta? ",
-                    style: TextStyle(
-                      fontSize: 15.0,
-                      color: AppTheme.colors.black.withOpacity(0.5),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 10),
+                child: GestureDetector(
+                  onTap: () => Modular.to.navigate('/signup/'),
+                  child: RichText(
+                    textAlign: TextAlign.center,
+                    text: TextSpan(
+                      text: "Não tem uma conta? ",
+                      style: TextStyle(
+                        fontSize: 15.0,
+                        color: AppTheme.colors.black.withOpacity(0.5),
+                      ),
+                      children: [
+                        TextSpan(
+                          text: "Cadastre-se aqui",
+                          style: TextStyle(
+                            fontSize: 15.0,
+                            color: AppTheme.colors.primary,
+                            fontWeight: FontWeight.w500,
+                            decoration: TextDecoration.underline,
+                          ),
+                        )
+                      ],
                     ),
-                    children: [
-                      TextSpan(
-                        text: "Cadastre-se aqui",
-                        style: TextStyle(
-                          fontSize: 15.0,
-                          color: AppTheme.colors.primary,
-                          fontWeight: FontWeight.w500,
-                          decoration: TextDecoration.underline,
-                        ),
-                      )
-                    ],
                   ),
                 ),
               ),
