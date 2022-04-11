@@ -8,6 +8,7 @@ abstract class AppColors {
   Color get transparent;
   Color get greyBoard;
   Color get greyLight;
+  Color get blueLight;
 }
 
 class AppColorsImpl implements AppColors {
@@ -18,7 +19,7 @@ class AppColorsImpl implements AppColors {
   Color get greyLight => const Color(0xffE8E7E3);
 
   @override
-  Color get primary => const Color(0xff493A92);
+  Color get primary => const Color(0xff1A00D0);
 
   @override
   Color get greyBoard => const Color(0xffE8E7E3);
@@ -31,4 +32,7 @@ class AppColorsImpl implements AppColors {
 
   @override
   Color get transparent => const Color.fromARGB(0, 0, 0, 0);
+
+  @override
+  Color get blueLight => const Color(0xffDEDAF0);
 }

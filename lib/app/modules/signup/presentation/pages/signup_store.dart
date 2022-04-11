@@ -1,12 +1,14 @@
-import 'package:camp_final/app/modules/signup/domain/usecases/insert_interests_usecase.dart';
-import 'package:camp_final/app/shared/usecases/set_token_usecase.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_triple/flutter_triple.dart';
+import '../../../../shared/domain/entites/user_enity.dart';
 import '../../../../shared/domain/helpers/errors/failure.dart';
+import '../../../../shared/store/user/user_store.dart';
+import '../../../../shared/usecases/set_token_usecase.dart';
 import '../../domain/entities/user_interests_entity.dart';
 import '../../domain/entities/user_signup_entity.dart';
 import '../../domain/usecases/fetch_interests_usecase.dart';
 import '../../domain/usecases/insert_emergency_contact_usecase.dart';
+import '../../domain/usecases/insert_interests_usecase.dart';
 import '../../domain/usecases/signup_usecase.dart';
 import 'signup_state.dart';
 
@@ -28,7 +30,7 @@ class SignupStore extends StreamStore<Failure, SignupState> {
   Future<void> signup() async {
     setLoading(true);
     final result = await _signupUsecase.singup(UserSignupEntity(
-      firstName: state.name,
+      name: state.name,
       email: state.email,
       password: state.password,
       passwordConfirmation: state.passwordConfirmation,
@@ -45,7 +47,7 @@ class SignupStore extends StreamStore<Failure, SignupState> {
   Future<void> insertContactEmergency() async {
     setLoading(true);
     final result = await _emergencyContactUsecase(UserSignupEntity(
-      firstName: state.name,
+      name: state.name,
       email: state.email,
       password: state.password,
       passwordConfirmation: state.passwordConfirmation,
@@ -104,14 +106,27 @@ class SignupStore extends StreamStore<Failure, SignupState> {
     final response = await _insertInterestsUsecase(
         UserInterestsEntity(activityIds: state.selectedInterests));
     response.fold(setError, (r) {
+      //Modular.get<UserStore>().setUser(state.userSignupResponse); TODO: PASSAR O USUARIO PARA A USERSTORE
+      Modular.get<UserStore>().setUser(
+        UserEntity(
+          id: state.userSignupResponse.id!,
+          name: state.userSignupResponse.name,
+          email: state.userSignupResponse.email,
+          phone: state.userSignupResponse.phone,
+          emergencyName: state.userSignupResponse.name,
+          emergencyPhone: state.userSignupResponse.emergencyPhone,
+        ),
+      );
       Modular.to.pushNamed('./confirmation');
     });
   }
 
   Future<void> fethInterests() async {
+    setLoading(true);
     final response = await _interestsUsecase();
     response.fold(setError, (result) {
       update(state.copyWith(interestsList: result));
     });
+    setLoading(false);
   }
 }

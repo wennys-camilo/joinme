@@ -45,7 +45,7 @@ class SignupState {
         email: '',
         password: '',
         id: '',
-        firstName: '',
+        name: '',
         passwordConfirmation: '',
       ),
       interestsId: [],
