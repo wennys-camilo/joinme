@@ -14,7 +14,7 @@ class LoginRemoteDatasourceImpl implements LoginRemoteDatasource {
   Future<ResponseAuthEntity> signin(
       {required AuthenticateEntity userAuth}) async {
     try {
-      final Response response = await _httpClient.post(
+      final response = await _httpClient.post(
         '/users/signin',
         data: {"email": userAuth.email, "password": userAuth.password},
       );

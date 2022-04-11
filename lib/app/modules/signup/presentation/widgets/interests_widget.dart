@@ -1,12 +1,31 @@
 import 'package:flutter/material.dart';
 
-import '../../../../shared/presentation/themes/app_theme.dart';
+import '../../domain/entities/interests_entity.dart';
 
-class InterestWidget extends StatelessWidget {
+class InterestWidget extends StatefulWidget {
   final bool selected;
-  final String name;
-  const InterestWidget({Key? key, required this.selected, required this.name})
+  final InterestsEntity interests;
+
+  const InterestWidget(
+      {Key? key, required this.selected, required this.interests})
       : super(key: key);
+
+  @override
+  State<InterestWidget> createState() => _InterestWidgetState();
+}
+
+class _InterestWidgetState extends State<InterestWidget> {
+  late final NetworkImage _imageActivate;
+  late final NetworkImage _imageInactivate;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _imageActivate = NetworkImage(widget.interests.urlActive);
+    _imageInactivate = NetworkImage(widget.interests.urlInactive);
+    precacheImage(_imageActivate, context);
+    precacheImage(_imageInactivate, context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,12 +35,13 @@ class InterestWidget extends StatelessWidget {
           child: Container(
             margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
             decoration: BoxDecoration(
-              color: selected ? AppTheme.colors.primary : AppTheme.colors.grey,
-              shape: BoxShape.circle,
-            ),
+                shape: BoxShape.circle,
+                image: DecorationImage(
+                  image: widget.selected ? _imageActivate : _imageInactivate,
+                )),
           ),
         ),
-        Text(name)
+        Text(widget.interests.name)
       ],
     );
   }

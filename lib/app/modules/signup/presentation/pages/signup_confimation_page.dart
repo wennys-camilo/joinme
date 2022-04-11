@@ -46,7 +46,7 @@ class SignupConfirmationPage extends StatelessWidget {
             height: 50,
           ),
           RoundedButtonWidget(
-            onPressed: () => Modular.to.navigate('/login/'),
+            onPressed: () => Modular.to.navigate('/home/homePage'),
             textButton: 'Próximo',
           )
         ],

@@ -5,6 +5,8 @@ class InterestsMapper {
     return InterestsEntity(
       id: map['id'] ?? '',
       name: map['name'] ?? '',
+      urlActive: map['urlActive'] ?? '',
+      urlInactive: map['urlInactive'] ?? '',
       active: map['active'] ?? false,
       createdAt: map['createdAt'] ?? '',
       updatedAt: map['updatedAt'] ?? '',

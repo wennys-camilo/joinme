@@ -2,6 +2,8 @@ class InterestsEntity {
   final String id;
   final String name;
   final bool active;
+  final String urlActive;
+  final String urlInactive;
   final String createdAt;
   final String updatedAt;
   final String deletedAt;
@@ -12,5 +14,7 @@ class InterestsEntity {
     required this.createdAt,
     required this.updatedAt,
     required this.deletedAt,
+    required this.urlActive,
+    required this.urlInactive,
   });
 }

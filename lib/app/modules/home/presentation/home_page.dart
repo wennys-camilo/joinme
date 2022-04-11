@@ -53,6 +53,7 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                         child: Text(
                           'Olá, ${userStore.state.user.name.capitalize()}!',
                           style: TextStyle(
+                              overflow: TextOverflow.ellipsis,
                               fontSize: 23,
                               fontWeight: FontWeight.w700,
                               color: AppTheme.colors.primary),

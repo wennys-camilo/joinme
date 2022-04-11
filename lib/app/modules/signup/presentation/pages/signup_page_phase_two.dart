@@ -1,5 +1,8 @@
+import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:validatorless/validatorless.dart';
 import '../../../../shared/presentation/themes/app_theme.dart';
 import '../../../../shared/presentation/widgets/input_text_widget.dart';
 import '../../../../shared/presentation/widgets/rounded_button_widget.dart';
@@ -14,6 +17,7 @@ class SignupPagePhaseTwo extends StatefulWidget {
 
 class _SignupPagePhaseTwoState
     extends ModularState<SignupPagePhaseTwo, SignupStore> {
+  final _formKey = GlobalKey<FormState>();
   @override
   void initState() {
     super.initState();
@@ -31,60 +35,69 @@ class _SignupPagePhaseTwoState
           elevation: 0,
           iconTheme: IconThemeData(color: AppTheme.colors.primary),
         ),
-        body: ListView(
-          physics: const BouncingScrollPhysics(),
-          children: [
-            Container(
-              height: MediaQuery.of(context).size.height / 6,
-              margin: const EdgeInsets.fromLTRB(100, 20, 100, 70),
-              decoration: BoxDecoration(
-                color: AppTheme.colors.grey,
-                shape: BoxShape.circle,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(30, 8, 30, 20),
-              child: Text(
-                'Gostaria de adicionar um contato de emergência?',
-                style: TextStyle(
-                  color: AppTheme.colors.primary.withOpacity(0.79),
-                  fontWeight: FontWeight.w600,
-                  fontSize: 20,
+        body: Form(
+          key: _formKey,
+          child: ListView(
+            physics: const BouncingScrollPhysics(),
+            children: [
+              Container(
+                height: MediaQuery.of(context).size.height / 6,
+                margin: const EdgeInsets.fromLTRB(100, 20, 100, 70),
+                decoration: BoxDecoration(
+                  color: AppTheme.colors.grey,
+                  shape: BoxShape.circle,
                 ),
               ),
-            ),
-            InputTextWidget(
-              ontopHint: 'Qual o nome da pessoa?',
-              hintText: 'Nome',
-              onChanged: store.onChangeEmergencyName,
-            ),
-            InputTextWidget(
-              ontopHint: 'E o telefone?',
-              hintText: '(64) 99245-8628',
-              onChanged: store.onChangeEmergencyPhone,
-            ),
-            const SizedBox(height: 20),
-            GestureDetector(
-              onTap: () => Modular.to.pushNamed('./phaseThree'),
-              child: Text(
-                'pular',
-                style: TextStyle(color: AppTheme.colors.primary),
-                textAlign: TextAlign.center,
+              Padding(
+                padding: const EdgeInsets.fromLTRB(30, 8, 30, 20),
+                child: Text(
+                  'Gostaria de adicionar um contato de emergência?',
+                  style: TextStyle(
+                    color: AppTheme.colors.primary.withOpacity(0.79),
+                    fontWeight: FontWeight.w600,
+                    fontSize: 20,
+                  ),
+                ),
               ),
-            ),
-            const SizedBox(height: 20),
-            Container(
-              padding: const EdgeInsets.fromLTRB(30, 8, 30, 20),
-              child: RoundedButtonWidget(
-                onPressed: () async {
-                  await store.insertContactEmergency();
-
-                  // Modular.to.navigate('./phaseThree');
-                },
-                textButton: 'Próximo',
+              InputTextWidget(
+                labelText: 'Qual o nome do seu contato?',
+                hintText: 'Nome',
+                onChanged: store.onChangeEmergencyName,
+                validator: Validatorless.required('Campo obrigatório'),
               ),
-            ),
-          ],
+              InputTextWidget(
+                labelText: 'E qual é o celular dele?',
+                hintText: '(64) 99245-8628',
+                onChanged: store.onChangeEmergencyPhone,
+                inputFormatters: [
+                  FilteringTextInputFormatter.digitsOnly,
+                  TelefoneInputFormatter()
+                ],
+                keyboardType: TextInputType.phone,
+                validator: Validatorless.required('Campo obrigatório'),
+              ),
+              const SizedBox(height: 20),
+              const SizedBox(height: 20),
+              Container(
+                padding: const EdgeInsets.fromLTRB(30, 8, 30, 20),
+                child: RoundedButtonWidget(
+                  onPressed: () async {
+                    if (_formKey.currentState!.validate()) {
+                      await store.insertContactEmergency();
+                    }
+                  },
+                  textButton: 'ADICIONAR CONTATO',
+                ),
+              ),
+              GestureDetector(
+                onTap: () => Modular.to.pushNamed('./phaseThree'),
+                child: const Text(
+                  'PULAR',
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

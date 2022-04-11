@@ -24,12 +24,12 @@ class OnboardModule extends Module {
     ChildRoute('/', child: (context, args) => const OnboardPageVerify()),
     ChildRoute('/board1',
         child: (context, args) => const OnboardPageOne(),
-        transition: TransitionType.noTransition),
+        transition: TransitionType.fadeIn),
     ChildRoute('/board2',
         child: (context, args) => const OnboardPageTwo(),
-        transition: TransitionType.noTransition),
+        transition: TransitionType.fadeIn),
     ChildRoute('/board3',
         child: (context, args) => const OnboardPageThree(),
-        transition: TransitionType.noTransition),
+        transition: TransitionType.fadeIn),
   ];
 }

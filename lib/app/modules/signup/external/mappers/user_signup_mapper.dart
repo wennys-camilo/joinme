@@ -4,7 +4,7 @@ import '../../domain/entities/user_signup_entity.dart';
 class UserSignupMapper {
   Map<String, dynamic> to(UserSignupEntity userSignupEntity) {
     return {
-      "name": userSignupEntity.firstName,
+      "name": userSignupEntity.name,
       "email": userSignupEntity.email,
       "password": userSignupEntity.password,
       "passwordConfirmation": userSignupEntity.passwordConfirmation,
@@ -17,7 +17,7 @@ class UserSignupMapper {
   UserSignupEntity from(Map<String, dynamic> map) {
     return UserSignupEntity(
       id: map['id'],
-      firstName: map['name'] ?? '',
+      name: map['name'] ?? '',
       email: map['email'] ?? '',
       password: map['password'] ?? '',
       passwordConfirmation: map['passwordConfirmation'] ?? '',

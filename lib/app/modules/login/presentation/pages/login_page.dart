@@ -41,26 +41,24 @@ class _LoginPageState extends ModularState<LoginPage, LoginStore> {
                 child: Container(
                   height: MediaQuery.of(context).size.height / 6,
                   //margin: const EdgeInsets.all(100)
-                  margin: const EdgeInsets.fromLTRB(100, 20, 100, 30),
+                  margin: const EdgeInsets.fromLTRB(100, 50, 100, 30),
                   decoration: BoxDecoration(
                     color: AppTheme.colors.grey,
                     shape: BoxShape.circle,
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(30, 8, 30, 20),
+              const Padding(
+                padding: EdgeInsets.fromLTRB(30, 8, 30, 20),
                 child: Text(
-                  'Acesse sua conta?',
+                  'Olá! Acesse sua conta:',
                   style: TextStyle(
-                    color: AppTheme.colors.primary.withOpacity(0.79),
-                    fontWeight: FontWeight.w600,
                     fontSize: 20,
                   ),
                 ),
               ),
               InputTextWidget(
-                ontopHint: 'Seu e-mail?',
+                labelText: 'Seu e-mail',
                 hintText: 'Email',
                 onChanged: store.onChangeEmail,
                 validator: Validatorless.multiple(
@@ -74,8 +72,7 @@ class _LoginPageState extends ModularState<LoginPage, LoginStore> {
                 store: store,
                 builder: (context, triple) {
                   return InputTextWidget(
-                    ontopHint: 'Digite uma senha',
-                    hintText: 'Senha',
+                    labelText: 'Digite sua senha',
                     onChanged: store.onChangePass,
                     obscureText: store.state.obscurePass,
                     suffixIcon: IconButton(
@@ -106,7 +103,7 @@ class _LoginPageState extends ModularState<LoginPage, LoginStore> {
                             return FlutterSwitch(
                               activeColor: AppTheme.colors.primary,
                               width: 42.0,
-                              height: 22.0,
+                              height: 24.0,
                               valueFontSize: 12.0,
                               toggleSize: 18.0,
                               value: store.state.rememberMe,
@@ -116,7 +113,7 @@ class _LoginPageState extends ModularState<LoginPage, LoginStore> {
                           }),
                     ),
                     Text(
-                      'Permanecer conectado',
+                      'Permanecer logado',
                       style: TextStyle(
                           fontSize: 16,
                           color: AppTheme.colors.black.withOpacity(0.5)),
@@ -129,7 +126,25 @@ class _LoginPageState extends ModularState<LoginPage, LoginStore> {
                 child: Text(
                   'Esqueceu a senha?',
                   textAlign: TextAlign.center,
-                  style: TextStyle(color: AppTheme.colors.primary),
+                  style: TextStyle(
+                      color: AppTheme.colors.primary,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(30, 8, 30, 10),
+                child: RoundedButtonWidget(
+                  backgroundColor: AppTheme.colors.blueLight,
+                  onPressed: () async {
+                    if (_formKey.currentState!.validate()) {
+                      await store.login();
+                    }
+                  },
+                  textButton: 'ACESSAR COM O GMAIL',
+                  styleText: TextStyle(
+                    color: AppTheme.colors.primary,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
 
@@ -151,7 +166,7 @@ class _LoginPageState extends ModularState<LoginPage, LoginStore> {
                           await store.login();
                         }
                       },
-                      textButton: 'entrar',
+                      textButton: 'ENTRAR',
                     ),
                   );
                 },

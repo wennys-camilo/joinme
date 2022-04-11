@@ -29,104 +29,77 @@ class _TabPageState extends State<TabPage> {
       bottomNavigationBar: ValueListenableBuilder<int>(
         valueListenable: currentIndex,
         builder: (context, value, _) {
-          return ClipRRect(
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(30.0),
-              topRight: Radius.circular(30.0),
-            ),
-            child: BottomNavigationBar(
-              showSelectedLabels: false,
-              showUnselectedLabels: false,
-              type: BottomNavigationBarType.fixed,
-              backgroundColor: AppTheme.colors.grey,
-              currentIndex: value,
-              onTap: (value) {
-                if (value == currentIndex.value) {
-                  return;
-                } else {
-                  switch (value) {
-                    case 0:
-                      Modular.to.pushNamed('./homePage');
-                      break;
-                    case 1:
-                      Modular.to.pushNamed('./perfil');
-                      break;
-                    case 2:
-                      Modular.to.pushNamed('./add_events');
-                      break;
-                    case 3:
-                      break;
-                    case 4:
-                      Modular.to.pushNamed('./profile');
-                      break;
-                    default:
-                  }
-                }
+          return BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
+            backgroundColor: AppTheme.colors.grey,
+            currentIndex: value,
+            onTap: (value) {
+              if (value == currentIndex.value) {
                 _changeBar(value);
-              },
-              items: [
-                BottomNavigationBarItem(
-                  icon: CircleAvatar(
-                    radius: 22,
-                    backgroundColor: AppTheme.colors.greyLight,
-                    child: Icon(
-                      Icons.home,
-                      size: 35,
-                      color: AppTheme.colors.primary,
-                    ),
-                  ),
-                  label: '',
+                return;
+              } else {
+                switch (value) {
+                  case 0:
+                    Modular.to.pushNamed('./homePage');
+                    break;
+                  case 1:
+                    Modular.to.pushNamed('./perfil');
+                    break;
+                  case 2:
+                    Modular.to.pushNamed('./add_events');
+                    break;
+                  case 3:
+                    break;
+                  case 4:
+                    Modular.to.pushNamed('./profile');
+                    break;
+                  default:
+                }
+              }
+              _changeBar(value);
+            },
+            items: [
+              const BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.home,
+                  size: 35,
                 ),
-                BottomNavigationBarItem(
-                  icon: CircleAvatar(
-                    radius: 22,
-                    backgroundColor: AppTheme.colors.greyLight,
-                    child: Icon(
-                      Icons.calendar_month,
-                      size: 35,
-                      color: AppTheme.colors.primary,
-                    ),
-                  ),
-                  label: '',
+                label: 'Home',
+              ),
+              const BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.calendar_month,
+                  size: 35,
                 ),
-                BottomNavigationBarItem(
-                  icon: CircleAvatar(
-                    radius: 25,
-                    backgroundColor: AppTheme.colors.primary,
-                    child: Icon(
-                      Icons.add_outlined,
-                      size: 40,
-                      color: AppTheme.colors.white,
-                    ),
+                label: 'Calendário',
+              ),
+              BottomNavigationBarItem(
+                icon: CircleAvatar(
+                  radius: 25,
+                  backgroundColor: AppTheme.colors.primary,
+                  child: Icon(
+                    Icons.add_outlined,
+                    size: 40,
+                    color: AppTheme.colors.white,
                   ),
-                  label: "",
                 ),
-                BottomNavigationBarItem(
-                  icon: CircleAvatar(
-                    radius: 22,
-                    backgroundColor: AppTheme.colors.greyLight,
-                    child: Icon(
-                      Icons.bookmark,
-                      size: 35,
-                      color: AppTheme.colors.primary,
-                    ),
-                  ),
-                  label: '',
+                label: "",
+              ),
+              const BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.bookmark,
+                  size: 35,
                 ),
-                BottomNavigationBarItem(
-                  icon: CircleAvatar(
-                    radius: 22,
-                    backgroundColor: AppTheme.colors.greyLight,
-                    child: Icon(
-                      Icons.person,
-                      size: 35,
-                      color: AppTheme.colors.primary,
-                    ),
-                  ),
-                  label: '',
+                label: 'Salvos',
+              ),
+              const BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.person,
+                  size: 35,
                 ),
-              ],
-            ),
+                label: 'Perfil',
+              ),
+            ],
           );
         },
       ),
