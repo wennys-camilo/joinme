@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
+
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../shared/presentation/themes/app_theme.dart';
 import '../../../../shared/presentation/widgets/rounded_button_widget.dart';
@@ -63,13 +63,6 @@ class BodyOnboardingWidget extends StatelessWidget {
                 ),
                 StepsOnboardingWidget(
                   numPage: numBoard,
-                ),
-                GestureDetector(
-                  onTap: () => Modular.to.navigate('/login/'),
-                  child: Text(
-                    'Pular introdução',
-                    style: TextStyle(color: AppTheme.colors.primary),
-                  ),
                 ),
                 const SizedBox(
                   height: 20,
