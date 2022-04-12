@@ -25,79 +25,112 @@ class _SignupInterestPageState extends State<SignupInterestPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Scaffold(
-          body: ListView(
-            shrinkWrap: true,
-            children: [
-              Align(
-                alignment: Alignment.topLeft,
-                child: IconButton(
-                  onPressed: () => Modular.to.pop(),
-                  icon: Icon(
-                    Icons.arrow_back,
-                    color: AppTheme.colors.primary,
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(20),
-                child: Text(
-                  'Conta pra gente...quais são seus interesses?',
-                  style:
-                      TextStyle(color: AppTheme.colors.primary, fontSize: 20),
-                ),
-              ),
-              TripleBuilder(
-                  store: store,
-                  builder: (context, triple) {
-                    return GridView.builder(
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisSpacing: 8,
-                        crossAxisCount: 3,
-                        mainAxisSpacing: 5,
+    return ScopedBuilder(
+      store: store,
+      onState: (context, state) {
+        return SafeArea(
+          child: Scaffold(
+            body: Scaffold(
+              body: ListView(
+                shrinkWrap: true,
+                children: [
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: IconButton(
+                      onPressed: () => Modular.to.pop(),
+                      icon: Icon(
+                        Icons.arrow_back,
+                        color: AppTheme.colors.primary,
                       ),
-                      itemCount: store.state.interestsList.length,
-                      shrinkWrap: true,
-                      physics: const ScrollPhysics(),
-                      padding: const EdgeInsets.all(8),
-                      itemBuilder: (context, index) {
-                        final interests = store.state.interestsList[index];
-                        return GestureDetector(
-                          onTap: () => store.addInterest(interests.id),
-                          child: InterestWidget(
-                            selected: store.state.selectedInterests
-                                .contains(interests.id),
-                            name: interests.name,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: Text(
+                      'Conta pra gente...quais são seus interesses?',
+                      style: TextStyle(
+                          color: AppTheme.colors.primary, fontSize: 20),
+                    ),
+                  ),
+                  TripleBuilder(
+                      store: store,
+                      builder: (context, triple) {
+                        return GridView.builder(
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisSpacing: 8,
+                            crossAxisCount: 3,
+                            mainAxisSpacing: 5,
                           ),
+                          itemCount: store.state.interestsList.length,
+                          shrinkWrap: true,
+                          physics: const ScrollPhysics(),
+                          padding: const EdgeInsets.all(8),
+                          itemBuilder: (context, index) {
+                            final interests = store.state.interestsList[index];
+                            return GestureDetector(
+                              onTap: () => store.addInterest(interests.id),
+                              child: InterestWidget(
+                                selected: store.state.selectedInterests
+                                    .contains(interests.id),
+                                interests: interests,
+                              ),
+                            );
+                          },
                         );
-                      },
-                    );
-                  }),
-              const SizedBox(height: 20),
-              GestureDetector(
-                onTap: () {
-                  //TODO IMPLEMENT
-                },
-                child: Text(
-                  'pular',
-                  style: TextStyle(color: AppTheme.colors.primary),
-                  textAlign: TextAlign.center,
-                ),
+                      }),
+                  const SizedBox(height: 20),
+                  Container(
+                    padding: const EdgeInsets.fromLTRB(30, 8, 30, 20),
+                    child: RoundedButtonWidget(
+                      onPressed: () => store.insertInterest(),
+                      textButton: 'CONFIRMAR',
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      //TODO IMPLEMENT
+                    },
+                    child: const Text(
+                      'PULAR',
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ],
               ),
-              const SizedBox(height: 20),
-              Container(
-                padding: const EdgeInsets.fromLTRB(30, 8, 30, 20),
-                margin: const EdgeInsets.symmetric(horizontal: 100),
-                child: RoundedButtonWidget(
-                  onPressed: () => store.insertInterest(),
-                  textButton: 'Próximo',
-                ),
-              ),
-            ],
+            ),
           ),
+        );
+      },
+      onError: (context, error) {
+        return Scaffold(
+          appBar: AppBar(
+            iconTheme: IconThemeData(
+              color: AppTheme.colors.primary,
+            ),
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+          ),
+          body: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text('Falha ao carregar interesses'),
+                const SizedBox(
+                  height: 20,
+                ),
+                RoundedButtonWidget(
+                  onPressed: () => store.fethInterests(),
+                  textButton: 'TENTAR NOVAMENTE',
+                )
+              ],
+            ),
+          ),
+        );
+      },
+      onLoading: (context) => const Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(),
         ),
       ),
     );

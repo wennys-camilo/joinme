@@ -1,12 +1,14 @@
-import '../../domain/entities/user_enity.dart';
+import '../../domain/entites/user_enity.dart';
 
 class UserMapper {
   UserEntity to(Map<String, dynamic> map) {
     return UserEntity(
       id: map['id'] ?? '',
-      firstName: map['firstName'] ?? '',
-      lastName: map['lastName'] ?? '',
+      name: map['name'] ?? '',
+      phone: map['phone'] ?? '',
       email: map['email'] ?? '',
+      emergencyName: map['emergencyName'] ?? '',
+      emergencyPhone: map['emergencyPhone'],
       createdAt: map['createdAt'] ?? '',
       updatedAt: map['updatedAt'],
       deletedAt: map['deletedAt'],

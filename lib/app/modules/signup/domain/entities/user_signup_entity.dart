@@ -1,8 +1,8 @@
-import 'package:camp_final/app/modules/login/domain/entities/token_enity.dart';
+import '../../../login/domain/entities/token_enity.dart';
 
 class UserSignupEntity {
   final String? id;
-  final String firstName;
+  final String name;
   final String email;
   final String password;
   final String passwordConfirmation;
@@ -11,7 +11,7 @@ class UserSignupEntity {
   final String? emergencyPhone;
   final TokenEnity? tokenEnity;
   const UserSignupEntity({
-    required this.firstName,
+    required this.name,
     required this.email,
     required this.password,
     required this.passwordConfirmation,

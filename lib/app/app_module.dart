@@ -10,7 +10,9 @@ import 'shared/external/adapters/http_client/dio/interceptors/dio_interceptor.da
 import 'shared/external/adapters/http_client/http_client_adapter.dart';
 import 'shared/external/datasources/token_local_datasource_impl.dart';
 import 'shared/infra/repositories/token_repository_impl.dart';
+import 'shared/store/user/user_store.dart';
 import 'shared/usecases/get_token_usecase_impl.dart';
+import 'shared/usecases/set_token_usecase_impl.dart';
 
 class AppModule extends Module {
   @override
@@ -18,13 +20,15 @@ class AppModule extends Module {
     Bind((i) => const FlutterSecureStorage(), isLazy: false),
     Bind((i) => TokenLocalDatasourceImpl(i.get())),
     Bind((i) => TokenRepositoryImpl(i.get())),
+    Bind((i) => SetTokenUsecaseImpl(i.get())),
     Bind((i) => GetTokenUsecaseImpl(i.get())),
-    Bind.factory<IHttpClientAdapter>(
-        (i) => DioAdapter(dio: i(), interceptors: [i<CustomInterceptors>()])),
-    Bind.factory<CustomInterceptors>((i) => CustomInterceptors(i.get())),
-    Bind((i) => Dio(i())),
     Bind.factory<BaseOptions>(
         (i) => BaseOptions(baseUrl: 'https://thiagosgdev.com')),
+    Bind.factory((i) => Dio(i.get())),
+    Bind.factory<CustomInterceptors>((i) => CustomInterceptors(i.get())),
+    Bind.factory<IHttpClientAdapter>(
+        (i) => DioAdapter(dio: i(), interceptors: [i<CustomInterceptors>()])),
+    Bind((i) => UserStore())
   ];
 
   @override

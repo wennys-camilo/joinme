@@ -36,130 +36,122 @@ class _SignUpPageState extends State<SignUpPage> {
       child: Scaffold(
         body: Form(
           key: _formKey,
-          child: ListView(
-            shrinkWrap: true,
-            children: [
-              Align(
-                alignment: Alignment.topLeft,
-                child: IconButton(
-                  onPressed: () => Modular.to.navigate('/login/'),
-                  icon: Icon(
-                    Icons.arrow_back,
-                    color: AppTheme.colors.primary,
+          child: Center(
+            child: ListView(
+              physics: const BouncingScrollPhysics(),
+              shrinkWrap: true,
+              children: [
+                const Padding(
+                  padding: EdgeInsets.fromLTRB(30, 30, 30, 20),
+                  child: Text(
+                    'Olá! Primeiro crie sua conta:',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                   ),
                 ),
-              ),
-              //TODO: COMPONENTIZAR
-              GestureDetector(
-                onTap: () {},
-                child: Container(
-                  height: MediaQuery.of(context).size.height / 6,
-                  //margin: const EdgeInsets.all(100)
-                  margin: const EdgeInsets.fromLTRB(100, 20, 100, 70),
-                  decoration: BoxDecoration(
-                    color: AppTheme.colors.grey,
-                    shape: BoxShape.circle,
-                  ),
-                  child: Icon(
-                    Icons.add_a_photo_outlined,
-                    size: 32,
-                    color: AppTheme.colors.primary,
-                  ),
+                InputTextWidget(
+                  labelText: 'Como podemos te chamar?',
+                  hintText: 'Nome',
+                  onChanged: store.onChangeName,
+                  validator: Validatorless.required('Campo obrigatório'),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(30, 8, 30, 20),
-                child: Text(
-                  'Vamos começar?',
-                  style: TextStyle(
-                    color: AppTheme.colors.primary.withOpacity(0.79),
-                    fontWeight: FontWeight.w600,
-                    fontSize: 20,
+                InputTextWidget(
+                  labelText: 'Seu e-mail:',
+                  hintText: 'E-mail',
+                  onChanged: store.onChangeEmail,
+                  validator: Validatorless.multiple(
+                    [
+                      Validatorless.email('E-mail invalido'),
+                      Validatorless.required('Campo obrigatório')
+                    ],
                   ),
                 ),
-              ),
-              InputTextWidget(
-                ontopHint: 'Como podemos te chamar?',
-                hintText: 'Nome',
-                onChanged: store.onChangeName,
-                validator: Validatorless.required('Campo obrigatório'),
-              ),
-              InputTextWidget(
-                ontopHint: 'Seu e-mail:',
-                hintText: 'E-mail',
-                onChanged: store.onChangeEmail,
-                validator: Validatorless.multiple(
-                  [
-                    Validatorless.email('E-mail invalido'),
-                    Validatorless.required('Campo obrigatório')
-                  ],
-                ),
-              ),
-              InputTextWidget(
-                ontopHint: 'Digite uma senha:',
-                controller: passwordController,
-                hintText: 'Senha',
-                obscureText: true,
-                onChanged: store.onChangePassword,
-                validator: Validatorless.multiple([
-                  Validatorless.min(
-                      6, 'Sua senha deve possui no mínimo 6 caracteres'),
-                  Validatorless.required('Campo obrigatório'),
-                ]),
-              ),
-              InputTextWidget(
-                ontopHint: 'Confirme a senha:',
-                hintText: 'Digite a senha novamente',
-                obscureText: true,
-                onChanged: store.onChangePasswordConfimation,
-                validator: Validatorless.multiple([
-                  Validatorless.min(
-                      6, 'Sua senha deve possui no mínimo 6 caracteres'),
-                  Validatorless.required('Campo obrigatório'),
-                  Validatorless.compare(passwordController,
-                      'As duas senhas digitadas são diferentes')
-                ]),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(30, 8, 30, 20),
-                child: Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(right: 8),
-                      child: CheckboxWidget(
-                        onChanged: store.onChangePoliciesTerms,
-                      ),
+                InputTextWidget(
+                  labelText: 'Digite uma senha:',
+                  controller: passwordController,
+                  hintText: 'Senha',
+                  obscureText: true,
+                  suffixIcon: IconButton(
+                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.visibility_off,
                     ),
-                    Flexible(
-                      child: RichText(
-                        text: TextSpan(
-                          text: 'Li e concordo com os',
-                          style: TextStyle(
-                              fontSize: 14, color: AppTheme.colors.black),
-                          children: [
-                            TextSpan(
-                              text:
-                                  ' Termos e Condições e Politica de Privacidade',
-                              style: TextStyle(
-                                color: AppTheme.colors.primary,
-                                fontSize: 14,
-                              ),
-                            ),
-                          ],
+                  ),
+                  onChanged: store.onChangePassword,
+                  validator: Validatorless.multiple([
+                    Validatorless.min(
+                        6, 'Sua senha deve possui no mínimo 6 caracteres'),
+                    Validatorless.required('Campo obrigatório'),
+                  ]),
+                ),
+                InputTextWidget(
+                  labelText: 'Confirme a senha:',
+                  hintText: 'Digite a senha novamente',
+                  obscureText: true,
+                  suffixIcon: IconButton(
+                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.visibility_off,
+                    ),
+                  ),
+                  onChanged: store.onChangePasswordConfimation,
+                  validator: Validatorless.multiple([
+                    Validatorless.min(
+                        6, 'Sua senha deve possui no mínimo 6 caracteres'),
+                    Validatorless.required('Campo obrigatório'),
+                    Validatorless.compare(passwordController,
+                        'As duas senhas digitadas são diferentes')
+                  ]),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(30, 8, 30, 20),
+                  child: Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: 8),
+                        child: CheckboxWidget(
+                          onChanged: store.onChangePoliciesTerms,
                         ),
                       ),
-                    ),
-                  ],
+                      Flexible(
+                        child: RichText(
+                          textAlign: TextAlign.start,
+                          text: TextSpan(
+                            text: 'Li e concordo com os',
+                            style: TextStyle(
+                                fontSize: 16, color: AppTheme.colors.black),
+                            children: [
+                              TextSpan(
+                                text:
+                                    ' Termos e Condições e Politica de Privacidade',
+                                style: TextStyle(
+                                  color: AppTheme.colors.primary,
+                                  fontSize: 15,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              TripleBuilder(
-                store: store,
-                builder: (context, triple) {
-                  return !triple.isLoading
-                      ? Container(
-                          padding: const EdgeInsets.fromLTRB(30, 8, 30, 20),
-                          margin: const EdgeInsets.symmetric(horizontal: 100),
-                          child: Align(
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(30, 8, 30, 20),
+                  child: RoundedButtonWidget(
+                    onPressed: () {},
+                    textButton: 'CONTINUAR COM O GAMIL',
+                    backgroundColor: AppTheme.colors.blueLight,
+                    styleText: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: AppTheme.colors.primary),
+                  ),
+                ),
+                TripleBuilder(
+                  store: store,
+                  builder: (context, triple) {
+                    return !triple.isLoading
+                        ? Container(
+                            padding: const EdgeInsets.fromLTRB(30, 8, 30, 20),
                             child: RoundedButtonWidget(
                               onPressed: () async {
                                 //Modular.to.navigate('./phaseThree');
@@ -168,14 +160,37 @@ class _SignUpPageState extends State<SignUpPage> {
                                   await store.signup();
                                 }
                               },
-                              textButton: 'Criar conta',
+                              textButton: 'CRIAR MINHA CONTA',
                             ),
-                          ),
-                        )
-                      : const Center(child: CircularProgressIndicator());
-                },
-              ),
-            ],
+                          )
+                        : const Center(child: CircularProgressIndicator());
+                  },
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 10),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        'Já tem uma conta?',
+                        style: TextStyle(fontSize: 16),
+                      ),
+                      GestureDetector(
+                        onTap: () => Modular.to.navigate('/login/'),
+                        child: Text(
+                          ' Entre aqui',
+                          style: TextStyle(
+                              color: AppTheme.colors.primary,
+                              decoration: TextDecoration.underline,
+                              fontSize: 16),
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),
