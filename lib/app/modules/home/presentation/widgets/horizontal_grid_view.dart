@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import '../../../../shared/presentation/themes/app_theme.dart';
 import '../home_page.dart';
 
@@ -26,24 +27,28 @@ class _LargeHorizontalGridViewState extends State<HorizontalGridView> {
           childAspectRatio: 158 / 114, crossAxisCount: 1, mainAxisSpacing: 4),
       itemCount: 5,
       itemBuilder: (context, index) {
-        return Card(
-          color: AppTheme.colors.grey,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(bottom: 20),
-                child: Text(
-                  widget.events,
-                  style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w700,
-                      color: AppTheme.colors.primary),
+        return GestureDetector( onTap: (() {
+          Modular.to.pushNamed('./eventPage');
+        }),
+          child: Card(
+            color: AppTheme.colors.grey,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 20),
+                  child: Text(
+                    widget.events,
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
+                        color: AppTheme.colors.primary),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         );
       },
