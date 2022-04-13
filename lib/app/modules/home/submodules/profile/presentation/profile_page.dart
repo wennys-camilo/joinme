@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
+
 import '../../../../../shared/presentation/themes/app_theme.dart';
 import 'widgets/container_light_primary_widget.dart';
 import 'widgets/subtitle_text_widget.dart';
@@ -16,7 +16,7 @@ class ProfilePage extends StatelessWidget {
           padding: const EdgeInsets.only(left: 20),
           child: IconButton(
             icon: Icon(Icons.arrow_back, color: AppTheme.colors.primary),
-            onPressed: () => Modular.to.pop(),
+            onPressed: () => Navigator.of(context).pop(),
           ),
         ),
         backgroundColor: Colors.transparent,

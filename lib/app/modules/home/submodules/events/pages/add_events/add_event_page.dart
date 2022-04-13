@@ -92,8 +92,10 @@ class _AddEventPageState extends State<AddEventPage> {
                     store: store,
                     builder: (context, trilpe) {
                       return DropDownWidget(
-                        value: store.state.categories.first,
-                        labelText: "Categoria do evento:",
+                        value: store.state.selectedCategorie,
+                        labelText: store.state.selectedCategorie?.id == "001"
+                            ? ""
+                            : "Categoria do evento:",
                         labelStyle: TextStyle(color: AppTheme.colors.primary),
                         items: store.state.categories
                             .map<DropdownMenuItem<EventCategorieEntity>>(
@@ -159,6 +161,57 @@ class _AddEventPageState extends State<AddEventPage> {
                     LengthLimitingTextInputFormatter(6),
                   ],
                   validator: Validatorless.required('Campo Obrigatório'),
+                  onChanged: (value) => store.onChangemMaxParticipants(value),
+                ),
+                TripleBuilder(
+                  store: store,
+                  builder: (context, triple) {
+                    return !store.state.isOnline
+                        ? Column(
+                            children: [
+                              Row(
+                                children: const [
+                                  Expanded(
+                                    flex: 6,
+                                    child: InputTextWidget(
+                                      paddding: EdgeInsets.only(
+                                          top: 8, bottom: 8, left: 30),
+                                      labelText: 'Rua',
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Expanded(
+                                    flex: 4,
+                                    child: InputTextWidget(
+                                      paddding: EdgeInsets.only(
+                                          top: 8, bottom: 8, right: 30),
+                                      labelText: 'N°',
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const InputTextWidget(
+                                labelText: 'Cidade',
+                              ),
+                              const InputTextWidget(
+                                labelText: 'Estado',
+                              ),
+                              InputTextWidget(
+                                labelText: 'CEP',
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.digitsOnly,
+                                  CepInputFormatter()
+                                ],
+                              ),
+                              const InputTextWidget(
+                                labelText: 'Ponto de referência',
+                              ),
+                            ],
+                          )
+                        : Container();
+                  },
                 ),
                 InputTextWidget(
                   prefixText: "R\$ ",
@@ -171,16 +224,39 @@ class _AddEventPageState extends State<AddEventPage> {
                 ),
                 InputDateWidget(
                   labelText: 'Data:',
-                  onChanged: (value) {},
+                  onChanged: (value) {
+                    if (value != null) {
+                      store.onChangeDate(value);
+                    }
+                  },
+                  validator: (value) {
+                    if (value == null) {
+                      return 'Campo Obrigatório';
+                    }
+                    return null;
+                  },
                 ),
                 InputTimeWidget(
                   labelText: 'Horário Inicio',
-                  onChanged: (value) {},
-                  validator: Validatorless.required('Campo Obrigatório'),
+                  onChanged: (value) {
+                    if (value != null) {
+                      store.onChangeStartTime(value);
+                    }
+                  },
+                  validator: (value) {
+                    if (value == null) {
+                      return 'Campo Obrigatório';
+                    }
+                    return null;
+                  },
                 ),
                 InputTimeWidget(
                   labelText: 'Horário Término',
-                  onChanged: (value) {},
+                  onChanged: (value) {
+                    if (value != null) {
+                      store.onChangeEndTime(value);
+                    }
+                  },
                 ),
                 DropDownWidget(
                   labelText: "Pet Friendly:",
@@ -189,11 +265,11 @@ class _AddEventPageState extends State<AddEventPage> {
                   items: const [
                     DropdownMenuItem(
                       child: Text('Não'),
-                      value: 0,
+                      value: false,
                     ),
                     DropdownMenuItem(
                       child: Text('Sim'),
-                      value: 1,
+                      value: true,
                     ),
                   ],
                   onChanged: (value) => store.onChangeisPetFriendly(value),
@@ -254,8 +330,10 @@ class _AddEventPageState extends State<AddEventPage> {
                 Padding(
                   padding: const EdgeInsets.only(top: 20, bottom: 20),
                   child: RoundedButtonWidget(
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {}
+                    onPressed: () async {
+                      if (_formKey.currentState!.validate()) {
+                        await store.createEvent();
+                      }
                     },
                     textButton: 'Criar evento e Publicar',
                   ),
@@ -268,4 +346,4 @@ class _AddEventPageState extends State<AddEventPage> {
     );
   }
 }
-//  
+//

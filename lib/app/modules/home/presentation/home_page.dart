@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import '../../../shared/presentation/themes/app_theme.dart';
 import '../../../shared/presentation/utils/extension/string_extension_capitalize.dart';
-import '../../../shared/store/user/user_store.dart';
 import 'home_store.dart';
 import 'widgets/horizontal_grid_view.dart';
 import 'widgets/section_label_title_widget.dart';
@@ -15,19 +14,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends ModularState<HomePage, HomeStore> {
-  late final UserStore userStore;
-
-  @override
-  void initState() {
-    super.initState();
-    userStore = Modular.get<UserStore>();
-  }
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
           child: Column(
             children: [
               Padding(
@@ -51,7 +43,7 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                       onTap: () {},
                       child: SizedBox(
                         child: Text(
-                          'Olá, ${userStore.state.user.name.capitalize()}!',
+                          'Olá, ${store.userStore.state.user.name.capitalize()}!',
                           style: TextStyle(
                               overflow: TextOverflow.ellipsis,
                               fontSize: 23,

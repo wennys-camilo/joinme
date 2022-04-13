@@ -10,7 +10,7 @@ class OnboardPageThree extends StatelessWidget {
   Widget build(BuildContext context) {
     return BodyOnboardingWidget(
       title:
-          '... e não deixe de cuidar da sua sáude mental e física. Às vezes só precisamos de um pouco de incentivo, não é mesmo? ',
+          'Um incentivo a mais para você cuidar da sua saúde mental e física!',
       subtitle:
           'Não seria legal aproveitar melhor o seu tempo livre e ter uma rotina mais agradável?',
       image: AppTheme.images.boardThree,

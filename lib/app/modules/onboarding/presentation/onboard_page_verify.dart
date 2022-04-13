@@ -1,3 +1,5 @@
+import 'package:lottie/lottie.dart';
+
 import 'onboard_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -32,16 +34,9 @@ class _OnboardPageVerifyState extends State<OnboardPageVerify> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppTheme.colors.black,
       body: Center(
-        child: Container(
-          alignment: Alignment.center,
-          height: MediaQuery.of(context).size.height / 6,
-          margin: const EdgeInsets.fromLTRB(100, 20, 100, 70),
-          decoration: BoxDecoration(
-            color: AppTheme.colors.grey,
-            shape: BoxShape.circle,
-          ),
-        ),
+        child: Lottie.asset('assets/images/splash.json'),
       ),
     );
   }

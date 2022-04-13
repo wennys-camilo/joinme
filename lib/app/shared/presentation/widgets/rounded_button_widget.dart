@@ -6,17 +6,19 @@ class RoundedButtonWidget extends StatelessWidget {
   final void Function()? onPressed;
   final Color? backgroundColor;
   final TextStyle? styleText;
-  const RoundedButtonWidget(
-      {Key? key,
-      this.textButton,
-      required this.onPressed,
-      this.backgroundColor,
-      this.styleText})
-      : super(key: key);
+  final double? width;
+  const RoundedButtonWidget({
+    Key? key,
+    this.textButton,
+    required this.onPressed,
+    this.backgroundColor,
+    this.styleText,
+    this.width,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: MediaQuery.of(context).size.width * 0.5,
+      width: width ?? MediaQuery.of(context).size.width * 0.5,
       height: 40,
       child: TextButton(
         style: TextButton.styleFrom(

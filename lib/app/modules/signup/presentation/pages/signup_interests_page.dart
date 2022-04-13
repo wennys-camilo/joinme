@@ -87,13 +87,16 @@ class _SignupInterestPageState extends State<SignupInterestPage> {
                       textButton: 'CONFIRMAR',
                     ),
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      //TODO IMPLEMENT
-                    },
-                    child: const Text(
-                      'PULAR',
-                      textAlign: TextAlign.center,
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 20),
+                    child: GestureDetector(
+                      onTap: () {
+                        //TODO IMPLEMENT
+                      },
+                      child: const Text(
+                        'PULAR',
+                        textAlign: TextAlign.center,
+                      ),
                     ),
                   ),
                 ],

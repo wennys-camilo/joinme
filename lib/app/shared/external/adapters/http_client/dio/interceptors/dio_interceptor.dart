@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import '../../../../../usecases/get_token_usecase.dart';
 import '../../../erros.dart';
 
@@ -20,6 +23,9 @@ class CustomInterceptors extends InterceptorsWrapper {
         'Authorization': 'Bearer $token',
       });
     });
+    if (options.data != null) {
+      debugPrint("Payload ${json.encode(options.data)}");
+    }
 
     handler.next(options);
   }
