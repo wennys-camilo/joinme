@@ -237,7 +237,58 @@ class EventPage extends StatelessWidget {
               ),
               const SizedBox(
                 height: 26,
-              )
+              ),
+              Align(
+                  alignment: Alignment.bottomLeft,
+                  child: EventTitleInfoWidget(
+                      titleInfo: 'Dúvidas? Pergunte ao fórum!')),
+              SizedBox(
+                height: 7,
+              ),
+              Row(
+                children: [
+                  Flexible(
+                    child: EventDataInfoWidget(
+                        titleData:
+                            'Sua dúvida poderá ser respondida pelo organiza-dor ou participantes já confirmados.'),
+                  ),
+                  Container(
+                    width: 46,
+                    height: 46,
+                    decoration: BoxDecoration(
+                        color: AppTheme.colors.grey, shape: BoxShape.circle),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 28,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    children: [
+                      Icon(Icons.abc),
+                      EventDataInfoWidget(titleData: 'Denunciar')
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Icon(Icons.abc),
+                      EventDataInfoWidget(titleData: 'Copiar link')
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Icon(
+                        Icons.share,
+                        color: AppTheme.colors.primary,
+                      ),
+                      EventDataInfoWidget(titleData: 'Compartilhar')
+                    ],
+                  ),
+                ],
+              ),
             ],
           ),
         ),
