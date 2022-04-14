@@ -137,7 +137,7 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                 ),
                 SizedBox(
                   height: 40,
-                  child: Event_List_View_categories(
+                  child: EventListViewcategories(
                     chipColor: AppTheme.colors.primary,
                   ),
                 ),
@@ -150,7 +150,7 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                 ),
                 SizedBox(
                   height: 40,
-                  child: Event_List_View_categories(
+                  child: EventListViewcategories(
                     chipColor: AppTheme.colors.primary,
                   ),
                 ),
