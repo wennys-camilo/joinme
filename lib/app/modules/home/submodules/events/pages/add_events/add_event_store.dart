@@ -1,6 +1,6 @@
-import 'package:camp_final/app/shared/store/user/user_store.dart';
 import 'package:flutter_triple/flutter_triple.dart';
 import 'package:intl/intl.dart';
+import '../../../../../../shared/store/user/user_store.dart';
 import '../../../../../../shared/domain/helpers/errors/failure.dart';
 import '../../domain/entities/accessibilities_entities.dart';
 import '../../domain/entities/address_entity.dart';
