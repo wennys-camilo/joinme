@@ -9,10 +9,9 @@ class OnboardPageOne extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BodyOnboardingWidget(
-      title:
-          'Dia difícil? Encontre atividades para aliviar a tensão próximas a você...',
+      title: 'A gente entende como alguns dias podem ser bem estressantes...',
       subtitle:
-          'Que tal esquecer e relaxar um pouco participando de grupos ou eventos que gosta?',
+          'Mas sabia que às vezes é mais produtivo fazer uma pausa e relaxar um pouco?',
       image: AppTheme.images.boardOne,
       onPressed: () => Modular.to.navigate('/board2'),
       numBoard: 0,

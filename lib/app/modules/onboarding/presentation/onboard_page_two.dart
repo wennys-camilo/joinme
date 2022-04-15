@@ -10,9 +10,10 @@ class OnboardPageTwo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BodyOnboardingWidget(
-      title: '...se conecte com pessoas que dividem os mesmos interesses...',
+      title:
+          '...já pensou quantas pessoas ao seu redor podem estar se sentindo assim?',
       subtitle:
-          'Já pensou em quantas pessoas podem estar procurando atividades parecidas?',
+          'Que tal se conectar com elas participando de grupos ou eventos do seu interesse?',
       image: AppTheme.images.boardTwo,
       onPressed: () => Modular.to.navigate('/board3'),
       numBoard: 1,

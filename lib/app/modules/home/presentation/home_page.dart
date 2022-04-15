@@ -1,4 +1,3 @@
-import 'package:camp_final/app/modules/home/presentation/widgets/insights_horizontal_grid_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import '../../../shared/presentation/themes/app_theme.dart';
@@ -8,7 +7,7 @@ import 'home_store.dart';
 import 'widgets/categories_title_widget.dart';
 import 'widgets/event_horizontal_grid_view.dart';
 import 'widgets/event_list_view_categories.dart';
-import 'widgets/section_label_title_widget.dart';
+import 'widgets/insights_horizontal_grid_view.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -31,6 +30,7 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
           child: Padding(
             padding: const EdgeInsets.only(left: 15),
             child: Column(
@@ -84,7 +84,7 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                               top: 0,
                               right: 3,
                               child: Container(
-                                  child: Center(
+                                  child: const Center(
                                     child: Text(
                                       '9',
                                       style: TextStyle(color: Colors.white),
@@ -129,7 +129,7 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                 const SizedBox(
                   height: 16,
                 ),
-                CategoriesTitleWidget(
+                const CategoriesTitleWidget(
                   title: 'Categorias',
                 ),
                 const SizedBox(
@@ -144,8 +144,8 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                 const SizedBox(
                   height: 15,
                 ),
-                CategoriesTitleWidget(title: 'Acessibilidade'),
-                SizedBox(
+                const CategoriesTitleWidget(title: 'Acessibilidade'),
+                const SizedBox(
                   height: 8,
                 ),
                 SizedBox(
@@ -154,11 +154,11 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                     chipColor: AppTheme.colors.primary,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 16,
                 ),
-                CategoriesTitleWidget(title: 'Eventos Impulsionados'),
-                SizedBox(
+                const CategoriesTitleWidget(title: 'Eventos Impulsionados'),
+                const SizedBox(
                   height: 8,
                 ),
                 SizedBox(
@@ -171,7 +171,7 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                 const SizedBox(
                   height: 20,
                 ),
-                CategoriesTitleWidget(
+                const CategoriesTitleWidget(
                   title: 'Eventos Próximos',
                 ),
                 const SizedBox(
@@ -185,8 +185,8 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                 const SizedBox(
                   height: 16,
                 ),
-                CategoriesTitleWidget(title: 'Eventos Online'),
-                SizedBox(
+                const CategoriesTitleWidget(title: 'Eventos Online'),
+                const SizedBox(
                   height: 8,
                 ),
                 SizedBox(
@@ -197,17 +197,17 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                 const SizedBox(
                   height: 16,
                 ),
-                CategoriesTitleWidget(title: 'Insights'),
-                SizedBox(
+                const CategoriesTitleWidget(title: 'Insights'),
+                const SizedBox(
                   height: 8,
                 ),
-                SizedBox(
+                const SizedBox(
                     height: 168,
                     child: InsightsHorizontalGridView(
                       title: 'Playlist para estudos',
                       description: 'sons para focar e relaxar',
                     )),
-                SizedBox(
+                const SizedBox(
                   height: 24,
                 )
               ],

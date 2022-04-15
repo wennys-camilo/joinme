@@ -2,6 +2,7 @@ import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:validatorless/validatorless.dart';
 import '../../../../shared/presentation/themes/app_theme.dart';
 import '../../../../shared/presentation/widgets/input_text_widget.dart';
@@ -40,23 +41,28 @@ class _SignupPagePhaseTwoState
           child: ListView(
             physics: const BouncingScrollPhysics(),
             children: [
-              Container(
-                height: MediaQuery.of(context).size.height / 6,
-                margin: const EdgeInsets.fromLTRB(100, 20, 100, 70),
-                decoration: BoxDecoration(
-                  color: AppTheme.colors.grey,
-                  shape: BoxShape.circle,
+              SvgPicture.asset(AppTheme.images.siren),
+              const SizedBox(
+                height: 20,
+              ),
+              const Padding(
+                padding: EdgeInsets.fromLTRB(30, 8, 30, 20),
+                child: Text(
+                  'Você gostaria de adicionar um contato para emergências?',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 18,
+                  ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(30, 8, 30, 20),
+              const Padding(
+                padding: EdgeInsets.fromLTRB(30, 8, 30, 20),
                 child: Text(
-                  'Gostaria de adicionar um contato de emergência?',
+                  'Esse contato serve para enviarmos uma mensa-gem para alguém que você confia, caso você não se sinta segura ou confortável em alguma situação, através do botão de ajuda.',
                   style: TextStyle(
-                    color: AppTheme.colors.primary.withOpacity(0.79),
-                    fontWeight: FontWeight.w600,
-                    fontSize: 20,
+                    fontSize: 16,
                   ),
+                  textAlign: TextAlign.justify,
                 ),
               ),
               InputTextWidget(

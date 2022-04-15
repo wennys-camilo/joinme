@@ -5,7 +5,10 @@ import 'package:intl/intl.dart';
 class InputDateWidget extends StatelessWidget {
   final void Function(DateTime?)? onChanged;
   final String? labelText;
-  const InputDateWidget({Key? key, this.onChanged, this.labelText})
+  final String? Function(DateTime?)? validator;
+
+  const InputDateWidget(
+      {Key? key, this.onChanged, this.labelText, this.validator})
       : super(key: key);
 
   @override
@@ -13,8 +16,7 @@ class InputDateWidget extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.fromLTRB(30, 8, 30, 8),
       child: FormBuilderDateTimePicker(
-        initialDate: DateTime.now(),
-        initialValue: DateTime.now(),
+        autovalidateMode: AutovalidateMode.onUserInteraction,
         firstDate: DateTime.now().subtract(const Duration(days: 0)),
         name: 'date',
         format: DateFormat(" d 'de' MMMM 'de' y", "pt_BR"),
@@ -27,7 +29,7 @@ class InputDateWidget extends StatelessWidget {
           border: const OutlineInputBorder(),
           enabledBorder: const OutlineInputBorder(),
         ),
-        // enabled: true,
+        validator: validator,
       ),
     );
   }

@@ -17,6 +17,8 @@ class InputTextWidget extends StatelessWidget {
   final String? suffixText;
   final String? prefixText;
   final String? labelText;
+
+  final EdgeInsetsGeometry? paddding;
   const InputTextWidget({
     Key? key,
     this.hintText,
@@ -32,12 +34,13 @@ class InputTextWidget extends StatelessWidget {
     this.suffixText,
     this.prefixText,
     this.labelText,
+    this.paddding,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.fromLTRB(30, 8, 30, 8),
+      padding: paddding ?? const EdgeInsets.fromLTRB(30, 8, 30, 8),
       child: SizedBox(
         height: height,
         child: TextFormField(

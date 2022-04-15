@@ -12,7 +12,7 @@ class OnboardController extends StreamStore<Failure, OnboardState> {
 
   Future<void> load() async {
     var reponse = await _checkFirstAcessUsecase.call();
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 3));
     reponse.fold(setError, (result) async {
       update(state.copyWith(firstAcess: result));
     });

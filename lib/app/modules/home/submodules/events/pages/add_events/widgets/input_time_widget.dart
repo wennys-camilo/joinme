@@ -14,6 +14,7 @@ class InputTimeWidget extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.fromLTRB(30, 8, 30, 8),
       child: FormBuilderDateTimePicker(
+        autovalidateMode: AutovalidateMode.onUserInteraction,
         name: 'time',
         initialTime: const TimeOfDay(hour: 8, minute: 0),
         onChanged: onChanged,

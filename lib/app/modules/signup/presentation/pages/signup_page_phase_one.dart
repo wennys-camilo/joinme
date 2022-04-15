@@ -136,10 +136,11 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(30, 8, 30, 20),
+                  padding: const EdgeInsets.fromLTRB(30, 8, 30, 5),
                   child: RoundedButtonWidget(
+                    googleButton: true,
                     onPressed: () {},
-                    textButton: 'CONTINUAR COM O GAMIL',
+                    textButton: 'CONTINUAR COM O GMAIL',
                     backgroundColor: AppTheme.colors.blueLight,
                     styleText: TextStyle(
                         fontWeight: FontWeight.bold,

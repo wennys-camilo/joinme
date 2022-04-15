@@ -1,3 +1,5 @@
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:lottie/lottie.dart';
 import 'onboard_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -19,6 +21,8 @@ class _OnboardPageVerifyState extends State<OnboardPageVerify> {
     controller.observer(
       onState: (state) {
         if (state.firstAcess) {
+          //TODO: CACHE
+          loadPictures();
           Modular.to.navigate('/board1');
           controller.setAcess(true);
         } else {
@@ -29,18 +33,34 @@ class _OnboardPageVerifyState extends State<OnboardPageVerify> {
     controller.load();
   }
 
+  loadPictures() {
+    Future.wait([
+      precachePicture(
+        ExactAssetPicture(SvgPicture.svgStringDecoderOutsideViewBoxBuilder,
+            AppTheme.images.boardOne),
+        null,
+      ),
+      precachePicture(
+        ExactAssetPicture(SvgPicture.svgStringDecoderOutsideViewBoxBuilder,
+            AppTheme.images.boardTwo),
+        null,
+      ),
+      precachePicture(
+        ExactAssetPicture(SvgPicture.svgStringDecoderOutsideViewBoxBuilder,
+            AppTheme.images.boardThree),
+        null,
+      ),
+    ]);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppTheme.colors.primary,
       body: Center(
-        child: Container(
-          alignment: Alignment.center,
-          height: MediaQuery.of(context).size.height / 6,
-          margin: const EdgeInsets.fromLTRB(100, 20, 100, 70),
-          decoration: BoxDecoration(
-            color: AppTheme.colors.grey,
-            shape: BoxShape.circle,
-          ),
+        child: Padding(
+          padding: const EdgeInsets.only(left: 40, right: 40),
+          child: Lottie.asset('assets/images/splash.json'),
         ),
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 import '../../domain/entities/interests_entity.dart';
 
@@ -19,10 +20,15 @@ class _InterestWidgetState extends State<InterestWidget> {
   late final NetworkImage _imageInactivate;
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
+  void initState() {
+    super.initState();
     _imageActivate = NetworkImage(widget.interests.urlActive);
     _imageInactivate = NetworkImage(widget.interests.urlInactive);
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
     precacheImage(_imageActivate, context);
     precacheImage(_imageInactivate, context);
   }
@@ -33,13 +39,14 @@ class _InterestWidgetState extends State<InterestWidget> {
       children: [
         Expanded(
           child: Container(
-            margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-            decoration: BoxDecoration(
+              margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+              decoration: const BoxDecoration(
                 shape: BoxShape.circle,
-                image: DecorationImage(
-                  image: widget.selected ? _imageActivate : _imageInactivate,
-                )),
-          ),
+              ),
+              child: FadeInImage(
+                placeholder: MemoryImage(kTransparentImage),
+                image: widget.selected ? _imageActivate : _imageInactivate,
+              )),
         ),
         Text(widget.interests.name)
       ],

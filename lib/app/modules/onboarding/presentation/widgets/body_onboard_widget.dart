@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
+
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../shared/presentation/themes/app_theme.dart';
 import '../../../../shared/presentation/widgets/rounded_button_widget.dart';
@@ -24,7 +24,6 @@ class BodyOnboardingWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppTheme.colors.greyBoard,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
@@ -34,10 +33,6 @@ class BodyOnboardingWidget extends StatelessWidget {
             height: MediaQuery.of(context).size.height * 0.5,
             decoration: BoxDecoration(
               color: AppTheme.colors.white,
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(40.0),
-                topRight: Radius.circular(40.0),
-              ),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -46,8 +41,11 @@ class BodyOnboardingWidget extends StatelessWidget {
                   padding: const EdgeInsets.all(30),
                   child: Text(
                     title,
-                    style:
-                        TextStyle(color: AppTheme.colors.primary, fontSize: 20),
+                    style: TextStyle(
+                      color: AppTheme.colors.black,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
                     textAlign: TextAlign.center,
                   ),
                 ),
@@ -55,28 +53,21 @@ class BodyOnboardingWidget extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 20, right: 20),
                   child: Text(
                     subtitle,
-                    style: TextStyle(
-                        color: AppTheme.colors.black.withOpacity(0.6),
-                        fontSize: 15),
+                    style:
+                        TextStyle(color: AppTheme.colors.black, fontSize: 15),
                     textAlign: TextAlign.center,
                   ),
                 ),
                 StepsOnboardingWidget(
                   numPage: numBoard,
                 ),
-                GestureDetector(
-                  onTap: () => Modular.to.navigate('/login/'),
-                  child: Text(
-                    'Pular introdução',
-                    style: TextStyle(color: AppTheme.colors.primary),
-                  ),
-                ),
                 const SizedBox(
                   height: 20,
                 ),
                 RoundedButtonWidget(
                   onPressed: onPressed,
-                  textButton: 'Proximo',
+                  textButton: 'PRÓXIMO',
+                  width: MediaQuery.of(context).size.width * 0.85,
                 ),
               ],
             ),

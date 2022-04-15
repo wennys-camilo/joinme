@@ -9,6 +9,7 @@ abstract class AppColors {
   Color get greyBoard;
   Color get greyLight;
   Color get blueLight;
+  Color get pink;
 }
 
 class AppColorsImpl implements AppColors {
@@ -35,4 +36,7 @@ class AppColorsImpl implements AppColors {
 
   @override
   Color get blueLight => const Color(0xffDEDAF0);
+
+  @override
+  Color get pink => const Color(0xffDF3083);
 }

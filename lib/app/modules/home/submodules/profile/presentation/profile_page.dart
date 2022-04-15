@@ -1,8 +1,5 @@
-import 'package:flutter_svg/flutter_svg.dart';
-
-import '../../../../../shared/presentation/themes/app_theme.dart';
 import 'package:flutter/material.dart';
-
+import '../../../../../shared/presentation/themes/app_theme.dart';
 import 'widgets/container_light_primary_widget.dart';
 import 'widgets/subtitle_text_widget.dart';
 
@@ -45,8 +42,8 @@ class ProfilePage extends StatelessWidget {
               const SizedBox(
                 height: 42,
               ),
-              GestureDetector( onDoubleTap: () {
-              },
+              GestureDetector(
+                onDoubleTap: () {},
                 child: Center(
                   child: Stack(
                     children: [
@@ -54,7 +51,8 @@ class ProfilePage extends StatelessWidget {
                         height: 118,
                         width: 118,
                         decoration: BoxDecoration(
-                            shape: BoxShape.circle, color: AppTheme.colors.grey),
+                            shape: BoxShape.circle,
+                            color: AppTheme.colors.grey),
                       ),
                       Positioned(
                         bottom: 0,
@@ -97,7 +95,7 @@ class ProfilePage extends StatelessWidget {
                     ),
                     inferior: 'Eventos',
                   ),
-                  ContainerLightPrimary(
+                  const ContainerLightPrimary(
                     superiorIcon: Icon(Icons.badge),
                     inferior: 'Nível #',
                   ),
@@ -113,40 +111,45 @@ class ProfilePage extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 35,
               ),
               Row(
                 children: [
-                  SubtitleText(
+                  const SubtitleText(
                     subtitle: 'Sobre mim',
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
                   Icon(Icons.create_rounded,
                       color: AppTheme.colors.black.withOpacity(0.6)),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 13,
               ),
               Container(
                 child: Text(
-                    'Lorem ipsum dolor sit amet, consectetur adipis-cing elit ut aliquam, purus sit amet luctus vene-natis, lectus magna fringilla.', style: TextStyle(color: AppTheme.colors.black.withOpacity(0.6),fontSize: 16, fontWeight: FontWeight.w400),),
+                  'Lorem ipsum dolor sit amet, consectetur adipis-cing elit ut aliquam, purus sit amet luctus vene-natis, lectus magna fringilla.',
+                  style: TextStyle(
+                      color: AppTheme.colors.black.withOpacity(0.6),
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400),
+                ),
                 width: double.infinity,
                 height: 90,
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(16)),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 12,
               ),
               Row(
                 children: [
-                  SubtitleText(subtitle: 'Interesses'),
-                  SizedBox(
+                  const SubtitleText(subtitle: 'Interesses'),
+                  const SizedBox(
                     width: 10,
                   ),
                   Icon(Icons.create_rounded,

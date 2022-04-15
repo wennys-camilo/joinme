@@ -29,77 +29,79 @@ class _TabPageState extends State<TabPage> {
       bottomNavigationBar: ValueListenableBuilder<int>(
         valueListenable: currentIndex,
         builder: (context, value, _) {
-          return BottomNavigationBar(
-            type: BottomNavigationBarType.fixed,
-            backgroundColor: AppTheme.colors.grey,
-            currentIndex: value,
-            onTap: (value) {
-              if (value == currentIndex.value) {
-                _changeBar(value);
-                return;
-              } else {
-                switch (value) {
-                  case 0:
-                    Modular.to.pushNamed('./homePage');
-                    break;
-                  case 1:
-                    Modular.to.pushNamed('./perfil');
-                    break;
-                  case 2:
-                    Modular.to.pushNamed('./add_events');
-                    break;
-                  case 3:
-                    break;
-                  case 4:
-                    Modular.to.pushNamed('./profile');
-                    break;
-                  default:
+          return ClipRRect(
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(20.0),
+              topRight: Radius.circular(20.0),
+            ),
+            child: BottomNavigationBar(
+              type: BottomNavigationBarType.fixed,
+              backgroundColor: AppTheme.colors.grey,
+              selectedItemColor: AppTheme.colors.pink,
+              currentIndex: value,
+              onTap: (value) {
+                if (value == currentIndex.value) {
+                  _changeBar(value);
+                  return;
+                } else {
+                  switch (value) {
+                    case 0:
+                      Modular.to.pushNamed('./homePage');
+                      break;
+                    case 1:
+                      Modular.to.pushNamed('./perfil');
+                      break;
+                    case 2:
+                      Modular.to.pushNamed('./add_events');
+                      break;
+                    case 3:
+                      break;
+                    case 4:
+                      Modular.to.pushNamed('./profile');
+                      break;
+                    default:
+                  }
                 }
-              }
-              _changeBar(value);
-            },
-            items: [
-              const BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.home,
-                  size: 35,
-                ),
-                label: 'Home',
-              ),
-              const BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.calendar_month,
-                  size: 35,
-                ),
-                label: 'Calendário',
-              ),
-              BottomNavigationBarItem(
-                icon: CircleAvatar(
-                  radius: 25,
-                  backgroundColor: AppTheme.colors.primary,
-                  child: Icon(
-                    Icons.add_outlined,
-                    size: 40,
-                    color: AppTheme.colors.white,
+                _changeBar(value);
+              },
+              items: const [
+                BottomNavigationBarItem(
+                  icon: Icon(
+                    Icons.home,
+                    size: 30,
                   ),
+                  label: 'Home',
                 ),
-                label: "",
-              ),
-              const BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.bookmark,
-                  size: 35,
+                BottomNavigationBarItem(
+                  icon: Icon(
+                    Icons.calendar_month,
+                    size: 30,
+                  ),
+                  label: 'Calendário',
                 ),
-                label: 'Salvos',
-              ),
-              const BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.person,
-                  size: 35,
+                BottomNavigationBarItem(
+                  icon: Icon(
+                    Icons.add_circle_outlined,
+                    size: 30,
+                  ),
+                  label: "Criar",
                 ),
-                label: 'Perfil',
-              ),
-            ],
+                BottomNavigationBarItem(
+                  icon: Icon(
+                    Icons.bookmark,
+                    size: 30,
+                  ),
+                  label: 'Salvos',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(
+                    Icons.person,
+                    size: 30,
+                  ),
+                  label: 'Perfil',
+                ),
+              ],
+            ),
           );
         },
       ),

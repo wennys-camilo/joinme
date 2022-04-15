@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:flutter_triple/flutter_triple.dart';
 import 'package:validatorless/validatorless.dart';
@@ -35,18 +36,10 @@ class _LoginPageState extends ModularState<LoginPage, LoginStore> {
           key: _formKey,
           child: ListView(
             children: [
-              //TODO: COMPONENTIZAR
-              GestureDetector(
-                onTap: () {},
-                child: Container(
-                  height: MediaQuery.of(context).size.height / 6,
-                  //margin: const EdgeInsets.all(100)
-                  margin: const EdgeInsets.fromLTRB(100, 50, 100, 30),
-                  decoration: BoxDecoration(
-                    color: AppTheme.colors.grey,
-                    shape: BoxShape.circle,
-                  ),
-                ),
+              Container(
+                height: MediaQuery.of(context).size.height / 7,
+                margin: const EdgeInsets.fromLTRB(100, 50, 100, 30),
+                child: SvgPicture.asset(AppTheme.images.joinmeLogo),
               ),
               const Padding(
                 padding: EdgeInsets.fromLTRB(30, 8, 30, 20),
@@ -132,13 +125,14 @@ class _LoginPageState extends ModularState<LoginPage, LoginStore> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.fromLTRB(30, 8, 30, 10),
+                padding: const EdgeInsets.fromLTRB(30, 8, 30, 5),
                 child: RoundedButtonWidget(
+                  googleButton: true,
                   backgroundColor: AppTheme.colors.blueLight,
                   onPressed: () async {
-                    if (_formKey.currentState!.validate()) {
+                    /*   if (_formKey.currentState!.validate()) {
                       await store.login();
-                    }
+                    }*/
                   },
                   textButton: 'ACESSAR COM O GMAIL',
                   styleText: TextStyle(
@@ -147,7 +141,6 @@ class _LoginPageState extends ModularState<LoginPage, LoginStore> {
                   ),
                 ),
               ),
-
               TripleBuilder(
                 store: store,
                 builder: (context, triple) {
@@ -171,7 +164,6 @@ class _LoginPageState extends ModularState<LoginPage, LoginStore> {
                   );
                 },
               ),
-
               Padding(
                 padding: const EdgeInsets.only(bottom: 10),
                 child: GestureDetector(
