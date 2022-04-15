@@ -1,10 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../shared/presentation/themes/app_theme.dart';
 import '../../../../shared/presentation/widgets/rounded_button_widget.dart';
 
-class SignupConfirmationPage extends StatelessWidget {
+class SignupConfirmationPage extends StatefulWidget {
   const SignupConfirmationPage({Key? key}) : super(key: key);
+
+  @override
+  State<SignupConfirmationPage> createState() => _SignupConfirmationPageState();
+}
+
+class _SignupConfirmationPageState extends State<SignupConfirmationPage> {
+  @override
+  void initState() {
+    super.initState();
+    preChacheSvg();
+  }
+
+  preChacheSvg() {
+    precachePicture(
+      ExactAssetPicture(
+        SvgPicture.svgStringDecoderBuilder, // See UPDATE below!
+        AppTheme.images.confirmation,
+      ),
+      null,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -14,40 +36,35 @@ class SignupConfirmationPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Center(
-            child: Container(
-              width: MediaQuery.of(context).size.width * 0.3,
-              height: MediaQuery.of(context).size.height * 0.2,
-              decoration: BoxDecoration(
-                color: AppTheme.colors.grey,
-                shape: BoxShape.circle,
-              ),
-              child: Icon(
-                Icons.check_outlined,
-                size: 90,
-                color: AppTheme.colors.white,
-              ),
+            child: SvgPicture.asset(
+              AppTheme.images.confirmation,
             ),
           ),
+          const SizedBox(
+            height: 40,
+          ),
           Text(
-            'Bem vindo!',
+            'Que bom  ter você por aqui!',
             style: TextStyle(
-                color: AppTheme.colors.primary,
-                fontSize: 20,
-                fontWeight: FontWeight.bold),
+              color: AppTheme.colors.black,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
           ),
           const SizedBox(
-            height: 20,
+            height: 15,
           ),
           const Text(
-            'Sua conta foi criada!',
+            'Sua conta foi criada com sucesso!',
             style: TextStyle(fontWeight: FontWeight.w500),
           ),
           const SizedBox(
             height: 50,
           ),
           RoundedButtonWidget(
-            onPressed: () => Modular.to.navigate('/home/homePage'),
-            textButton: 'Próximo',
+            width: MediaQuery.of(context).size.width * 0.8,
+            onPressed: () => Modular.to.navigate('/signup/phaseTwo'),
+            textButton: 'ENTRAR',
           )
         ],
       ),

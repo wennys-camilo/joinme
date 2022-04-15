@@ -37,9 +37,9 @@ class _TabPageState extends State<TabPage> {
             child: BottomNavigationBar(
               type: BottomNavigationBarType.fixed,
               backgroundColor: AppTheme.colors.grey,
+              selectedItemColor: AppTheme.colors.pink,
               currentIndex: value,
               onTap: (value) {
-                //TODO: ARRUMAR O PROBLEMA DA NAVEGAÇÃO
                 if (value == currentIndex.value) {
                   _changeBar(value);
                   return;
@@ -68,35 +68,35 @@ class _TabPageState extends State<TabPage> {
                 BottomNavigationBarItem(
                   icon: Icon(
                     Icons.home,
-                    size: 35,
+                    size: 30,
                   ),
                   label: 'Home',
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(
                     Icons.calendar_month,
-                    size: 35,
+                    size: 30,
                   ),
                   label: 'Calendário',
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(
                     Icons.add_circle_outlined,
-                    size: 35,
+                    size: 30,
                   ),
                   label: "Criar",
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(
                     Icons.bookmark,
-                    size: 35,
+                    size: 30,
                   ),
                   label: 'Salvos',
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(
                     Icons.person,
-                    size: 35,
+                    size: 30,
                   ),
                   label: 'Perfil',
                 ),

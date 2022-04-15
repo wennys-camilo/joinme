@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import '../themes/app_theme.dart';
 
 class RoundedButtonWidget extends StatelessWidget {
@@ -7,6 +8,7 @@ class RoundedButtonWidget extends StatelessWidget {
   final Color? backgroundColor;
   final TextStyle? styleText;
   final double? width;
+  final bool googleButton;
   const RoundedButtonWidget({
     Key? key,
     this.textButton,
@@ -14,6 +16,7 @@ class RoundedButtonWidget extends StatelessWidget {
     this.backgroundColor,
     this.styleText,
     this.width,
+    this.googleButton = false,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -27,9 +30,20 @@ class RoundedButtonWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(18.0),
           ),
         ),
-        child: Text(
-          textButton ?? '',
-          style: styleText ?? TextStyle(color: AppTheme.colors.white),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              textButton ?? '',
+              style: styleText ?? TextStyle(color: AppTheme.colors.white),
+            ),
+            googleButton
+                ? Padding(
+                    padding: const EdgeInsets.only(left: 10),
+                    child: SvgPicture.asset(AppTheme.images.googleIcon),
+                  )
+                : Container()
+          ],
         ),
         onPressed: onPressed,
       ),

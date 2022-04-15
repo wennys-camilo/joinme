@@ -44,12 +44,12 @@ class _SignupInterestPageState extends State<SignupInterestPage> {
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(20),
+                  const Padding(
+                    padding: EdgeInsets.all(20),
                     child: Text(
                       'Conta pra gente...quais são seus interesses?',
-                      style: TextStyle(
-                          color: AppTheme.colors.primary, fontSize: 20),
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
                     ),
                   ),
                   TripleBuilder(

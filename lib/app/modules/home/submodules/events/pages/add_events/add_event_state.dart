@@ -25,6 +25,7 @@ class AddEventState {
   final String zipCode;
   final String referencePoint;
   final String userId;
+  final List<String> selectedsIdsAccessibilities;
   AddEventState({
     required this.accessibilities,
     required this.categories,
@@ -48,8 +49,8 @@ class AddEventState {
     required this.zipCode,
     required this.referencePoint,
     required this.userId,
+    required this.selectedsIdsAccessibilities,
   });
-  //TODO VEREFICAR O CAMPO EVENT ID
 
   factory AddEventState.empty() {
     return AddEventState(
@@ -58,7 +59,7 @@ class AddEventState {
       selectedsAccessibilities: [],
       categories: [
         EventCategorieEntity(
-            active: true, name: 'Selecione uma Categoria', id: "001")
+            active: true, name: 'Selecione uma Categoria', id: "CATEGORIA")
       ],
       isOnline: false,
       maxParticipants: 0,
@@ -78,6 +79,7 @@ class AddEventState {
       referencePoint: '',
       endTime: '',
       street: '',
+      selectedsIdsAccessibilities: [],
     );
   }
 
@@ -104,6 +106,7 @@ class AddEventState {
     String? zipCode,
     String? referencePoint,
     String? userId,
+    List<String>? selectedsIdsAccessibilities,
   }) {
     return AddEventState(
       accessibilities: accessibilities ?? this.accessibilities,
@@ -129,6 +132,8 @@ class AddEventState {
       zipCode: zipCode ?? this.zipCode,
       referencePoint: referencePoint ?? this.referencePoint,
       userId: userId ?? this.userId,
+      selectedsIdsAccessibilities:
+          selectedsIdsAccessibilities ?? this.selectedsIdsAccessibilities,
     );
   }
 }

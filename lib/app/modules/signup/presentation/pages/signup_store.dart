@@ -39,7 +39,7 @@ class SignupStore extends StreamStore<Failure, SignupState> {
       update(state.copyWith(userSignupResponse: response));
       var responseToken = await _setTokenUsecase(response.tokenEnity!.token);
       responseToken.fold(setError, (r) {});
-      Modular.to.navigate('/signup/phaseTwo');
+      Modular.to.pushNamed('./confirmation');
     });
     setLoading(false);
   }
@@ -117,7 +117,7 @@ class SignupStore extends StreamStore<Failure, SignupState> {
           emergencyPhone: state.userSignupResponse.emergencyPhone,
         ),
       );
-      Modular.to.pushNamed('./confirmation');
+      Modular.to.pushNamed('/home/homePage');
     });
   }
 

@@ -1,6 +1,5 @@
-import 'package:camp_final/app/shared/presentation/themes/app_images.dart';
-
-import 'app_colos.dart';
+import 'app_images.dart';
+import 'app_colors.dart';
 
 class AppTheme {
   AppTheme._();

@@ -58,7 +58,12 @@ class AddEventStore extends StreamStore<Failure, AddEventState> {
   }
 
   onChangeSelectedsAccessibilities(List<AccessibilitiesEntity> value) {
-    update(state.copyWith(selectedsAccessibilities: value));
+    List<String> ids = [];
+    for (var accessibilite in value) {
+      ids.add(accessibilite.id);
+    }
+    update(state.copyWith(
+        selectedsAccessibilities: value, selectedsIdsAccessibilities: ids));
   }
 
   onChangeCategorie(EventCategorieEntity value) {
@@ -73,24 +78,60 @@ class AddEventStore extends StreamStore<Failure, AddEventState> {
     update(state.copyWith(maxParticipants: int.parse(value)));
   }
 
+  onChangePrice(String value) {
+    update(state.copyWith(price: double.parse(value.replaceAll(',', '.'))));
+  }
+
+  onChangeUrl(String value) {
+    update(state.copyWith(url: value));
+  }
+
+  onChangeStreet(String value) {
+    update(state.copyWith(street: value));
+  }
+
+  onChangeNumber(String value) {
+    update(state.copyWith(number: int.parse(value)));
+  }
+
+  onChangeCity(String value) {
+    update(state.copyWith(city: value));
+  }
+
+  onChangeState(String value) {
+    update(state.copyWith(state: value));
+  }
+
+  onChangeZipCode(String value) {
+    update(state.copyWith(zipCode: value));
+  }
+
+  onChangeReferencePoint(String value) {
+    update(state.copyWith(referencePoint: value));
+  }
+
   Future<void> accessibilities() async {
     final response = await _fetchAccessibilitiesEventsUsecase();
     response.fold(setError, (result) {
-      update(state.copyWith(accessibilities: result));
+      update(state
+          .copyWith(accessibilities: result, selectedsIdsAccessibilities: []));
     });
-    print(state.accessibilities.first.id);
   }
 
   Future<void> categories() async {
     final response = await _fetchCategorieEventUsecase();
     response.fold(setError, (result) {
-      update(state.copyWith(categories: [
-        EventCategorieEntity(
-            active: true, name: 'Selecione uma Categoria', id: "001"),
-        ...result
-      ]));
+      update(
+        state.copyWith(
+          categories: [
+            EventCategorieEntity(
+                active: true, name: 'Selecione uma Categoria', id: "CATEGORIA"),
+            ...result
+          ],
+        ),
+      );
       for (var element in state.categories) {
-        if (element.id == "001") {
+        if (element.id == "CATEGORIA") {
           update(state.copyWith(selectedCategorie: element));
         }
       }
@@ -98,35 +139,39 @@ class AddEventStore extends StreamStore<Failure, AddEventState> {
   }
 
   Future<void> createEvent() async {
+    setLoading(true);
     final response = await _createEventUsecase(
       EventAddressEntity(
         event: EventEntity(
-          activityId: "76e56e1a-c5fb-451b-b49c-0019258383dc",
-          date: '2022-04-22',
-          description: "Evento online teste",
-          isOnline: true,
-          isPetFriendly: true,
-          maxParticipants: 20,
-          name: 'Any name',
-          price: 99.99,
-          startTime: '15:00',
-          userIdentity: '66332545445',
-          url: 'https://teste.com.br',
-          //endTime: state.endTime,
+          activityId: state.selectedCategorie!.id,
+          date: state.date,
+          description: state.description,
+          isOnline: state.isOnline,
+          isPetFriendly: state.isPetFriendly,
+          maxParticipants: state.maxParticipants,
+          name: state.eventName,
+          price: state.price,
+          startTime: state.startTime,
+          userIdentity: state.cpforCnpj,
+          url: state.url,
+          endTime: state.endTime,
+          accessibilities: state.selectedsIdsAccessibilities,
         ),
         address: !state.isOnline
             ? AddressEntity(
-                number: 01,
-                state: 'SP',
-                street: 'RUA 18',
-                zipCode: '75909260',
-                city: 'São Paulo',
-                userId: '41b63cc0-ed43-42c3-8ff9-af30bf1d8cb3',
-              )
+                number: state.number,
+                state: state.state,
+                street: state.street,
+                zipCode: state.zipCode,
+                city: state.city,
+                userId: userStore.state.user.id,
+                referencePoint: state.referencePoint)
             : null,
       ),
     );
-
-    response.fold(setError, (result) {});
+    response.fold(setError, (result) {
+      update(state.copyWith());
+    });
+    setLoading(false);
   }
 }
