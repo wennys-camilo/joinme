@@ -69,7 +69,7 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                         ),
                       ),
                       const Spacer(),
-                      Container(
+                      SizedBox(
                         width: 40,
                         child: Stack(
                           children: [

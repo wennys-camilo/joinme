@@ -68,7 +68,7 @@ class EventPage extends StatelessWidget {
               ),
               Row(
                 children: [
-                  EventTitleInfoWidget(
+                  const EventTitleInfoWidget(
                     titleInfo: 'Organizador',
                   ),
                   const SizedBox(
@@ -77,7 +77,7 @@ class EventPage extends StatelessWidget {
                   Container(
                     height: 32,
                     width: 32,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       shape: BoxShape.circle,
                       color: Colors.black,
                     ),
@@ -85,16 +85,16 @@ class EventPage extends StatelessWidget {
                   const SizedBox(
                     width: 9,
                   ),
-                  EventDataInfoWidget(titleData: 'Ana Vaz')
+                  const EventDataInfoWidget(titleData: 'Ana Vaz')
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 29,
               ),
               Row(
-                children: [
+                children: const [
                   EventTitleInfoWidget(titleInfo: 'Participantes:'),
-                  const SizedBox(
+                  SizedBox(
                     width: 15,
                   ),
                   EventDataInfoWidget(titleData: '6 confirmados')
@@ -108,9 +108,9 @@ class EventPage extends StatelessWidget {
                 children: [
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
+                    children: const [
                       EventTitleInfoWidget(titleInfo: 'Data:'),
-                      const SizedBox(
+                      SizedBox(
                         height: 10,
                       ),
                       EventDataInfoWidget(titleData: 'Sáb, 30 de abril'),
@@ -118,9 +118,9 @@ class EventPage extends StatelessWidget {
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
+                    children: const [
                       EventTitleInfoWidget(titleInfo: 'Início:'),
-                      const SizedBox(
+                      SizedBox(
                         height: 10,
                       ),
                       EventDataInfoWidget(titleData: '8:30h'),
@@ -128,7 +128,7 @@ class EventPage extends StatelessWidget {
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
+                    children: const [
                       EventTitleInfoWidget(titleInfo: 'Término'),
                       SizedBox(
                         height: 10,
@@ -142,7 +142,7 @@ class EventPage extends StatelessWidget {
                 height: 24,
               ),
               Row(
-                children: [
+                children: const [
                   EventTitleInfoWidget(titleInfo: 'Categories'),
                   Flexible(
                       child: EventDataInfoWidget(
@@ -158,10 +158,10 @@ class EventPage extends StatelessWidget {
                     Icons.location_on,
                     color: AppTheme.colors.primary,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 16,
                   ),
-                  EventDataInfoWidget(
+                  const EventDataInfoWidget(
                     titleData: 'Evento Presencial',
                   )
                 ],
@@ -172,13 +172,13 @@ class EventPage extends StatelessWidget {
                     Icons.wheelchair_pickup,
                     color: AppTheme.colors.primary,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 15,
                   ),
-                  Flexible(
+                  const Flexible(
                       child: EventDataInfoWidget(
                           titleData: 'Possui acessibilidade arquitetônica')),
-                  SizedBox(
+                  const SizedBox(
                     width: 15,
                   ),
                   GestureDetector(
@@ -189,7 +189,7 @@ class EventPage extends StatelessWidget {
                         decoration: BoxDecoration(
                             color: AppTheme.colors.primary,
                             shape: BoxShape.circle),
-                        child: Center(
+                        child: const Center(
                             child: Text(
                           '?',
                           style: TextStyle(
@@ -207,7 +207,7 @@ class EventPage extends StatelessWidget {
                   const SizedBox(
                     width: 15,
                   ),
-                  EventDataInfoWidget(titleData: 'Evento Gratuito')
+                  const EventDataInfoWidget(titleData: 'Evento Gratuito')
                 ],
               ),
               const SizedBox(
@@ -215,7 +215,7 @@ class EventPage extends StatelessWidget {
               ),
               Align(
                   child: Column(
-                children: [
+                children: const [
                   Align(
                       alignment: Alignment.bottomLeft,
                       child: EventTitleInfoWidget(titleInfo: 'Local:')),
@@ -238,16 +238,16 @@ class EventPage extends StatelessWidget {
               const SizedBox(
                 height: 26,
               ),
-              Align(
+              const Align(
                   alignment: Alignment.bottomLeft,
                   child: EventTitleInfoWidget(
                       titleInfo: 'Dúvidas? Pergunte ao fórum!')),
-              SizedBox(
+              const SizedBox(
                 height: 7,
               ),
               Row(
                 children: [
-                  Flexible(
+                  const Flexible(
                     child: EventDataInfoWidget(
                         titleData:
                             'Sua dúvida poderá ser respondida pelo organiza-dor ou participantes já confirmados.'),
@@ -260,20 +260,20 @@ class EventPage extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 28,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Column(
-                    children: [
+                    children: const [
                       Icon(Icons.abc),
                       EventDataInfoWidget(titleData: 'Denunciar')
                     ],
                   ),
                   Column(
-                    children: [
+                    children: const [
                       Icon(Icons.abc),
                       EventDataInfoWidget(titleData: 'Copiar link')
                     ],
@@ -284,7 +284,7 @@ class EventPage extends StatelessWidget {
                         Icons.share,
                         color: AppTheme.colors.primary,
                       ),
-                      EventDataInfoWidget(titleData: 'Compartilhar')
+                      const EventDataInfoWidget(titleData: 'Compartilhar')
                     ],
                   ),
                 ],

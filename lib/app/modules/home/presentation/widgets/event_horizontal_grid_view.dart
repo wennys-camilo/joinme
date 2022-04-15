@@ -14,7 +14,8 @@ class EventHorizontalGridView extends StatefulWidget {
   final HomePage widget;
 
   @override
-  State<EventHorizontalGridView> createState() => _EventHorizontalGridViewState();
+  State<EventHorizontalGridView> createState() =>
+      _EventHorizontalGridViewState();
 }
 
 class _EventHorizontalGridViewState extends State<EventHorizontalGridView> {
@@ -64,7 +65,7 @@ class _EventHorizontalGridViewState extends State<EventHorizontalGridView> {
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 10,
                 ),
                 Flexible(
@@ -76,12 +77,12 @@ class _EventHorizontalGridViewState extends State<EventHorizontalGridView> {
                         padding: const EdgeInsets.only(left: 23),
                         child: Text(
                           widget.events,
-                          style: TextStyle(fontWeight: FontWeight.w700),
+                          style: const TextStyle(fontWeight: FontWeight.w700),
                         ),
                       ),
                       Row(
                         children: [
-                          Icon(Icons.location_on),
+                          const Icon(Icons.location_on),
                           Flexible(
                               child: Text(
                             'Gramado do Centro de Vivência, Campus II, UFMG',
@@ -94,7 +95,7 @@ class _EventHorizontalGridViewState extends State<EventHorizontalGridView> {
                       ),
                       Row(
                         children: [
-                          Container(
+                          SizedBox(
                             height: 24,
                             width: 48,
                             child: Stack(
@@ -139,7 +140,7 @@ class _EventHorizontalGridViewState extends State<EventHorizontalGridView> {
                               ],
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 6,
                           ),
                           Text(
@@ -180,8 +181,8 @@ class _EventHorizontalGridViewState extends State<EventHorizontalGridView> {
                                 }),
                           ),
                           GestureDetector(
-                              onTap: () {}, child: Icon(Icons.flag)),
-                          SizedBox(
+                              onTap: () {}, child: const Icon(Icons.flag)),
+                          const SizedBox(
                             width: 5,
                           )
                         ],

@@ -37,7 +37,7 @@ class InsightsHorizontalGridView extends StatelessWidget {
                     width: 168,
                     color: Colors.pink,
                   ),
-                  Container(
+                  SizedBox(
                     height: 45,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -62,6 +62,5 @@ class InsightsHorizontalGridView extends StatelessWidget {
         );
       },
     );
-    ;
   }
 }

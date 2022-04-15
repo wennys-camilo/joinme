@@ -1,11 +1,9 @@
-import 'presentation/home_page.dart';
-import 'submodules/event_page/presentation/event_page.dart';
-import 'submodules/profile/presentation/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'presentation/home_page.dart';
 import 'presentation/home_store.dart';
 import 'presentation/tab_page.dart';
+import 'submodules/event_page/presentation/event_page.dart';
 import 'submodules/events/domain/usecases/create_event_usecase_impl.dart';
 import 'submodules/events/domain/usecases/fetch_accessibilities_events_usecase_impl.dart';
 import 'submodules/events/domain/usecases/fetch_categories_event_usecase_impl.dart';
