@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'domain/usecases/fetch_all_events_usecase_impl.dart';
+import 'external/datasources/home_events_remote_datasource_impl.dart';
+import 'infra/repositories.dart/home_events_repository_impl.dart';
 import 'presentation/home_page.dart';
 import 'presentation/home_store.dart';
 import 'presentation/tab_page.dart';
+import 'submodules/calendar/presentation/calendar_page.dart';
 import 'submodules/event_page/presentation/event_page.dart';
 import 'submodules/events/domain/usecases/create_event_usecase_impl.dart';
 import 'submodules/events/domain/usecases/fetch_accessibilities_events_usecase_impl.dart';
@@ -16,7 +20,10 @@ import 'submodules/profile/presentation/profile_page.dart';
 class HomeModule extends Module {
   @override
   final List<Bind> binds = [
-    Bind.lazySingleton((i) => HomeStore(i.get())),
+    Bind((i) => HomeEventsRemoteDataSourceImpl(i.get())),
+    Bind((i) => HomeEventsRepositoryImpl(i.get())),
+    Bind((i) => FetchAllEventsUsecaseImpl(i.get())),
+    Bind.lazySingleton((i) => HomeStore(i.get(), i.get())),
 
     //TODO:
     Bind((i) => EventsRemoteDatasourceImpl(i.get())),
@@ -34,6 +41,7 @@ class HomeModule extends Module {
       child: (_, args) => const TabPage(),
       children: [
         ChildRoute('/homePage', child: (context, args) => const HomePage()),
+        ChildRoute('/calendar', child: (context, args) => const CalendarPage()),
         ChildRoute('/perfil',
             child: (context, args) => const Center(child: Text('2'))),
         ChildRoute('/add_events',

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'package:camp_final/app/shared/presentation/themes/app_theme.dart';
+import '../../../../shared/presentation/themes/app_theme.dart';
 
 class CategoriesTitleWidget extends StatelessWidget {
   final String title;
@@ -11,14 +10,17 @@ class CategoriesTitleWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Align(
-      alignment: Alignment.bottomLeft,
-      child: Text(
-        title,
-        style: TextStyle(
-            fontSize: 16,
-            color: AppTheme.colors.black.withOpacity(0.5),
-            fontWeight: FontWeight.bold),
+    return Padding(
+      padding: const EdgeInsets.only(left: 5),
+      child: Align(
+        alignment: Alignment.bottomLeft,
+        child: Text(
+          title,
+          style: TextStyle(
+              fontSize: 16,
+              color: AppTheme.colors.black.withOpacity(0.6),
+              fontWeight: FontWeight.bold),
+        ),
       ),
     );
   }

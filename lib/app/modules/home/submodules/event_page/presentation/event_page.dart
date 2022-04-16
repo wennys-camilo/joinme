@@ -1,8 +1,7 @@
-import 'package:camp_final/app/modules/home/submodules/event_page/presentation/widget/event_data_info_widget.dart';
-import 'package:camp_final/app/shared/presentation/themes/app_theme.dart';
 import 'package:flutter/material.dart';
-
-import 'widget/event_title_info_widget.dart';
+import '../../../../../shared/presentation/themes/app_theme.dart';
+import 'widgets/event_data_info_widget.dart';
+import 'widgets/event_title_info_widget.dart';
 
 class EventPage extends StatelessWidget {
   const EventPage({Key? key}) : super(key: key);

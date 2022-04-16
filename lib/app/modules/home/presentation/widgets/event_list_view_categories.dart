@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:camp_final/app/shared/presentation/themes/app_theme.dart';
+import '../../../../shared/presentation/themes/app_theme.dart';
 
 class EventListViewcategories extends StatelessWidget {
   final Color chipColor;
@@ -20,9 +20,13 @@ class EventListViewcategories extends StatelessWidget {
             child: FilterChip(
               backgroundColor: AppTheme.colors.transparent,
               side: BorderSide(color: chipColor),
-              label: Text(
-                'categorias',
-                style: TextStyle(color: chipColor),
+              label: Padding(
+                padding: const EdgeInsets.all(5),
+                child: Text(
+                  'Categorias',
+                  style:
+                      TextStyle(color: chipColor, fontWeight: FontWeight.bold),
+                ),
               ),
               onSelected: (b) {},
             ),

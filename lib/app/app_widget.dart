@@ -20,7 +20,7 @@ class AppWidget extends StatelessWidget {
       ],
       theme: ThemeData(
         primarySwatch: Colors.blue,
-        textTheme: GoogleFonts.robotoTextTheme(
+        textTheme: GoogleFonts.sourceSansProTextTheme(
           Theme.of(context).textTheme,
         ),
         colorScheme:

@@ -49,7 +49,7 @@ class _TabPageState extends State<TabPage> {
                       Modular.to.pushNamed('./homePage');
                       break;
                     case 1:
-                      Modular.to.pushNamed('./perfil');
+                      Modular.to.pushNamed('./calendar');
                       break;
                     case 2:
                       Modular.to.pushNamed('./add_events');

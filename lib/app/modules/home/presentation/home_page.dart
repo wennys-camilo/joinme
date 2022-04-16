@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import '../../../shared/presentation/themes/app_theme.dart';
 import '../../../shared/presentation/utils/extension/string_extension_capitalize.dart';
-import '../../../shared/store/user/user_store.dart';
 import 'home_store.dart';
 import 'widgets/categories_title_widget.dart';
-import 'widgets/event_horizontal_grid_view.dart';
+import 'widgets/event_item_tile.dart';
 import 'widgets/event_list_view_categories.dart';
 import 'widgets/insights_horizontal_grid_view.dart';
 
@@ -17,12 +16,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends ModularState<HomePage, HomeStore> {
-  late final UserStore userStore;
-
   @override
   void initState() {
     super.initState();
-    userStore = Modular.get<UserStore>();
+    store.fetchEvents();
   }
 
   @override
@@ -34,22 +31,21 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
           child: Padding(
             padding: const EdgeInsets.only(left: 15),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(
                   height: 5,
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 14, right: 24),
+                  padding: const EdgeInsets.only(left: 5, right: 24, top: 20),
                   child: Row(
                     children: [
-                      GestureDetector(
-                        onTap: (() => Modular.to.pushNamed('./userPage')),
-                        child: Container(
-                          decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: AppTheme.colors.primary),
-                          height: 48,
-                          width: 48,
+                      ClipOval(
+                        child: Image.network(
+                          'https://i.ibb.co/d2CzTcn/Vector-8.png',
+                          width: 60,
+                          height: 60,
+                          fit: BoxFit.cover,
                         ),
                       ),
                       const SizedBox(
@@ -59,12 +55,12 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                         onTap: () {},
                         child: SizedBox(
                           child: Text(
-                            'Olá, ${userStore.state.user.name.capitalize()}!',
+                            'Olá, ${store.userStore.state.user.name.capitalize()}!',
                             style: TextStyle(
                                 overflow: TextOverflow.ellipsis,
                                 fontSize: 18,
-                                fontWeight: FontWeight.w700,
-                                color: AppTheme.colors.black.withOpacity(0.5)),
+                                fontWeight: FontWeight.bold,
+                                color: AppTheme.colors.black),
                           ),
                         ),
                       ),
@@ -74,27 +70,33 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                         child: Stack(
                           children: [
                             Container(
-                              height: 32,
-                              width: 32,
+                              height: 50,
+                              width: 50,
                               decoration: BoxDecoration(
                                   shape: BoxShape.circle,
-                                  color: AppTheme.colors.grey),
+                                  color: AppTheme.colors.greyBoard),
+                              child: Icon(
+                                Icons.notifications,
+                                color: AppTheme.colors.primary,
+                              ),
                             ),
                             Positioned(
-                              top: 0,
-                              right: 3,
+                              top: 2,
+                              right: 1,
                               child: Container(
-                                  child: const Center(
-                                    child: Text(
-                                      '9',
-                                      style: TextStyle(color: Colors.white),
-                                    ),
+                                child: const Center(
+                                  child: Text(
+                                    '9',
+                                    style: TextStyle(color: Colors.white),
                                   ),
-                                  height: 16,
-                                  width: 16,
-                                  decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: AppTheme.colors.primary)),
+                                ),
+                                height: 16,
+                                width: 16,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: AppTheme.colors.red,
+                                ),
+                              ),
                             )
                           ],
                         ),
@@ -108,21 +110,21 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                     child: TextField(
                       textAlign: TextAlign.left,
                       decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.symmetric(
-                              vertical: 10.0, horizontal: 15),
-                          suffixIcon: const Icon(Icons.search),
-                          iconColor: AppTheme.colors.primary,
-                          fillColor: AppTheme.colors.white,
-                          filled: true,
-                          hintText: 'Pesquisar',
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: AppTheme.colors.black.withOpacity(0.5)),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: AppTheme.colors.primary),
-                          )),
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 10.0, horizontal: 15),
+                        suffixIcon: const Icon(Icons.search),
+                        iconColor: AppTheme.colors.primary,
+                        fillColor: AppTheme.colors.white,
+                        filled: true,
+                        hintText: 'Pesquisar',
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: AppTheme.colors.black),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: AppTheme.colors.primary),
+                        ),
+                      ),
                     ),
                   ),
                 ),
@@ -151,21 +153,32 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                 SizedBox(
                   height: 40,
                   child: EventListViewcategories(
-                    chipColor: AppTheme.colors.primary,
+                    chipColor: AppTheme.colors.pink,
                   ),
                 ),
                 const SizedBox(
                   height: 16,
                 ),
-                const CategoriesTitleWidget(title: 'Eventos Impulsionados'),
+                const CategoriesTitleWidget(
+                  title: 'Eventos Impulsionados',
+                ),
                 const SizedBox(
                   height: 8,
                 ),
                 SizedBox(
-                  height: 160,
-                  child: EventHorizontalGridView(
-                    widget: widget,
-                    events: 'Evento',
+                  height: MediaQuery.of(context).size.height * 0.30,
+                  child: ListView.builder(
+                    physics: const BouncingScrollPhysics(),
+                    scrollDirection: Axis.horizontal,
+                    itemCount: store.state.promotedEvents.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      var promoted = store.state.promotedEvents[index];
+                      return GestureDetector(
+                          onTap: () {
+                            Modular.to.pushNamed('./eventPage');
+                          },
+                          child: EventItemTile(event: promoted));
+                    },
                   ),
                 ),
                 const SizedBox(
@@ -178,9 +191,23 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                   height: 8,
                 ),
                 SizedBox(
-                  height: 158,
-                  child: EventHorizontalGridView(
-                      events: 'eventos', widget: widget),
+                  height: MediaQuery.of(context).size.height * 0.30,
+                  child: ListView.builder(
+                    physics: const BouncingScrollPhysics(),
+                    scrollDirection: Axis.horizontal,
+                    itemCount: store.state.events.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      var event = store.state.events[index];
+                      return GestureDetector(
+                          onTap: () {
+                            Modular.to.pushNamed('./eventPage');
+                          },
+                          child: EventItemTile(event: event));
+                    },
+                  ),
+                ),
+                const SizedBox(
+                  height: 8,
                 ),
                 const SizedBox(
                   height: 16,
@@ -190,9 +217,20 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                   height: 8,
                 ),
                 SizedBox(
-                  height: 158,
-                  child: EventHorizontalGridView(
-                      events: 'eventos', widget: widget),
+                  height: MediaQuery.of(context).size.height * 0.30,
+                  child: ListView.builder(
+                    physics: const BouncingScrollPhysics(),
+                    scrollDirection: Axis.horizontal,
+                    itemCount: store.state.events.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      var event = store.state.events[index];
+                      return GestureDetector(
+                          onTap: () {
+                            Modular.to.pushNamed('./eventPage');
+                          },
+                          child: EventItemTile(event: event));
+                    },
+                  ),
                 ),
                 const SizedBox(
                   height: 16,
