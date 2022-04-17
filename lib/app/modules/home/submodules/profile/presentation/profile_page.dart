@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../../shared/presentation/themes/app_theme.dart';
+import '../../../presentation/widgets/custom_filter_chip_widget.dart';
 import 'widgets/container_light_primary_widget.dart';
 import 'widgets/subtitle_text_widget.dart';
 
@@ -19,19 +20,28 @@ class ProfilePage extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text(
+                    Text(
                       'Perfil',
-                      style: TextStyle(fontSize: 23),
+                      style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                          color: AppTheme.colors.black),
                     ),
                     Container(
-                      width: 30,
-                      height: 30,
-                      color: Colors.black,
+                      width: 35,
+                      height: 35,
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: AppTheme.colors.grey.withOpacity(0.6)),
+                      child: Icon(
+                        Icons.settings,
+                        color: AppTheme.colors.primary,
+                      ),
                     )
                   ],
                 ),
                 const SizedBox(
-                  height: 42,
+                  height: 20,
                 ),
                 GestureDetector(
                   onDoubleTap: () {},
@@ -39,11 +49,16 @@ class ProfilePage extends StatelessWidget {
                     child: Stack(
                       children: [
                         Container(
-                          height: 118,
-                          width: 118,
+                          height: 100,
+                          width: 100,
                           decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               color: AppTheme.colors.grey),
+                          child: const CircleAvatar(
+                            backgroundImage: NetworkImage(
+                              'https://i.ibb.co/d2CzTcn/Vector-8.png',
+                            ),
+                          ),
                         ),
                         Positioned(
                           bottom: 0,
@@ -51,13 +66,13 @@ class ProfilePage extends StatelessWidget {
                           child: Container(
                               child: Icon(
                                 Icons.create_rounded,
-                                color: AppTheme.colors.white,
+                                color: AppTheme.colors.primary,
                               ),
                               height: 32,
                               width: 32,
                               decoration: BoxDecoration(
                                   shape: BoxShape.circle,
-                                  color: AppTheme.colors.primary)),
+                                  color: AppTheme.colors.blueLight)),
                         )
                       ],
                     ),
@@ -77,28 +92,31 @@ class ProfilePage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     ContainerLightPrimary(
-                      superiorIcon: Text(
+                      topComponent: Text(
                         '2',
                         style: TextStyle(
                             color: AppTheme.colors.primary,
                             fontSize: 23,
                             fontWeight: FontWeight.w700),
                       ),
-                      inferior: 'Eventos',
-                    ),
-                    const ContainerLightPrimary(
-                      superiorIcon: Icon(Icons.badge),
-                      inferior: 'Nível #',
+                      bottomText: 'Eventos',
                     ),
                     ContainerLightPrimary(
-                      superiorIcon: Text(
+                      topComponent: Icon(
+                        Icons.workspace_premium,
+                        color: AppTheme.colors.primary,
+                      ),
+                      bottomText: 'Nível #',
+                    ),
+                    ContainerLightPrimary(
+                      topComponent: Text(
                         '140',
                         style: TextStyle(
                             color: AppTheme.colors.primary,
                             fontSize: 23,
                             fontWeight: FontWeight.w700),
                       ),
-                      inferior: 'Minutos',
+                      bottomText: 'Minutos',
                     ),
                   ],
                 ),
@@ -118,21 +136,14 @@ class ProfilePage extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(
-                  height: 13,
+                  height: 5,
                 ),
-                Container(
-                  child: Text(
-                    'Lorem ipsum dolor sit amet, consectetur adipis-cing elit ut aliquam, purus sit amet luctus vene-natis, lectus magna fringilla.',
-                    style: TextStyle(
-                        color: AppTheme.colors.black.withOpacity(0.6),
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400),
-                  ),
-                  width: double.infinity,
-                  height: 90,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(16)),
+                Text(
+                  'Estudante de Engenharia de Produção, gosto de fazer atividades físicas e cursos que estimulam a criatividade.',
+                  style: TextStyle(
+                      color: AppTheme.colors.black.withOpacity(0.6),
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400),
                 ),
                 const SizedBox(
                   height: 12,
@@ -146,6 +157,46 @@ class ProfilePage extends StatelessWidget {
                     Icon(Icons.create_rounded,
                         color: AppTheme.colors.black.withOpacity(0.6)),
                   ],
+                ),
+                SizedBox(
+                  height: 50,
+                  child: ListView.builder(
+                    physics: const BouncingScrollPhysics(),
+                    itemCount: 10,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      return CustomFilterChipWidget(
+                          chipColor: AppTheme.colors.pink);
+                    },
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  children: [
+                    const SubtitleText(subtitle: 'Possui alguma deficiência ?'),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Icon(Icons.create_rounded,
+                        color: AppTheme.colors.black.withOpacity(0.6)),
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 20),
+                  child: SizedBox(
+                    height: 50,
+                    child: ListView.builder(
+                      physics: const BouncingScrollPhysics(),
+                      itemCount: 10,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) {
+                        return CustomFilterChipWidget(
+                            chipColor: AppTheme.colors.pink);
+                      },
+                    ),
+                  ),
                 ),
               ],
             ),

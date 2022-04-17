@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import '../../../../shared/presentation/themes/app_theme.dart';
 import '../../domain/entities/event_description_entity.dart';
 import '../utils/extension/category_type_extension.dart';
-import 'custom_chip.dart';
+import 'custom_chip_label_widget.dart';
 
-class EventItemTile extends StatelessWidget {
+class EventItemCardTile extends StatelessWidget {
   final EventDescriptionEntity event;
 
-  const EventItemTile({Key? key, required this.event}) : super(key: key);
+  const EventItemCardTile({Key? key, required this.event}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,42 +22,44 @@ class EventItemTile extends StatelessWidget {
           children: [
             Flexible(
               flex: 4,
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.black,
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(15.0),
-                    bottomLeft: Radius.circular(15.0),
+              child: Hero(
+                tag: event.id,
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(15.0),
+                      bottomLeft: Radius.circular(15.0),
+                    ),
+                    image: DecorationImage(
+                      image: AssetImage(event.typeImage.coverPhoto),
+                      fit: BoxFit.cover,
+                    ),
                   ),
-                  image: DecorationImage(
-                    image: AssetImage(event.typeImage.coverPhoto),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                child: Stack(
-                  children: [
-                    Positioned(
-                      top: 5,
-                      left: 5,
-                      child: Card(
-                        elevation: 0,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15.0),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            '28 abril',
-                            style: TextStyle(
-                              color: AppTheme.colors.primary,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
+                  child: Stack(
+                    children: [
+                      Positioned(
+                        top: 5,
+                        left: 5,
+                        child: Card(
+                          elevation: 0,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15.0),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              event.formattedDate,
+                              style: TextStyle(
+                                color: AppTheme.colors.primary,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -175,7 +177,9 @@ class EventItemTile extends StatelessWidget {
                             width: 6,
                           ),
                           Text(
-                            '8 confirmados',
+                            event.numParticipants > 1
+                                ? '${event.numParticipants} confirmados'
+                                : '${event.numParticipants} confirmado',
                             style: TextStyle(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w400,
@@ -188,9 +192,9 @@ class EventItemTile extends StatelessWidget {
                       padding: const EdgeInsets.only(left: 10, top: 10),
                       child: Row(
                         children: [
-                          CustomChip(label: event.activities.name),
+                          CustomChipLabelWidget(label: event.activities.name),
                           event.price.toInt() == 0
-                              ? CustomChip(
+                              ? CustomChipLabelWidget(
                                   label: 'Grátis',
                                   color: AppTheme.colors.green,
                                 )

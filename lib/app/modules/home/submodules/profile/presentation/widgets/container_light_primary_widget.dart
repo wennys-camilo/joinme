@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import '../../../../../../shared/presentation/themes/app_theme.dart';
 
 class ContainerLightPrimary extends StatelessWidget {
-  final Widget superiorIcon;
-  final String inferior;
+  final Widget topComponent;
+  final String bottomText;
   const ContainerLightPrimary({
     Key? key,
-    required this.superiorIcon,
-    required this.inferior,
+    required this.topComponent,
+    required this.bottomText,
   }) : super(key: key);
 
   @override
@@ -16,9 +16,9 @@ class ContainerLightPrimary extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          superiorIcon,
+          topComponent,
           Text(
-            inferior,
+            bottomText,
             style: TextStyle(
                 color: AppTheme.colors.black.withOpacity(0.6),
                 fontSize: 12,
@@ -26,10 +26,10 @@ class ContainerLightPrimary extends StatelessWidget {
           )
         ],
       ),
-      width: 99,
+      width: MediaQuery.of(context).size.width * 0.25,
       height: 70,
       decoration: BoxDecoration(
-          color: AppTheme.colors.primary.withOpacity(0.3),
+          color: AppTheme.colors.greyLight,
           borderRadius: BorderRadius.circular(16)),
     );
   }

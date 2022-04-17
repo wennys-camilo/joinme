@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import '../../../shared/presentation/themes/app_theme.dart';
-import '../../../shared/presentation/utils/extension/string_extension_capitalize.dart';
+import '../../../../shared/presentation/themes/app_theme.dart';
+import '../../../../shared/presentation/utils/extension/string_extension_capitalize.dart';
+import '../widgets/categories_title_widget.dart';
+import '../widgets/event_item_card_tile.dart';
+import '../widgets/custom_filter_chip_widget.dart';
+import '../widgets/insights_horizontal_grid_view.dart';
 import 'home_store.dart';
-import 'widgets/categories_title_widget.dart';
-import 'widgets/event_item_tile.dart';
-import 'widgets/event_list_view_categories.dart';
-import 'widgets/insights_horizontal_grid_view.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -139,8 +139,13 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                 ),
                 SizedBox(
                   height: 40,
-                  child: EventListViewcategories(
-                    chipColor: AppTheme.colors.primary,
+                  child: ListView.builder(
+                    itemCount: 10,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      return CustomFilterChipWidget(
+                          chipColor: AppTheme.colors.primary);
+                    },
                   ),
                 ),
                 const SizedBox(
@@ -152,8 +157,13 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                 ),
                 SizedBox(
                   height: 40,
-                  child: EventListViewcategories(
-                    chipColor: AppTheme.colors.pink,
+                  child: ListView.builder(
+                    itemCount: 10,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      return CustomFilterChipWidget(
+                          chipColor: AppTheme.colors.pink);
+                    },
                   ),
                 ),
                 const SizedBox(
@@ -175,9 +185,10 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                       var promoted = store.state.promotedEvents[index];
                       return GestureDetector(
                           onTap: () {
-                            Modular.to.pushNamed('./eventPage');
+                            Modular.to
+                                .pushNamed('./eventPage', arguments: promoted);
                           },
-                          child: EventItemTile(event: promoted));
+                          child: EventItemCardTile(event: promoted));
                     },
                   ),
                 ),
@@ -200,9 +211,10 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                       var event = store.state.events[index];
                       return GestureDetector(
                           onTap: () {
-                            Modular.to.pushNamed('./eventPage');
+                            Modular.to
+                                .pushNamed('./eventPage', arguments: event);
                           },
-                          child: EventItemTile(event: event));
+                          child: EventItemCardTile(event: event));
                     },
                   ),
                 ),
@@ -226,9 +238,10 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                       var event = store.state.events[index];
                       return GestureDetector(
                           onTap: () {
-                            Modular.to.pushNamed('./eventPage');
+                            Modular.to
+                                .pushNamed('./eventPage', arguments: event);
                           },
-                          child: EventItemTile(event: event));
+                          child: EventItemCardTile(event: event));
                     },
                   ),
                 ),

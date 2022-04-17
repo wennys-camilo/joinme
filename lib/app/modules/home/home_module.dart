@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'domain/usecases/fetch_all_events_usecase_impl.dart';
 import 'external/datasources/home_events_remote_datasource_impl.dart';
-import 'infra/repositories.dart/home_events_repository_impl.dart';
-import 'presentation/home_page.dart';
-import 'presentation/home_store.dart';
+import 'infra/repositories/home_events_repository_impl.dart';
+import 'presentation/event_details/event_details_page.dart';
+import 'presentation/event_details/event_details_store.dart';
+import 'presentation/home/home_page.dart';
+import 'presentation/home/home_store.dart';
 import 'presentation/tab_page.dart';
 import 'submodules/calendar/presentation/calendar_page.dart';
-import 'submodules/event_page/presentation/event_page.dart';
 import 'submodules/events/domain/usecases/create_event_usecase_impl.dart';
 import 'submodules/events/domain/usecases/fetch_accessibilities_events_usecase_impl.dart';
 import 'submodules/events/domain/usecases/fetch_categories_event_usecase_impl.dart';
@@ -22,9 +23,11 @@ class HomeModule extends Module {
   final List<Bind> binds = [
     Bind((i) => HomeEventsRemoteDataSourceImpl(i.get())),
     Bind((i) => HomeEventsRepositoryImpl(i.get())),
+
     Bind((i) => FetchAllEventsUsecaseImpl(i.get())),
     Bind.lazySingleton((i) => HomeStore(i.get(), i.get())),
 
+    Bind((i) => EventDetailsStore()),
     //TODO:
     Bind((i) => EventsRemoteDatasourceImpl(i.get())),
     Bind((i) => EventsRepositoryImpl(i.get())),
@@ -47,7 +50,8 @@ class HomeModule extends Module {
         ChildRoute('/add_events',
             child: (context, args) => const AddEventPage()),
         ChildRoute('/profile', child: (context, args) => const ProfilePage()),
-        ChildRoute('/eventPage', child: (context, args) => const EventPage()),
+        ChildRoute('/eventPage',
+            child: (context, args) => EventDetailsPage(event: args.data)),
       ],
     ),
   ];

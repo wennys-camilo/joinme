@@ -1,3 +1,5 @@
+import 'package:camp_final/app/modules/home/domain/entities/attendees_entity.dart';
+import 'package:camp_final/app/modules/home/domain/entities/attendees_response_entity.dart';
 import 'package:dartz/dartz.dart';
 import '../../../../shared/domain/helpers/errors/failure.dart';
 import '../../domain/entities/event_description_entity.dart';
@@ -13,6 +15,17 @@ class HomeEventsRepositoryImpl implements HomeEventsRepository {
   Future<Either<Failure, List<EventDescriptionEntity>>> fetchAll() async {
     try {
       final response = await _remoteDataSource.events();
+      return Right(response);
+    } on Failure catch (error) {
+      return Left(error);
+    }
+  }
+
+  @override
+  Future<Either<Failure, AttendeesReponseEntity>> attendeesEvents(
+      AttendeesEntity entity) async {
+    try {
+      final response = await _remoteDataSource.setAttendees(entity);
       return Right(response);
     } on Failure catch (error) {
       return Left(error);

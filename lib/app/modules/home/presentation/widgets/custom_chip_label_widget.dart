@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 import '../../../../shared/presentation/themes/app_theme.dart';
 
-class CustomChip extends StatelessWidget {
+class CustomChipLabelWidget extends StatelessWidget {
   final String label;
 
   final Color? color;
-  const CustomChip({Key? key, required this.label, this.color})
+  const CustomChipLabelWidget({Key? key, required this.label, this.color})
       : super(key: key);
 
   @override

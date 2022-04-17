@@ -1,8 +1,8 @@
 import 'package:flutter_triple/flutter_triple.dart';
-import 'package:camp_final/app/shared/store/user/user_store.dart';
-import '../../../shared/domain/helpers/errors/failure.dart';
-import '../domain/entities/event_description_entity.dart';
-import '../domain/usecases/fetch_all_events_usecase.dart';
+import '../../../../shared/domain/helpers/errors/failure.dart';
+import '../../../../shared/store/user/user_store.dart';
+import '../../domain/entities/event_description_entity.dart';
+import '../../domain/usecases/fetch_all_events_usecase.dart';
 import 'home_state.dart';
 
 class HomeStore extends NotifierStore<Failure, HomeState> {

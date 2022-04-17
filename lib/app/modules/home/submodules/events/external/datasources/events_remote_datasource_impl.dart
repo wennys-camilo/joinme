@@ -34,7 +34,7 @@ class EventsRemoteDatasourceImpl implements EventsRemoteDatasource {
   @override
   Future<List<EventCategorieEntity>> categories() async {
     try {
-      //TODO: NÃO LEMBRAR DE MUDAR O NOME
+      //TODO: LEMBRAR DE MUDAR O NOME
       final response = await _httpClient.get('/activities/list');
       print(response.data);
       return (response.data as List)

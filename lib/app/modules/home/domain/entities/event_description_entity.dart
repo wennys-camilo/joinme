@@ -1,5 +1,5 @@
-import 'package:camp_final/app/modules/home/domain/enums/category_type.dart';
-
+import 'package:intl/intl.dart';
+import '../enums/category_type.dart';
 import 'activities_description_entity.dart';
 import 'address_description_entity.dart';
 
@@ -46,4 +46,7 @@ class EventDescriptionEntity {
     required this.numParticipants,
     required this.typeImage,
   });
+
+  String get formattedDate =>
+      DateFormat('dd MMMM', "pt_BR").format(DateTime.parse(date));
 }

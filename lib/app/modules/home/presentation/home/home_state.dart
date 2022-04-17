@@ -1,4 +1,4 @@
-import '../domain/entities/event_description_entity.dart';
+import '../../domain/entities/event_description_entity.dart';
 
 class HomeState {
   final List<EventDescriptionEntity> events;
