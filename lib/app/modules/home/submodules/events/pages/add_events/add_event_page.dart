@@ -162,17 +162,19 @@ class _AddEventPageState extends State<AddEventPage> {
                       },
                     ),
                     InputTextWidget(
-                      labelText: 'Máximo de participantes: ',
-                      suffixText: 'Participantes',
-                      keyboardType: TextInputType.number,
-                      inputFormatters: [
-                        FilteringTextInputFormatter.digitsOnly,
-                        LengthLimitingTextInputFormatter(6),
-                      ],
-                      validator: Validatorless.required('Campo Obrigatório'),
-                      onChanged: (value) =>
-                          store.onChangemMaxParticipants(value),
-                    ),
+                        labelText: 'Máximo de participantes: ',
+                        suffixText: 'Participantes',
+                        keyboardType: TextInputType.number,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly,
+                          LengthLimitingTextInputFormatter(6),
+                        ],
+                        validator: Validatorless.required('Campo Obrigatório'),
+                        onChanged: (value) {
+                          if (value.isNotEmpty) {
+                            store.onChangemMaxParticipants(value);
+                          }
+                        }),
                     TripleBuilder(
                       store: store,
                       builder: (context, triple) {

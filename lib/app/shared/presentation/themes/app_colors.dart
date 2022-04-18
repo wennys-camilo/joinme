@@ -12,6 +12,8 @@ abstract class AppColors {
   Color get pink;
   Color get green;
   Color get red;
+  Color get neutralDark;
+  Color get logoBlue;
 }
 
 class AppColorsImpl implements AppColors {
@@ -44,6 +46,13 @@ class AppColorsImpl implements AppColors {
 
   @override
   Color get green => const Color(0xff00B200);
+
   @override
   Color get red => const Color.fromARGB(255, 255, 0, 0);
+
+  @override
+  Color get neutralDark => const Color(0xff757678);
+
+  @override
+  Color get logoBlue => const Color(0xff1E00FC);
 }

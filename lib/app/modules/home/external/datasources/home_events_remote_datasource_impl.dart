@@ -45,4 +45,22 @@ class HomeEventsRemoteDataSourceImpl implements HomeEventsRemoteDataSource {
           message: error.toString(), stackTrace: stackTrace);
     }
   }
+
+  @override
+  Future<List<AttendeesReponseEntity>> getStatusList(String type) async {
+    try {
+      final response = await _httpClient.get('/events/attendees/list/user',
+          queryParameters: {"status": type});
+      return (response.data as List)
+          .map((e) => AtendeesMapper().from(e))
+          .toList();
+    } on Failure {
+      rethrow;
+    } on DioError catch (error, stackTrace) {
+      throw ApiFailure(stackTrace: stackTrace, message: error.message);
+    } catch (error, stackTrace) {
+      throw DatasourceFailure(
+          message: error.toString(), stackTrace: stackTrace);
+    }
+  }
 }

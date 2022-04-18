@@ -31,4 +31,15 @@ class HomeEventsRepositoryImpl implements HomeEventsRepository {
       return Left(error);
     }
   }
+
+  @override
+  Future<Either<Failure, List<AttendeesReponseEntity>>> status(
+      String type) async {
+    try {
+      final response = await _remoteDataSource.getStatusList(type);
+      return Right(response);
+    } on Failure catch (error) {
+      return Left(error);
+    }
+  }
 }

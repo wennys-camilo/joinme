@@ -6,8 +6,10 @@ import 'custom_chip_label_widget.dart';
 
 class EventItemCardTile extends StatelessWidget {
   final EventDescriptionEntity event;
-
-  const EventItemCardTile({Key? key, required this.event}) : super(key: key);
+  final bool favorite;
+  const EventItemCardTile(
+      {Key? key, required this.event, required this.favorite})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -205,9 +207,10 @@ class EventItemCardTile extends StatelessWidget {
                             child: GestureDetector(
                                 onTap: () {},
                                 child: Icon(
-                                  Icons.bookmark_outline,
-                                  color:
-                                      AppTheme.colors.primary.withOpacity(0.6),
+                                  favorite
+                                      ? Icons.bookmark
+                                      : Icons.bookmark_outline,
+                                  color: AppTheme.colors.primary,
                                   size: 30,
                                 )),
                           ),

@@ -11,7 +11,8 @@ class EventDescriptionEntity {
   final bool isPetFriendly;
   final int maxParticipants;
   final String startTime;
-  final int price;
+  final String endTime;
+  final double price;
   final bool isPromoted;
   final String activityId;
   final String userId;
@@ -24,6 +25,7 @@ class EventDescriptionEntity {
   final List<dynamic> eventAccessibilities;
   final int numParticipants;
   final CategorieType typeImage;
+  final String eventCreatorName;
   EventDescriptionEntity({
     required this.id,
     required this.name,
@@ -45,6 +47,8 @@ class EventDescriptionEntity {
     required this.eventAccessibilities,
     required this.numParticipants,
     required this.typeImage,
+    required this.endTime,
+    required this.eventCreatorName,
   });
 
   String get formattedDate =>

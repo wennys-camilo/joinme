@@ -1,4 +1,6 @@
-import 'package:camp_final/app/modules/home/presentation/event_details/event_details_store.dart';
+import 'package:brasil_fields/brasil_fields.dart';
+import 'package:flutter_triple/flutter_triple.dart';
+import 'event_details_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl/intl.dart';
@@ -7,6 +9,7 @@ import '../../domain/entities/event_description_entity.dart';
 import '../utils/extension/category_type_extension.dart';
 import 'widgets/event_data_info_widget.dart';
 import 'widgets/event_title_info_widget.dart';
+import 'package:camp_final/app/shared/presentation/utils/extension/string_extension_capitalize.dart';
 
 class EventDetailsPage extends StatefulWidget {
   final EventDescriptionEntity event;
@@ -20,17 +23,24 @@ class EventDetailsPage extends StatefulWidget {
 class _EventDetailsPageState
     extends ModularState<EventDetailsPage, EventDetailsStore> {
   @override
+  void initState() {
+    super.initState();
+    store.getFavorites(widget.event.id);
+  }
+
+  @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
           child: Stack(
             children: <Widget>[
               Hero(
                 tag: widget.event.id,
                 child: Container(
-                  height: height * 0.5,
+                  height: height * 0.35,
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       image: AssetImage(widget.event.typeImage.coverPhoto),
@@ -47,7 +57,7 @@ class _EventDetailsPageState
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 280),
+                padding: const EdgeInsets.only(top: 200),
                 child: Align(
                   alignment: Alignment.bottomCenter,
                   child: ClipRRect(
@@ -58,8 +68,8 @@ class _EventDetailsPageState
                       decoration: BoxDecoration(
                         color: AppTheme.colors.white,
                         borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(40),
-                            topRight: Radius.circular(40)),
+                            topLeft: Radius.circular(35),
+                            topRight: Radius.circular(35)),
                       ),
                       width: double.infinity,
                       child: Padding(
@@ -67,21 +77,23 @@ class _EventDetailsPageState
                         child: Column(
                           children: [
                             const SizedBox(
-                              height: 40,
+                              height: 25,
                             ),
                             Row(
                               children: [
                                 Text(
                                   widget.event.name,
                                   style: TextStyle(
-                                      color: AppTheme.colors.primary,
-                                      fontSize: 23,
-                                      fontWeight: FontWeight.w700),
+                                    color: AppTheme.colors.logoBlue,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
                               ],
                             ),
-                            const SizedBox(
-                              height: 15,
+                            SizedBox(
+                              height:
+                                  widget.event.description.isNotEmpty ? 15 : 0,
                             ),
                             Row(
                               children: [
@@ -89,24 +101,24 @@ class _EventDetailsPageState
                                   child: Text(
                                     widget.event.description,
                                     style: TextStyle(
-                                        color: AppTheme.colors.black
-                                            .withOpacity(0.5),
+                                        color: AppTheme.colors.black,
                                         fontSize: 16,
-                                        fontWeight: FontWeight.w700),
+                                        fontWeight: FontWeight.normal),
                                   ),
                                 )
                               ],
                             ),
-                            const SizedBox(
-                              height: 21,
+                            SizedBox(
+                              height:
+                                  widget.event.description.isNotEmpty ? 21 : 0,
                             ),
                             Row(
                               children: [
                                 const EventTitleInfoWidget(
-                                  titleInfo: 'Organizador',
+                                  titleInfo: 'Organizador:',
                                 ),
                                 const SizedBox(
-                                  width: 22,
+                                  width: 10,
                                 ),
                                 Container(
                                   height: 32,
@@ -119,11 +131,13 @@ class _EventDetailsPageState
                                 const SizedBox(
                                   width: 9,
                                 ),
-                                const EventDataInfoWidget(titleData: 'Ana Vaz')
+                                EventDataInfoWidget(
+                                    titleData: widget.event.eventCreatorName
+                                        .toTitleCase())
                               ],
                             ),
                             const SizedBox(
-                              height: 29,
+                              height: 10,
                             ),
                             Row(
                               children: [
@@ -137,6 +151,65 @@ class _EventDetailsPageState
                                       ? '${widget.event.numParticipants} confirmados'
                                       : '${widget.event.numParticipants} confirmado',
                                 )
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 30,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const EventTitleInfoWidget(
+                                        titleInfo: 'Categoria:'),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    EventDataInfoWidget(
+                                        titleData:
+                                            widget.event.activities.name),
+                                  ],
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const EventTitleInfoWidget(
+                                        titleInfo: 'Modalidade:'),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    EventDataInfoWidget(
+                                      titleData: widget.event.isOnline
+                                          ? 'Online'
+                                          : 'Presencial',
+                                    ),
+                                  ],
+                                ),
+                                Container(
+                                  height: 40,
+                                  width: 80,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    border: Border.all(
+                                      color: AppTheme.colors.neutralDark,
+                                      width: 1.2,
+                                    ),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      widget.event.price.toInt() == 0
+                                          ? 'Gratuito'
+                                          : UtilBrasilFields.obterReal(
+                                              widget.event.price),
+                                      style: TextStyle(
+                                        color: AppTheme.colors.neutralDark,
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                    ),
+                                  ),
+                                ),
                               ],
                             ),
                             const SizedBox(
@@ -154,10 +227,10 @@ class _EventDetailsPageState
                                       height: 10,
                                     ),
                                     EventDataInfoWidget(
-                                        titleData: DateFormat(
-                                                "EEE, d 'de' MMMM", "pt_BR")
-                                            .format(DateTime.parse(
-                                                widget.event.date))),
+                                        titleData:
+                                            DateFormat("d 'de' MMMM", "pt_BR")
+                                                .format(DateTime.parse(
+                                                    widget.event.date))),
                                   ],
                                 ),
                                 Column(
@@ -175,30 +248,22 @@ class _EventDetailsPageState
                                 ),
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: const [
-                                    EventTitleInfoWidget(titleInfo: 'Término'),
-                                    SizedBox(
+                                  children: [
+                                    const EventTitleInfoWidget(
+                                        titleInfo: 'Duração'),
+                                    const SizedBox(
                                       height: 10,
                                     ),
-                                    EventDataInfoWidget(titleData: '9:30h'),
+                                    EventDataInfoWidget(
+                                        titleData: widget.event.endTime.isEmpty
+                                            ? '-'
+                                            : widget.event.endTime),
                                   ],
                                 ),
                               ],
                             ),
                             const SizedBox(
                               height: 24,
-                            ),
-                            Row(
-                              children: const [
-                                EventTitleInfoWidget(titleInfo: 'Categories'),
-                                Flexible(
-                                    child: EventDataInfoWidget(
-                                        titleData:
-                                            'Yoga, presencial, gratis, etc'))
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 26,
                             ),
                             Row(
                               children: [
@@ -353,26 +418,34 @@ class _EventDetailsPageState
                   ),
                 ),
               ),
-              Positioned(
-                top: 250,
-                right: 30,
-                child: Container(
-                  width: 60,
-                  height: 60,
-                  decoration: BoxDecoration(
-                    color: AppTheme.colors.primary,
-                    shape: BoxShape.circle,
-                  ),
-                  child: IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.bookmark,
-                      size: 30,
-                      color: AppTheme.colors.white,
-                    ),
-                  ),
-                ),
-              ),
+              TripleBuilder(
+                  store: store,
+                  builder: (context, triple) {
+                    return Positioned(
+                      top: 185,
+                      right: 35,
+                      child: Container(
+                        width: 45,
+                        height: 45,
+                        decoration: BoxDecoration(
+                          color: AppTheme.colors.greyBoard,
+                          shape: BoxShape.circle,
+                        ),
+                        child: IconButton(
+                          onPressed: () async {
+                            await store.favorite(widget.event.id);
+                          },
+                          icon: Icon(
+                            store.state.isFavorite ?? false
+                                ? Icons.bookmark
+                                : Icons.bookmark_outline,
+                            size: 30,
+                            color: AppTheme.colors.primary,
+                          ),
+                        ),
+                      ),
+                    );
+                  }),
             ],
           ),
         ),

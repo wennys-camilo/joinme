@@ -14,10 +14,9 @@ class EventDataInfoWidget extends StatelessWidget {
     return Text(
       titleData,
       style: TextStyle(
-          color: AppTheme.colors.black.withOpacity(0.5),
+          color: AppTheme.colors.black,
           fontSize: 16,
-          fontWeight: FontWeight.w700),
+          fontWeight: FontWeight.normal),
     );
   }
 }
-

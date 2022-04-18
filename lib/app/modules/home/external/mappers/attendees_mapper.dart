@@ -1,3 +1,5 @@
+import 'package:camp_final/app/modules/home/external/mappers/event_description_mapper.dart';
+
 import '../../domain/entities/attendees_entity.dart';
 import '../../domain/entities/attendees_response_entity.dart';
 
@@ -11,10 +13,10 @@ class AtendeesMapper {
 
   AttendeesReponseEntity from(Map<String, dynamic> map) {
     return AttendeesReponseEntity(
-      id: map['id'] ?? '',
-      status: map['status'] ?? '',
-      userId: map['userId'] ?? '',
-      eventId: map['eventId'] ?? '',
-    );
+        id: map['id'] ?? '',
+        status: map['status'] ?? '',
+        userId: map['userId'] ?? '',
+        eventId: map['eventId'] ?? '',
+        event: EventDescriptionMapper().to(map['event']));
   }
 }

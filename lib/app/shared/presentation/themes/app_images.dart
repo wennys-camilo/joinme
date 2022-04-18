@@ -46,7 +46,7 @@ class AppImagesImpl implements AppImages {
   String get gym => "assets/images/academia.png";
 
   @override
-  String get art => "assets/images/academia.png";
+  String get art => "assets/images/artes.png";
 
   @override
   String get movie => "assets/images/cinema.png";

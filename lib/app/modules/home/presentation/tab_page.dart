@@ -36,7 +36,7 @@ class _TabPageState extends State<TabPage> {
             ),
             child: BottomNavigationBar(
               type: BottomNavigationBarType.fixed,
-              backgroundColor: AppTheme.colors.grey,
+              backgroundColor: AppTheme.colors.greyBoard,
               selectedItemColor: AppTheme.colors.pink,
               currentIndex: value,
               onTap: (value) {
@@ -46,18 +46,19 @@ class _TabPageState extends State<TabPage> {
                 } else {
                   switch (value) {
                     case 0:
-                      Modular.to.pushNamed('./homePage');
+                      Modular.to.navigate('/home/homePage');
                       break;
                     case 1:
-                      Modular.to.pushNamed('./calendar');
+                      Modular.to.navigate('/home/calendar');
                       break;
                     case 2:
-                      Modular.to.pushNamed('./add_events');
+                      Modular.to.navigate('/home/add_events');
                       break;
                     case 3:
+                      Modular.to.navigate('/home/saved/');
                       break;
                     case 4:
-                      Modular.to.pushNamed('./profile');
+                      Modular.to.navigate('/home/profile');
                       break;
                     default:
                   }

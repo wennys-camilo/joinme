@@ -8,4 +8,5 @@ abstract class HomeEventsRepository {
   Future<Either<Failure, List<EventDescriptionEntity>>> fetchAll();
   Future<Either<Failure, AttendeesReponseEntity>> attendeesEvents(
       AttendeesEntity entity);
+  Future<Either<Failure, List<AttendeesReponseEntity>>> status(String type);
 }

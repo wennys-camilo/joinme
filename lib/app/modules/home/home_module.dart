@@ -1,6 +1,7 @@
-import 'package:flutter/material.dart';
+import 'package:camp_final/app/modules/home/domain/usecases/set_attendees_status_usecase_impl.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'domain/usecases/fetch_all_events_usecase_impl.dart';
+import 'domain/usecases/fetch_all_status_events_attendees_usecase_impl.dart';
 import 'external/datasources/home_events_remote_datasource_impl.dart';
 import 'infra/repositories/home_events_repository_impl.dart';
 import 'presentation/event_details/event_details_page.dart';
@@ -17,17 +18,18 @@ import 'submodules/events/infra/repositories/events_repository_impl.dart';
 import 'submodules/events/pages/add_events/add_event_page.dart';
 import 'submodules/events/pages/add_events/add_event_store.dart';
 import 'submodules/profile/presentation/profile_page.dart';
+import 'submodules/saved/saved_module.dart';
 
 class HomeModule extends Module {
   @override
   final List<Bind> binds = [
     Bind((i) => HomeEventsRemoteDataSourceImpl(i.get())),
     Bind((i) => HomeEventsRepositoryImpl(i.get())),
-
     Bind((i) => FetchAllEventsUsecaseImpl(i.get())),
-    Bind.lazySingleton((i) => HomeStore(i.get(), i.get())),
-
-    Bind((i) => EventDetailsStore()),
+    Bind((i) => SetAttendeesStatusUsecaseImpl(i.get())),
+    Bind((i) => FetchAllStatusEventsAttendeesUsecaseImpl(i.get())),
+    Bind((i) => HomeStore(i.get(), i.get(), i.get())),
+    Bind((i) => EventDetailsStore(i.get(), i.get())),
     //TODO:
     Bind((i) => EventsRemoteDatasourceImpl(i.get())),
     Bind((i) => EventsRepositoryImpl(i.get())),
@@ -45,8 +47,8 @@ class HomeModule extends Module {
       children: [
         ChildRoute('/homePage', child: (context, args) => const HomePage()),
         ChildRoute('/calendar', child: (context, args) => const CalendarPage()),
-        ChildRoute('/perfil',
-            child: (context, args) => const Center(child: Text('2'))),
+        ModuleRoute('/saved', module: SavedModule()),
+        //ChildRoute('/saved', child: (context, args) => const SavedPage()),
         ChildRoute('/add_events',
             child: (context, args) => const AddEventPage()),
         ChildRoute('/profile', child: (context, args) => const ProfilePage()),

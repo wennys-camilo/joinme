@@ -14,9 +14,9 @@ class EventTitleInfoWidget extends StatelessWidget {
     return Text(
       titleInfo,
       style: TextStyle(
-          color: AppTheme.colors.primary,
+          color: AppTheme.colors.black,
           fontSize: 16,
-          fontWeight: FontWeight.w700),
+          fontWeight: FontWeight.bold),
     );
   }
 }
