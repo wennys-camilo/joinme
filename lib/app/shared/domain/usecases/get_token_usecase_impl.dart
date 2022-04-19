@@ -1,6 +1,7 @@
+import 'package:camp_final/app/shared/domain/helpers/errors/failure.dart';
 import 'package:dartz/dartz.dart';
-import '../domain/helpers/errors/failure.dart';
-import '../domain/repositories/token_repository.dart';
+
+import '../repositories/token_repository.dart';
 import 'get_token_usecase.dart';
 
 class GetTokenUsecaseImpl implements GetTokenUsecase {

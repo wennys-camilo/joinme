@@ -1,3 +1,7 @@
+import 'package:camp_final/app/modules/signup/domain/usecases/insert_disabilities_usecase_impl.dart';
+import 'package:camp_final/app/modules/signup/domain/usecases/insert_city_user_usecase_impl.dart';
+import 'package:camp_final/app/modules/signup/presentation/pages/signup_address_page.dart';
+import 'package:camp_final/app/modules/signup/presentation/pages/signup_disabilities_page.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import 'domain/usecases/fetch_interests_usecase_impl.dart';
@@ -24,10 +28,13 @@ class SignUpModule extends Module {
     Bind((i) => InterestsRepositoryImpl(i.get())),
     Bind((i) => FetchInterestsUsecaseImpl(i.get())),
     Bind((i) => InsertEmergencyContactUsecaseImpl(i.get())),
+    Bind((i) => InsertCityUserUsecaseImpl(i.get())),
     Bind((i) => InterestsRemoteDatasourceImpl(i.get())),
     Bind((i) => InterestsRepositoryImpl(i.get())),
     Bind((i) => InsertInterestsUsecaseImpl(i.get())),
-    Bind(((i) => SignupStore(i.get(), i.get(), i.get(), i.get(), i.get()))),
+    Bind((i) => InsertDisabilitiesUsecaseImpl(i.get())),
+    Bind(((i) => SignupStore(i.get(), i.get(), i.get(), i.get(), i.get(),
+        i.get(), i.get(), i.get(), i.get()))),
   ];
 
   @override
@@ -38,6 +45,10 @@ class SignUpModule extends Module {
         child: (context, args) => const SignupPagePhaseTwo()),
     ChildRoute('/phaseThree',
         child: (context, args) => const SignupInterestPage()),
+    ChildRoute('/phaseFour',
+        child: (context, args) => const DisabilitiesPage()),
+    ChildRoute('/phaseFive',
+        child: (context, args) => const SignupAddressPage()),
     ChildRoute('/confirmation',
         child: (context, args) => const SignupConfirmationPage()),
   ];

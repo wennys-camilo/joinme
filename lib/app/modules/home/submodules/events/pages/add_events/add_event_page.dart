@@ -84,8 +84,8 @@ class _AddEventPageState extends State<AddEventPage> {
                         if (value!.isEmpty) {
                           return 'Campo Obrigatório';
                         }
-                        if ((!UtilBrasilFields.isCPFValido(value)) ||
-                            (!UtilBrasilFields.isCPFValido(value))) {
+                        if ((!UtilBrasilFields.isCPFValido(value)) &&
+                            (!UtilBrasilFields.isCNPJValido(value))) {
                           return 'CPF ou CNPJ invalido';
                         }
                         return null;

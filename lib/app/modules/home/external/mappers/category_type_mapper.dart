@@ -36,6 +36,9 @@ class CategoryImageTypeMapper {
       case "Academia":
         return CategorieType.gym;
 
+      case "Cinema":
+        return CategorieType.movie;
+
       default:
         throw UnimplementedError();
     }

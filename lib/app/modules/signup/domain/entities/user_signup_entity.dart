@@ -10,6 +10,7 @@ class UserSignupEntity {
   final String? emergencyName;
   final String? emergencyPhone;
   final TokenEnity? tokenEnity;
+  final String? city;
   const UserSignupEntity({
     required this.name,
     required this.email,
@@ -20,5 +21,11 @@ class UserSignupEntity {
     this.phone,
     this.emergencyName,
     this.emergencyPhone,
+    this.city,
   });
+
+  @override
+  String toString() {
+    return 'UserSignupEntity(id: $id, name: $name, email: $email, password: $password, passwordConfirmation: $passwordConfirmation, phone: $phone, emergencyName: $emergencyName, emergencyPhone: $emergencyPhone, tokenEnity: $tokenEnity)';
+  }
 }

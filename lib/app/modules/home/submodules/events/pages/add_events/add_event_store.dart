@@ -164,7 +164,6 @@ class AddEventStore extends StreamStore<Failure, AddEventState> {
                 street: state.street,
                 zipCode: state.zipCode,
                 city: state.city,
-                userId: userStore.state.user.id,
                 referencePoint: state.referencePoint)
             : null,
       ),

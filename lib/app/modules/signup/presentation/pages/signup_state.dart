@@ -1,3 +1,6 @@
+import 'package:camp_final/app/shared/domain/entites/city_entity.dart';
+import 'package:camp_final/app/shared/domain/entites/disabilities_enity.dart';
+
 import '../../domain/entities/interests_entity.dart';
 import '../../domain/entities/user_signup_entity.dart';
 
@@ -14,6 +17,11 @@ class SignupState {
   final List<String> selectedInterests;
   final UserSignupEntity userSignupResponse;
   final List<String> interestsId;
+  final List<DisabilitiesEntity> disabilitiesList;
+  final List<DisabilitiesEntity> selectedsDisaibilities;
+  final List<String> selectedsIdsDisabilities;
+  final String city;
+  final List<CityEntity> citysList;
   SignupState({
     required this.policiesTerms,
     required this.name,
@@ -27,29 +35,38 @@ class SignupState {
     required this.selectedInterests,
     required this.userSignupResponse,
     required this.interestsId,
+    required this.disabilitiesList,
+    required this.selectedsIdsDisabilities,
+    required this.selectedsDisaibilities,
+    required this.city,
+    required this.citysList,
   });
 
   factory SignupState.empty() {
     return SignupState(
-      policiesTerms: false,
-      name: "",
-      email: "",
-      password: "",
-      passwordConfirmation: "",
-      emergencyName: "",
-      emergencyPhone: "",
-      phone: "",
-      interestsList: const [],
-      selectedInterests: const [],
-      userSignupResponse: const UserSignupEntity(
-        email: '',
-        password: '',
-        id: '',
-        name: '',
-        passwordConfirmation: '',
-      ),
-      interestsId: [],
-    );
+        policiesTerms: false,
+        name: "",
+        email: "",
+        disabilitiesList: [],
+        selectedsDisaibilities: [],
+        selectedsIdsDisabilities: [],
+        password: "",
+        passwordConfirmation: "",
+        emergencyName: "",
+        emergencyPhone: "",
+        phone: "",
+        interestsList: const [],
+        selectedInterests: const [],
+        userSignupResponse: const UserSignupEntity(
+          email: '',
+          password: '',
+          id: '',
+          name: '',
+          passwordConfirmation: '',
+        ),
+        interestsId: [],
+        city: '',
+        citysList: []);
   }
 
   SignupState copyWith({
@@ -65,6 +82,11 @@ class SignupState {
     List<String>? selectedInterests,
     UserSignupEntity? userSignupResponse,
     List<String>? interestsId,
+    List<DisabilitiesEntity>? disabilitiesList,
+    List<DisabilitiesEntity>? selectedsDisaibilities,
+    List<String>? selectedsIdsDisabilities,
+    String? city,
+    List<CityEntity>? citysList,
   }) {
     return SignupState(
       policiesTerms: policiesTerms ?? this.policiesTerms,
@@ -79,6 +101,13 @@ class SignupState {
       selectedInterests: selectedInterests ?? this.selectedInterests,
       userSignupResponse: userSignupResponse ?? this.userSignupResponse,
       interestsId: interestsId ?? this.interestsId,
+      disabilitiesList: disabilitiesList ?? this.disabilitiesList,
+      selectedsDisaibilities:
+          selectedsDisaibilities ?? this.selectedsDisaibilities,
+      selectedsIdsDisabilities:
+          selectedsIdsDisabilities ?? this.selectedsIdsDisabilities,
+      city: city ?? this.city,
+      citysList: citysList ?? this.citysList,
     );
   }
 }

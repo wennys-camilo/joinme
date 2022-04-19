@@ -1,9 +1,9 @@
-import 'package:camp_final/app/modules/home/domain/entities/attendees_entity.dart';
-import 'package:camp_final/app/modules/home/domain/usecases/fetch_all_status_events_attendees_usecase.dart';
-import 'package:camp_final/app/modules/home/domain/usecases/set_attendees_status_usecase.dart';
-import 'package:camp_final/app/modules/home/presentation/event_details/event_details_state.dart';
-import 'package:camp_final/app/shared/domain/helpers/errors/failure.dart';
 import 'package:flutter_triple/flutter_triple.dart';
+import '../../../../shared/domain/helpers/errors/failure.dart';
+import '../../domain/entities/attendees_entity.dart';
+import '../../domain/usecases/fetch_all_status_events_attendees_usecase.dart';
+import '../../domain/usecases/set_attendees_status_usecase.dart';
+import 'event_details_state.dart';
 
 class EventDetailsStore extends StreamStore<Failure, EventDetailsState> {
   final SetAttendeesStatusUsecase _setAttendeesStatusUsecase;

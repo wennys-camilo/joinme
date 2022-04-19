@@ -1,3 +1,4 @@
+import 'package:camp_final/app/modules/signup/domain/entities/user_disabilities_entity.dart';
 import 'package:dartz/dartz.dart';
 import '../../../../shared/domain/helpers/errors/failure.dart';
 import '../../domain/entities/user_signup_entity.dart';
@@ -25,6 +26,27 @@ class SignupRepositoryImpl implements SignupRepository {
     try {
       final response = await _remoteDatasource.update(userSignupEntity);
       return Right(response);
+    } on Failure catch (error) {
+      return Left(error);
+    }
+  }
+
+  @override
+  Future<Either<Failure, UserSignupEntity>> updateCity(String city) async {
+    try {
+      final response = await _remoteDatasource.updateCity(city);
+      return Right(response);
+    } on Failure catch (error) {
+      return Left(error);
+    }
+  }
+
+  @override
+  Future<Either<Failure, Unit>> insertDisabilities(
+      UserDisabilitiesEntity userDisabilitiesEntity) async {
+    try {
+      await _remoteDatasource.disabilities(userDisabilitiesEntity);
+      return const Right(unit);
     } on Failure catch (error) {
       return Left(error);
     }

@@ -1,5 +1,4 @@
 class UserEntity {
-  final String id;
   final String name;
   final String email;
   final String? phone;
@@ -8,8 +7,8 @@ class UserEntity {
   final String? createdAt;
   final String? updatedAt;
   final String? deletedAt;
+  final String? city;
   UserEntity({
-    required this.id,
     required this.name,
     required this.email,
     this.phone,
@@ -18,5 +17,6 @@ class UserEntity {
     this.createdAt,
     this.updatedAt,
     this.deletedAt,
+    this.city,
   });
 }

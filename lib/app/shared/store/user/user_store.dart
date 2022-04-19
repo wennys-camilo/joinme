@@ -8,7 +8,6 @@ class UserStore extends StreamStore<Failure, UserState> {
       : super(
           UserState(
             user: UserEntity(
-                id: "",
                 email: "",
                 name: "",
                 phone: "",

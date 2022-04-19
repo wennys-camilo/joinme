@@ -33,7 +33,9 @@ class EventItemCardTile extends StatelessWidget {
                       bottomLeft: Radius.circular(15.0),
                     ),
                     image: DecorationImage(
-                      image: AssetImage(event.typeImage.coverPhoto),
+                      image: AssetImage(
+                        event.typeImage.coverPhoto,
+                      ),
                       fit: BoxFit.cover,
                     ),
                   ),

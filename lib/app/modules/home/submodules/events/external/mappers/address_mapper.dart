@@ -9,7 +9,6 @@ class AddressMapper {
       'state': address?.state,
       'zipCode': address?.zipCode,
       'referencePoint': address?.referencePoint,
-      'userId': address?.userId,
     };
   }
 }

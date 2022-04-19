@@ -83,16 +83,21 @@ class _SignupInterestPageState extends State<SignupInterestPage> {
                   Container(
                     padding: const EdgeInsets.fromLTRB(30, 8, 30, 20),
                     child: RoundedButtonWidget(
-                      onPressed: () => store.insertInterest(),
+                      onPressed: () async {
+                        if (store.state.interestsId.isNotEmpty) {
+                          await store.insertInterest();
+                        } else {
+                          print('aqui');
+                          Modular.to.navigate('./phaseFour');
+                        }
+                      },
                       textButton: 'CONFIRMAR',
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 20),
                     child: GestureDetector(
-                      onTap: () {
-                        //TODO IMPLEMENT
-                      },
+                      onTap: () => Modular.to.navigate('./phaseFour'),
                       child: const Text(
                         'PULAR',
                         textAlign: TextAlign.center,

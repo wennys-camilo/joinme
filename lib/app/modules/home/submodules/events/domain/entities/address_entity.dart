@@ -5,7 +5,7 @@ class AddressEntity {
   final String? state;
   final String? zipCode;
   final String? referencePoint;
-  final String userId;
+
   AddressEntity({
     required this.street,
     required this.number,
@@ -13,6 +13,5 @@ class AddressEntity {
     required this.state,
     required this.zipCode,
     this.referencePoint,
-    required this.userId,
   });
 }
