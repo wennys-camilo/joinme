@@ -1,4 +1,5 @@
 import 'package:camp_final/app/modules/home/presentation/widgets/event_item_card_tile.dart';
+import 'package:camp_final/app/shared/presentation/pages/reload_error_page.dart';
 import 'package:camp_final/app/shared/presentation/widgets/rounded_button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -37,26 +38,30 @@ class _SavedPageState extends ModularState<SavedPage, SavedStore> {
             elevation: 0,
           ),
           body: store.state.attendes.isNotEmpty
-              ? ListView.builder(
-                  physics: const BouncingScrollPhysics(),
-                  itemCount: store.state.attendes.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    var event = store.state.attendes[index].event;
-                    return GestureDetector(
-                      onTap: () {
-                        Modular.to
-                            .pushNamed('/home/eventPage', arguments: event);
+              ? TripleBuilder(
+                  store: store,
+                  builder: (context, triple) {
+                    return ListView.builder(
+                      physics: const BouncingScrollPhysics(),
+                      itemCount: store.state.attendes.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        var event = store.state.attendes[index].event;
+                        return GestureDetector(
+                          onTap: () {
+                            Modular.to
+                                .pushNamed('/home/eventPage', arguments: event);
+                          },
+                          child: SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.30,
+                            child: EventItemCardTile(
+                              event: event!,
+                              favorite: true,
+                            ),
+                          ),
+                        );
                       },
-                      child: SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.30,
-                        child: EventItemCardTile(
-                          event: event!,
-                          favorite: true,
-                        ),
-                      ),
                     );
-                  },
-                )
+                  })
               : const Center(
                   child: Text(
                     'Você não possui eventos salvos',
@@ -73,37 +78,9 @@ class _SavedPageState extends ModularState<SavedPage, SavedStore> {
         );
       },
       onError: (context, error) {
-        return Container(
-          color: AppTheme.colors.primary,
-          child: SafeArea(
-            child: Container(
-              color: AppTheme.colors.white,
-              child: Center(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Falha ao carregar eventos salvos',
-                      style: TextStyle(
-                        color: AppTheme.colors.primary,
-                        fontSize: 18,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    RoundedButtonWidget(
-                      onPressed: () async {
-                        await store.fetchSaveds();
-                      },
-                      textButton: 'Tentar Novamente',
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
+        return ReloadErrorPage(
+          message: 'Falha ao carregar eventos salvos',
+          action: () async => await store.fetchSaveds(),
         );
       },
     );

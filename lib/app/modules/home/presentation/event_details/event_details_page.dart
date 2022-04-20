@@ -1,5 +1,7 @@
 import 'package:brasil_fields/brasil_fields.dart';
+import 'package:camp_final/app/modules/home/presentation/event_details/event_details_state.dart';
 import 'package:flutter_triple/flutter_triple.dart';
+import '../../../../shared/domain/helpers/errors/failure.dart';
 import 'event_details_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -75,6 +77,7 @@ class _EventDetailsPageState
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 35),
                         child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const SizedBox(
                               height: 25,
@@ -193,7 +196,7 @@ class _EventDetailsPageState
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(20),
                                     border: Border.all(
-                                      color: AppTheme.colors.neutralDark,
+                                      color: AppTheme.colors.primary,
                                       width: 1.2,
                                     ),
                                   ),
@@ -204,7 +207,7 @@ class _EventDetailsPageState
                                           : UtilBrasilFields.obterReal(
                                               widget.event.price),
                                       style: TextStyle(
-                                        color: AppTheme.colors.neutralDark,
+                                        color: AppTheme.colors.primary,
                                         fontWeight: FontWeight.w700,
                                       ),
                                     ),
@@ -268,6 +271,35 @@ class _EventDetailsPageState
                             Row(
                               children: [
                                 Icon(
+                                  Icons.accessible,
+                                  color: AppTheme.colors.primary,
+                                ),
+                                const SizedBox(
+                                  width: 15,
+                                ),
+                                const Flexible(
+                                  child: EventDataInfoWidget(
+                                      titleData:
+                                          'Evento acessível a pessoas com deficiência?'),
+                                ),
+                              ],
+                            ),
+                            widget.event.eventAccessibilities.isEmpty
+                                ? const Text(
+                                    'Infelizmente, não! :/',
+                                    textAlign: TextAlign.start,
+                                  )
+                                : Row(
+                                    children: [
+                                      Text(
+                                        'Sim!',
+                                        textAlign: TextAlign.start,
+                                      ),
+                                    ],
+                                  ),
+                            Row(
+                              children: [
+                                Icon(
                                   Icons.location_on,
                                   color: AppTheme.colors.primary,
                                 ),
@@ -276,42 +308,6 @@ class _EventDetailsPageState
                                 ),
                                 const EventDataInfoWidget(
                                   titleData: 'Evento Presencial',
-                                )
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.wheelchair_pickup,
-                                  color: AppTheme.colors.primary,
-                                ),
-                                const SizedBox(
-                                  width: 15,
-                                ),
-                                const Flexible(
-                                    child: EventDataInfoWidget(
-                                        titleData:
-                                            'Possui acessibilidade arquitetônica')),
-                                const SizedBox(
-                                  width: 15,
-                                ),
-                                GestureDetector(
-                                  onTap: () {},
-                                  child: Container(
-                                    width: 15,
-                                    height: 15,
-                                    decoration: BoxDecoration(
-                                        color: AppTheme.colors.primary,
-                                        shape: BoxShape.circle),
-                                    child: const Center(
-                                      child: Text(
-                                        '?',
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w700),
-                                      ),
-                                    ),
-                                  ),
                                 )
                               ],
                             ),
@@ -418,7 +414,7 @@ class _EventDetailsPageState
                   ),
                 ),
               ),
-              TripleBuilder(
+              TripleBuilder<EventDetailsStore, Failure, EventDetailsState>(
                   store: store,
                   builder: (context, triple) {
                     return Positioned(
@@ -436,7 +432,7 @@ class _EventDetailsPageState
                             await store.favorite(widget.event.id);
                           },
                           icon: Icon(
-                            store.state.isFavorite ?? false
+                            triple.state.isFavorite ?? false
                                 ? Icons.bookmark
                                 : Icons.bookmark_outline,
                             size: 30,

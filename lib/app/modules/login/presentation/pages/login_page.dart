@@ -114,14 +114,17 @@ class _LoginPageState extends ModularState<LoginPage, LoginStore> {
                   ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 15, bottom: 15),
-                child: Text(
-                  'Esqueceu a senha?',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      color: AppTheme.colors.primary,
-                      fontWeight: FontWeight.bold),
+              GestureDetector(
+                onTap: () => Modular.to.navigate('/forgotPassword/'),
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 15, bottom: 15),
+                  child: Text(
+                    'Esqueceu a senha?',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        color: AppTheme.colors.primary,
+                        fontWeight: FontWeight.bold),
+                  ),
                 ),
               ),
               Padding(

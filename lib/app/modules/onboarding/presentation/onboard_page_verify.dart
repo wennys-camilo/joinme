@@ -17,12 +17,11 @@ class _OnboardPageVerifyState extends State<OnboardPageVerify> {
 
   @override
   void initState() {
+    //loadPictures();
     super.initState();
     controller.observer(
       onState: (state) {
         if (state.firstAcess) {
-          //TODO: CACHE
-          loadPictures();
           Modular.to.navigate('/board1');
           controller.setAcess(true);
         } else {

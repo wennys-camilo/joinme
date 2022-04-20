@@ -1,5 +1,6 @@
 import 'package:camp_final/app/modules/home/domain/entities/attendees_entity.dart';
 import 'package:camp_final/app/modules/home/domain/entities/attendees_response_entity.dart';
+import 'package:camp_final/app/modules/home/domain/entities/mood_entity.dart';
 import 'package:dartz/dartz.dart';
 import '../../../../shared/domain/helpers/errors/failure.dart';
 import '../../domain/entities/event_description_entity.dart';
@@ -37,6 +38,16 @@ class HomeEventsRepositoryImpl implements HomeEventsRepository {
       String type) async {
     try {
       final response = await _remoteDataSource.getStatusList(type);
+      return Right(response);
+    } on Failure catch (error) {
+      return Left(error);
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<MoodEntity>>> getMoodsHome() async {
+    try {
+      final response = await _remoteDataSource.getMoods();
       return Right(response);
     } on Failure catch (error) {
       return Left(error);

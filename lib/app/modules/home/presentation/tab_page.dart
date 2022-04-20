@@ -41,7 +41,6 @@ class _TabPageState extends State<TabPage> {
               currentIndex: value,
               onTap: (value) {
                 if (value == currentIndex.value) {
-                  _changeBar(value);
                   return;
                 } else {
                   switch (value) {
@@ -58,7 +57,7 @@ class _TabPageState extends State<TabPage> {
                       Modular.to.navigate('/home/saved/');
                       break;
                     case 4:
-                      Modular.to.navigate('/home/profile');
+                      Modular.to.navigate('/home/profile/');
                       break;
                     default:
                   }

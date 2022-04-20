@@ -12,6 +12,8 @@ class UserMapper {
       updatedAt: map['updatedAt'],
       deletedAt: map['deletedAt'],
       city: map['city'] ?? '',
+      aboutMe: map['aboutMe'] ?? '',
+      isPremium: map['isPremium'] ?? false,
     );
   }
 }

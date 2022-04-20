@@ -4,9 +4,10 @@ import 'package:flutter_triple/flutter_triple.dart';
 import '../../../../shared/presentation/themes/app_theme.dart';
 import '../../../../shared/presentation/utils/extension/string_extension_capitalize.dart';
 import '../widgets/categories_title_widget.dart';
-import '../widgets/event_item_card_tile.dart';
 import '../widgets/custom_filter_chip_widget.dart';
+import '../widgets/event_item_card_tile.dart';
 import '../widgets/insights_horizontal_grid_view.dart';
+import '../widgets/mood_dialog_widget.dart';
 import 'home_store.dart';
 
 class HomePage extends StatefulWidget {
@@ -20,8 +21,28 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
   @override
   void initState() {
     super.initState();
+    verifyMood();
     store.getFavorites();
     store.fetchEvents();
+  }
+
+  Future<void> verifyMood() async {
+    await store.checkShowMood();
+    if (store.state.showMood) {
+      await store.fechMoods();
+      showMood();
+    }
+  }
+
+  showMood() async {
+    await Future.delayed(const Duration(milliseconds: 50));
+    showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (BuildContext context) {
+        return const MoodDialogWidget();
+      },
+    );
   }
 
   @override

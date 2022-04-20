@@ -1,3 +1,4 @@
+import 'package:camp_final/app/shared/presentation/themes/app_theme.dart';
 import 'package:flutter/material.dart';
 
 class DropDownWidget extends StatelessWidget {
@@ -28,6 +29,7 @@ class DropDownWidget extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.fromLTRB(30, 8, 30, 8),
       child: DropdownButtonFormField<dynamic>(
+        dropdownColor: AppTheme.colors.lightPurple,
         value: value,
         items: items,
         autovalidateMode: AutovalidateMode.onUserInteraction,

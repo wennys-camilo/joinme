@@ -18,6 +18,14 @@ abstract class AppImages {
   String get yoga;
   String get music;
   String get studies;
+  String get happy;
+  String get motivated;
+  String get sad;
+  String get bored;
+  String get happySelected;
+  String get motivatedSelected;
+  String get sadSelected;
+  String get boredSelected;
 }
 
 class AppImagesImpl implements AppImages {
@@ -77,4 +85,28 @@ class AppImagesImpl implements AppImages {
 
   @override
   String get music => "assets/images/music.png";
+
+  @override
+  String get happy => "assets/images/feliz.svg";
+
+  @override
+  String get sad => "assets/images/triste.svg";
+
+  @override
+  String get bored => "assets/images/entediado.svg";
+
+  @override
+  String get motivated => "assets/images/motivado.svg";
+
+  @override
+  String get happySelected => "assets/images/feliz2.svg";
+
+  @override
+  String get sadSelected => "assets/images/triste2.svg";
+
+  @override
+  String get boredSelected => "assets/images/entediado2.svg";
+
+  @override
+  String get motivatedSelected => "assets/images/motivado2.svg";
 }

@@ -1,4 +1,14 @@
+import 'package:camp_final/app/modules/home/domain/usecases/fetch_user_usecase_impl.dart';
+import 'package:camp_final/app/modules/home/domain/usecases/get_mood_usecase_impl.dart';
+import 'package:camp_final/app/modules/home/domain/usecases/post_mood_user_usecase_impl.dart';
+import 'package:camp_final/app/modules/home/domain/usecases/set_acess_mood_usecase_impl.dart';
 import 'package:camp_final/app/modules/home/domain/usecases/set_attendees_status_usecase_impl.dart';
+import 'package:camp_final/app/modules/home/domain/usecases/verify_show_mood_usecase_impl.dart';
+import 'package:camp_final/app/modules/home/internal/home_local_datasource_impl.dart';
+import 'package:camp_final/app/modules/home/external/datasources/user_remote_datasource_impl.dart';
+import 'package:camp_final/app/modules/home/infra/repositories/home_local_repository_impl.dart';
+import 'package:camp_final/app/modules/home/infra/repositories/user_repositoy_impl.dart';
+import 'package:camp_final/app/modules/home/submodules/profile/presentation/profile_module.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'domain/usecases/fetch_all_events_usecase_impl.dart';
 import 'domain/usecases/fetch_all_status_events_attendees_usecase_impl.dart';
@@ -23,12 +33,22 @@ import 'submodules/saved/saved_module.dart';
 class HomeModule extends Module {
   @override
   final List<Bind> binds = [
+    Bind((i) => HomeLocalDatasourceImpl(i.get())),
+    Bind((i) => HomeLocalRepositoryImpl(i.get())),
+    Bind((i) => SetAcessMoodUsecaseImpl(i.get())),
+    Bind((i) => VerifyShowMoodUsecaseImpl(i.get())),
+    Bind((i) => UserRemoteDataSourceImpl(i.get())),
+    Bind((i) => UserRepositoryImpl(i.get())),
+    Bind((i) => FetchUserUsecaseImpl(i.get())),
+    Bind((i) => PostMoodUserUsecaseImpl(i.get())),
     Bind((i) => HomeEventsRemoteDataSourceImpl(i.get())),
     Bind((i) => HomeEventsRepositoryImpl(i.get())),
     Bind((i) => FetchAllEventsUsecaseImpl(i.get())),
     Bind((i) => SetAttendeesStatusUsecaseImpl(i.get())),
     Bind((i) => FetchAllStatusEventsAttendeesUsecaseImpl(i.get())),
-    Bind((i) => HomeStore(i.get(), i.get(), i.get())),
+    Bind((i) => GetMoodUsecaseImpl(i.get())),
+    Bind((i) => HomeStore(
+        i.get(), i.get(), i.get(), i.get(), i.get(), i.get(), i.get())),
     Bind((i) => EventDetailsStore(i.get(), i.get())),
     //TODO:
     Bind((i) => EventsRemoteDatasourceImpl(i.get())),
@@ -48,10 +68,9 @@ class HomeModule extends Module {
         ChildRoute('/homePage', child: (context, args) => const HomePage()),
         ChildRoute('/calendar', child: (context, args) => const CalendarPage()),
         ModuleRoute('/saved', module: SavedModule()),
-        //ChildRoute('/saved', child: (context, args) => const SavedPage()),
         ChildRoute('/add_events',
             child: (context, args) => const AddEventPage()),
-        ChildRoute('/profile', child: (context, args) => const ProfilePage()),
+        ModuleRoute('/profile', module: ProfileModule()),
         ChildRoute('/eventPage',
             child: (context, args) => EventDetailsPage(event: args.data)),
       ],

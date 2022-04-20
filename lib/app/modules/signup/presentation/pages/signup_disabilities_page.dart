@@ -1,3 +1,4 @@
+import 'package:camp_final/app/modules/signup/presentation/pages/signup_state.dart';
 import 'package:camp_final/app/modules/signup/presentation/pages/signup_store.dart';
 import 'package:camp_final/app/shared/domain/entites/disabilities_enity.dart';
 import 'package:camp_final/app/shared/presentation/themes/app_theme.dart';
@@ -6,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_triple/flutter_triple.dart';
+
+import '../../../../shared/domain/helpers/errors/failure.dart';
 
 class DisabilitiesPage extends StatefulWidget {
   const DisabilitiesPage({Key? key}) : super(key: key);
@@ -27,7 +30,7 @@ class _DisabilitiesPageState extends State<DisabilitiesPage> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: ScopedBuilder(
+      child: ScopedBuilder<SignupStore, Failure, SignupState>(
         store: store,
         onState: (context, state) {
           return Scaffold(
@@ -64,7 +67,7 @@ class _DisabilitiesPageState extends State<DisabilitiesPage> {
                     decoration: const InputDecoration(
                       border: InputBorder.none,
                     ),
-                    options: store.state.disabilitiesList
+                    options: state.disabilitiesList
                         .map<FormBuilderFieldOption<DisabilitiesEntity>>(
                             (value) {
                       return FormBuilderFieldOption<DisabilitiesEntity>(
