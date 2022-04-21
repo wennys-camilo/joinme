@@ -1,4 +1,5 @@
 import 'package:brasil_fields/brasil_fields.dart';
+import 'package:camp_final/app/shared/presentation/pages/reload_error_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -50,7 +51,7 @@ class _AddEventPageState extends State<AddEventPage> {
 
   @override
   Widget build(BuildContext context) {
-    return ScopedBuilder(
+    return ScopedBuilder<AddEventStore, Failure, AddEventState>(
       store: store,
       onState: (context, state) {
         return SafeArea(

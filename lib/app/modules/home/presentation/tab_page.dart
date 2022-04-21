@@ -20,6 +20,8 @@ class _TabPageState extends State<TabPage> {
   void initState() {
     super.initState();
     currentIndex = ValueNotifier<int>(0);
+    _changeBar(0);
+    Modular.to.navigate('/home/homePage');
   }
 
   @override

@@ -16,7 +16,7 @@ class SignupState {
   final List<InterestsEntity> interestsList;
   final List<String> selectedInterests;
   final UserSignupEntity userSignupResponse;
-  final List<String> interestsId;
+
   final List<DisabilitiesEntity> disabilitiesList;
   final List<DisabilitiesEntity> selectedsDisaibilities;
   final List<String> selectedsIdsDisabilities;
@@ -34,7 +34,6 @@ class SignupState {
     required this.interestsList,
     required this.selectedInterests,
     required this.userSignupResponse,
-    required this.interestsId,
     required this.disabilitiesList,
     required this.selectedsIdsDisabilities,
     required this.selectedsDisaibilities,
@@ -64,7 +63,6 @@ class SignupState {
           name: '',
           passwordConfirmation: '',
         ),
-        interestsId: [],
         city: '',
         citysList: []);
   }
@@ -100,7 +98,6 @@ class SignupState {
       interestsList: interestsList ?? this.interestsList,
       selectedInterests: selectedInterests ?? this.selectedInterests,
       userSignupResponse: userSignupResponse ?? this.userSignupResponse,
-      interestsId: interestsId ?? this.interestsId,
       disabilitiesList: disabilitiesList ?? this.disabilitiesList,
       selectedsDisaibilities:
           selectedsDisaibilities ?? this.selectedsDisaibilities,

@@ -23,6 +23,7 @@ class _ProfilePageState extends ModularState<ProfilePage, ProfileStore> {
   void initState() {
     super.initState();
     store.fetchProfile();
+    store.fetchInterest();
   }
 
   @override
@@ -36,6 +37,7 @@ class _ProfilePageState extends ModularState<ProfilePage, ProfileStore> {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 32),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 30),
                     Row(
@@ -99,14 +101,18 @@ class _ProfilePageState extends ModularState<ProfilePage, ProfileStore> {
                         ),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 24, bottom: 37),
-                      child: Text(
-                        triple.userEntity.name.toTitleCase(),
-                        style: TextStyle(
-                            color: AppTheme.colors.black.withOpacity(0.5),
-                            fontSize: 23,
-                            fontWeight: FontWeight.w700),
+                    Center(
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 24, bottom: 37),
+                        child: Text(
+                          triple.userEntity.name.isNotEmpty
+                              ? triple.userEntity.name.toTitleCase()
+                              : '',
+                          style: TextStyle(
+                              color: AppTheme.colors.black.withOpacity(0.5),
+                              fontSize: 23,
+                              fontWeight: FontWeight.w700),
+                        ),
                       ),
                     ),
                     Row(
@@ -144,17 +150,8 @@ class _ProfilePageState extends ModularState<ProfilePage, ProfileStore> {
                     const SizedBox(
                       height: 35,
                     ),
-                    Row(
-                      children: [
-                        const SubtitleText(
-                          subtitle: 'Sobre mim',
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Icon(Icons.create_rounded,
-                            color: AppTheme.colors.black.withOpacity(0.6)),
-                      ],
+                    const SubtitleText(
+                      subtitle: 'Sobre mim',
                     ),
                     const SizedBox(
                       height: 5,
@@ -169,28 +166,39 @@ class _ProfilePageState extends ModularState<ProfilePage, ProfileStore> {
                     const SizedBox(
                       height: 12,
                     ),
-                    Row(
-                      children: [
-                        const SubtitleText(subtitle: 'Interesses'),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Icon(Icons.create_rounded,
-                            color: AppTheme.colors.black.withOpacity(0.6)),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 50,
-                      child: ListView.builder(
-                        physics: const BouncingScrollPhysics(),
-                        itemCount: 10,
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, index) {
-                          return CustomFilterChipWidget(
-                              chipColor: AppTheme.colors.pink);
-                        },
-                      ),
-                    ),
+                    const SubtitleText(subtitle: 'Interesses'),
+                    triple.interestsUserList.isNotEmpty
+                        ? SizedBox(
+                            height: 50,
+                            child: ListView.builder(
+                              physics: const BouncingScrollPhysics(),
+                              itemCount: triple.interestsUserList.length,
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (context, index) {
+                                final interest =
+                                    triple.interestsUserList[index];
+                                return Padding(
+                                  padding: const EdgeInsets.only(right: 8),
+                                  child: Chip(
+                                    label: Text(
+                                      interest.name,
+                                      style: TextStyle(
+                                          color: AppTheme.colors.primary,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    backgroundColor: AppTheme.colors.white,
+                                    shape: StadiumBorder(
+                                      side: BorderSide(
+                                        color: AppTheme.colors.primary,
+                                        width: 2,
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          )
+                        : Container(),
                     const SizedBox(
                       height: 10,
                     ),

@@ -1,6 +1,6 @@
 import 'package:camp_final/app/modules/home/presentation/widgets/event_item_card_tile.dart';
 import 'package:camp_final/app/shared/presentation/pages/reload_error_page.dart';
-import 'package:camp_final/app/shared/presentation/widgets/rounded_button_widget.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_triple/flutter_triple.dart';

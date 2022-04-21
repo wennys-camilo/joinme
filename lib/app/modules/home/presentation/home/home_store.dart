@@ -1,3 +1,4 @@
+import 'package:camp_final/app/modules/home/domain/usecases/fetch_user_events_usecase.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_triple/flutter_triple.dart';
 import '../../../../shared/domain/helpers/errors/failure.dart';
@@ -20,9 +21,9 @@ class HomeStore extends NotifierStore<Failure, HomeState> {
       _fetchAllStatusEventsAttendeesUsecase;
   final GetMoodUsecase _getMoodUsecase;
   final PostMoodUserUsecase _postMoodUserUsecase;
-
   final SetAcessMoodUsecase _setAcessMoodUsecase;
   final VerifyShowMoodUsecase _verifyShowMoodUsecase;
+  final FetchUserEventsUsecase _fetchUserEventsUsecase;
 
   HomeStore(
     this.userStore,
@@ -32,12 +33,15 @@ class HomeStore extends NotifierStore<Failure, HomeState> {
     this._postMoodUserUsecase,
     this._setAcessMoodUsecase,
     this._verifyShowMoodUsecase,
+    this._fetchUserEventsUsecase,
   ) : super(
           HomeState(
             events: [],
             promotedEvents: [],
             attendees: [],
+            userDrivenEventsList: [],
             moods: [],
+            onlineEvents: [],
             selectedMood: null,
             showMood: false,
           ),
@@ -72,16 +76,23 @@ class HomeStore extends NotifierStore<Failure, HomeState> {
   }
 
   Future<void> fetchEvents() async {
+    setLoading(true);
     final response = await _fetchAllEventsUsecase();
     response.fold(setError, (result) {
       List<EventDescriptionEntity> promoted = [];
+      List<EventDescriptionEntity> online = [];
       for (var element in result) {
         if (element.isPromoted) {
           promoted.add(element);
         }
+        if (element.isOnline) {
+          online.add(element);
+        }
       }
-      update(state.copyWith(events: result, promotedEvents: promoted));
+      update(state.copyWith(
+          events: result, promotedEvents: promoted, onlineEvents: online));
     });
+    setLoading(false);
   }
 
   Future<void> postMood() async {
@@ -105,5 +116,14 @@ class HomeStore extends NotifierStore<Failure, HomeState> {
   Future<void> setMood() async {
     final response = await _setAcessMoodUsecase();
     response.fold(setError, (result) {});
+  }
+
+  Future<void> userDrivenEvents() async {
+    setLoading(true);
+    final reponse = await _fetchUserEventsUsecase();
+    reponse.fold(setError, (response) {
+      update(state.copyWith(userDrivenEventsList: response));
+    });
+    setLoading(false);
   }
 }

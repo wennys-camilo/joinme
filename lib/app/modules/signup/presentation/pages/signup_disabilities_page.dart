@@ -1,6 +1,7 @@
 import 'package:camp_final/app/modules/signup/presentation/pages/signup_state.dart';
 import 'package:camp_final/app/modules/signup/presentation/pages/signup_store.dart';
 import 'package:camp_final/app/shared/domain/entites/disabilities_enity.dart';
+import 'package:camp_final/app/shared/presentation/pages/reload_error_page.dart';
 import 'package:camp_final/app/shared/presentation/themes/app_theme.dart';
 import 'package:camp_final/app/shared/presentation/widgets/rounded_button_widget.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +33,7 @@ class _DisabilitiesPageState extends State<DisabilitiesPage> {
     return SafeArea(
       child: ScopedBuilder<SignupStore, Failure, SignupState>(
         store: store,
-        onState: (context, state) {
+        onState: (context, triple) {
           return Scaffold(
             body: Column(
               children: [
@@ -67,7 +68,7 @@ class _DisabilitiesPageState extends State<DisabilitiesPage> {
                     decoration: const InputDecoration(
                       border: InputBorder.none,
                     ),
-                    options: state.disabilitiesList
+                    options: triple.disabilitiesList
                         .map<FormBuilderFieldOption<DisabilitiesEntity>>(
                             (value) {
                       return FormBuilderFieldOption<DisabilitiesEntity>(
@@ -94,7 +95,11 @@ class _DisabilitiesPageState extends State<DisabilitiesPage> {
                 RoundedButtonWidget(
                   width: MediaQuery.of(context).size.width * 0.9,
                   onPressed: () async {
-                    await store.inserDisabilities();
+                    if (triple.selectedsIdsDisabilities.isNotEmpty) {
+                      await store.inserDisabilities();
+                    } else {
+                      Modular.to.navigate('./phaseFive');
+                    }
                   },
                   textButton: 'CONFIRMAR',
                   styleText: TextStyle(
@@ -122,30 +127,9 @@ class _DisabilitiesPageState extends State<DisabilitiesPage> {
           ),
         ),
         onError: (context, error) {
-          return Scaffold(
-            appBar: AppBar(
-              iconTheme: IconThemeData(
-                color: AppTheme.colors.primary,
-              ),
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-            ),
-            body: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text('Falha ao carregar '),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  RoundedButtonWidget(
-                    onPressed: () => store.fetchDisabilities(),
-                    textButton: 'TENTAR NOVAMENTE',
-                  )
-                ],
-              ),
-            ),
-          );
+          return ReloadErrorPage(
+              message: 'Falha ao carregar',
+              action: () async => store.fetchDisabilities());
         },
       ),
     );

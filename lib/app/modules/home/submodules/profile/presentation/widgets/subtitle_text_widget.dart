@@ -13,9 +13,10 @@ class SubtitleText extends StatelessWidget {
     return Text(
       subtitle,
       style: TextStyle(
-          color: AppTheme.colors.black.withOpacity(0.6),
-          fontSize: 16,
-          fontWeight: FontWeight.w700),
+        color: AppTheme.colors.black.withOpacity(0.6),
+        fontSize: 16,
+        fontWeight: FontWeight.w700,
+      ),
     );
   }
 }
