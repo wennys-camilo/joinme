@@ -16,7 +16,7 @@ class ForgotPasswordPageOne extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           leading: GestureDetector(
-              onTap: () => Modular.to.pop(),
+              onTap: () => Modular.to.pushReplacementNamed('./login'),
               child: Icon(
                 Icons.arrow_back,
                 color: AppTheme.colors.primary,
