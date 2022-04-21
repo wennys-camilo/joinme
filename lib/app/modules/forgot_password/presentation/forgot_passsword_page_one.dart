@@ -39,11 +39,13 @@ class ForgotPasswordPageOne extends StatelessWidget {
                 child: Text(
                   'Esqueceu a senha?',
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w700
+
                   ),
                 ),
               ),
-              Padding(
+              const Padding(
                 padding: EdgeInsets.fromLTRB(30, 0, 30, 40),
                 child: Text(
                   'Não se preocupe, acontece! Digite seu e-mail abaixo que vamos enviar uma nova senha.',
@@ -65,6 +67,10 @@ class ForgotPasswordPageOne extends StatelessWidget {
                 child: RoundedButtonWidget(
                   onPressed: () => Modular.to.pushNamed('./pageTwo'),
                   textButton: 'ENVIAR',
+                  styleText: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w700),
                 ),
               ),
             ],
