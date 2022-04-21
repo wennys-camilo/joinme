@@ -5,6 +5,6 @@ class ForgorPasswordPageTwo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(height: 20, width: 20, color: Colors.red,);
   }
 }

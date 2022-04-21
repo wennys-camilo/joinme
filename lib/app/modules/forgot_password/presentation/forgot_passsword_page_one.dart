@@ -63,7 +63,7 @@ class ForgotPasswordPageOne extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.fromLTRB(30, 120, 30, 20),
                 child: RoundedButtonWidget(
-                  onPressed: () => Modular.to.navigate('/pageTwo/'),
+                  onPressed: () => Modular.to.pushNamed('./pageTwo'),
                   textButton: 'ENVIAR',
                 ),
               ),
