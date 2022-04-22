@@ -1,4 +1,4 @@
-import 'package:camp_final/app/shared/domain/helpers/errors/failure.dart';
+import '../helpers/errors/failure.dart';
 import 'package:dartz/dartz.dart';
 
 abstract class GetTokenUsecase {

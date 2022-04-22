@@ -22,7 +22,7 @@ class ContainerLightPrimary extends StatelessWidget {
             style: TextStyle(
                 color: AppTheme.colors.black.withOpacity(0.6),
                 fontSize: 12,
-                fontWeight: FontWeight.w400),
+                fontWeight: FontWeight.bold),
           )
         ],
       ),

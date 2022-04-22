@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_triple/flutter_triple.dart';
 import '../../../../../shared/domain/helpers/errors/failure.dart';
 import '../../../../../shared/presentation/pages/reload_error_page.dart';
@@ -71,7 +72,7 @@ class _ProfilePageState extends ModularState<ProfilePage, ProfileStore> {
                       ],
                     ),
                     const SizedBox(
-                      height: 20,
+                      height: 15,
                     ),
                     GestureDetector(
                       onDoubleTap: () {},
@@ -80,19 +81,17 @@ class _ProfilePageState extends ModularState<ProfilePage, ProfileStore> {
                           children: [
                             Container(
                               height: 100,
-                              width: 100,
+                              width: 150,
                               decoration: BoxDecoration(
                                   shape: BoxShape.circle,
-                                  color: AppTheme.colors.grey),
-                              child: const CircleAvatar(
-                                backgroundImage: NetworkImage(
-                                  'https://i.ibb.co/d2CzTcn/Vector-8.png',
-                                ),
-                              ),
+                                  image: DecorationImage(
+                                      image: AssetImage(
+                                    AppTheme.images.luma,
+                                  ))),
                             ),
                             Positioned(
-                              bottom: 0,
-                              right: 0,
+                              bottom: 2,
+                              right: 20,
                               child: Container(
                                   child: Icon(
                                     Icons.create_rounded,
@@ -136,11 +135,8 @@ class _ProfilePageState extends ModularState<ProfilePage, ProfileStore> {
                           bottomText: 'Eventos',
                         ),
                         ContainerLightPrimary(
-                          topComponent: Icon(
-                            Icons.workspace_premium,
-                            color: AppTheme.colors.primary,
-                          ),
-                          bottomText: 'Nível #',
+                          topComponent: SvgPicture.asset(AppTheme.icons.medal),
+                          bottomText: 'Nível 1',
                         ),
                         ContainerLightPrimary(
                           topComponent: Text(
@@ -150,26 +146,34 @@ class _ProfilePageState extends ModularState<ProfilePage, ProfileStore> {
                                 fontSize: 23,
                                 fontWeight: FontWeight.w700),
                           ),
-                          bottomText: 'Minutos',
+                          bottomText: 'Moods',
                         ),
                       ],
                     ),
-                    const SizedBox(
-                      height: 35,
+                    SizedBox(
+                      height: triple.hasAboutMe ? 35 : 0,
                     ),
-                    const SubtitleText(
-                      subtitle: 'Sobre mim',
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    Text(
-                      'Estudante de Engenharia de Produção, gosto de fazer atividades físicas e cursos que estimulam a criatividade.',
-                      style: TextStyle(
-                          color: AppTheme.colors.black.withOpacity(0.6),
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400),
-                    ),
+                    triple.hasAboutMe
+                        ? Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const SubtitleText(
+                                subtitle: 'Sobre mim',
+                              ),
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              Text(
+                                triple.userEntity.aboutMe!,
+                                style: TextStyle(
+                                    color:
+                                        AppTheme.colors.black.withOpacity(0.6),
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400),
+                              )
+                            ],
+                          )
+                        : Container(),
                     const SizedBox(
                       height: 12,
                     ),
@@ -186,7 +190,7 @@ class _ProfilePageState extends ModularState<ProfilePage, ProfileStore> {
                                     triple.interestsUserList[index];
                                 return Padding(
                                     padding: const EdgeInsets.only(
-                                      right: 8,
+                                      right: 5,
                                     ),
                                     child: CustomFilterChipWidget(
                                       chipColor: AppTheme.colors.primary,
@@ -215,7 +219,7 @@ class _ProfilePageState extends ModularState<ProfilePage, ProfileStore> {
                             selected: false,
                           )
                         : Padding(
-                            padding: const EdgeInsets.only(bottom: 20),
+                            padding: const EdgeInsets.only(bottom: 15),
                             child: SizedBox(
                               height: 50,
                               child: ListView.builder(
@@ -235,6 +239,15 @@ class _ProfilePageState extends ModularState<ProfilePage, ProfileStore> {
                               ),
                             ),
                           ),
+                    const SubtitleText(
+                        subtitle: 'Registro dos moods da semana:'),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 20),
+                      child: SvgPicture.asset(AppTheme.images.moods),
+                    )
                   ],
                 ),
               ),

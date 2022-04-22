@@ -85,7 +85,6 @@ class _SignupInterestPageState extends State<SignupInterestPage> {
                         if (triple.selectedInterests.isNotEmpty) {
                           await store.insertInterest();
                         } else {
-                          print('aqui');
                           Modular.to.navigate('./phaseFour');
                         }
                       },

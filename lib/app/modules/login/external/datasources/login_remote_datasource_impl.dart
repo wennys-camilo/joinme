@@ -1,3 +1,4 @@
+import 'package:camp_final/app/shared/external/adapters/http_client/http_client_adapter.dart';
 import 'package:dio/dio.dart';
 import '../../../../shared/domain/helpers/errors/failure.dart';
 import '../../domain/entities/authenticate_entity.dart';
@@ -6,7 +7,7 @@ import '../../infra/datasources/login_remote_datasource.dart';
 import '../mappers/response_auth_mapper.dart';
 
 class LoginRemoteDatasourceImpl implements LoginRemoteDatasource {
-  final Dio _httpClient;
+  final IHttpClientAdapter _httpClient;
 
   const LoginRemoteDatasourceImpl(this._httpClient);
 

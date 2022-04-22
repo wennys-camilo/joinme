@@ -1,5 +1,4 @@
-import 'package:camp_final/app/shared/presentation/themes/app_icons.dart';
-
+import 'app_icons.dart';
 import 'app_images.dart';
 import 'app_colors.dart';
 

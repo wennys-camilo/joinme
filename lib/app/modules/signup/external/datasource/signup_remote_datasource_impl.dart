@@ -38,7 +38,6 @@ class SignupRemoteDatasourceImpl implements SignupRemoteDatasource {
         '/users',
         data: UserSignupMapper().to(userSignupEntity),
       );
-      print(response.data);
       return UserSignupMapper().from(response.data, update: true);
     } on Failure {
       rethrow;
@@ -53,11 +52,7 @@ class SignupRemoteDatasourceImpl implements SignupRemoteDatasource {
   @override
   Future<UserSignupEntity> updateCity(String city) async {
     try {
-      final response = await _httpClient.patch(
-        '/users',
-        data: {"city": city},
-      );
-      print(response.data);
+      final response = await _httpClient.patch('/users', data: {"city": city});
       return UserSignupMapper().from(response.data, update: true);
     } on Failure {
       rethrow;

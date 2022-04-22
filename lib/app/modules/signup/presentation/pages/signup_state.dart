@@ -1,6 +1,5 @@
-import 'package:camp_final/app/shared/domain/entites/city_entity.dart';
-import 'package:camp_final/app/shared/domain/entites/disabilities_enity.dart';
-
+import '../../../../shared/domain/entites/city_entity.dart';
+import '../../../../shared/domain/entites/disabilities_enity.dart';
 import '../../domain/entities/interests_entity.dart';
 import '../../domain/entities/user_signup_entity.dart';
 

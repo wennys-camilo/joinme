@@ -2,7 +2,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'domain/usecases/check_first_acess_usecase_impl.dart';
 import 'domain/usecases/set_first_acess_usecase_impl.dart';
 import 'infra/repositories/onboarding_repository_impl.dart';
-import 'intenal/onboarding_local_datasource.dart';
+import 'internal/onboarding_local_datasource.dart';
 import 'presentation/onboard_controller.dart';
 import 'presentation/onboard_page_one.dart';
 import 'presentation/onboard_page_three.dart';

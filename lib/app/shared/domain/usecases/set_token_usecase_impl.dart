@@ -1,5 +1,5 @@
-import 'package:camp_final/app/shared/domain/helpers/errors/failure.dart';
 import 'package:dartz/dartz.dart';
+import '../helpers/errors/failure.dart';
 import '../repositories/token_repository.dart';
 import 'set_token_usecase.dart';
 

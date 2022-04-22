@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-
 import '../../../shared/presentation/themes/app_theme.dart';
 import 'widgets/body_onboard_widget.dart';
 

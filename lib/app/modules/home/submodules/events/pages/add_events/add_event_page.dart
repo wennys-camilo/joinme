@@ -372,11 +372,16 @@ class _AddEventPageState extends State<AddEventPage> {
                             keyboardType: TextInputType.number,
                             inputFormatters: [
                               FilteringTextInputFormatter.digitsOnly,
-                              CentavosInputFormatter()
+                              CentavosInputFormatter(),
+                              LengthLimitingTextInputFormatter(10),
                             ],
-                            onChanged: (value) => store.onChangePrice(value),
-                            validator: (_) {
-                              if (!triple.state.isFree) {
+                            onChanged: (value) {
+                              if (value.isNotEmpty) {
+                                store.onChangePrice(value);
+                              }
+                            },
+                            validator: (value) {
+                              if (!triple.state.isFree && value!.isEmpty) {
                                 return 'Insira o valor do evento';
                               }
                               return null;

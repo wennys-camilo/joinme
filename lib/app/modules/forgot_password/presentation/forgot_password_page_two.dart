@@ -1,7 +1,7 @@
-import 'package:camp_final/app/shared/presentation/widgets/rounded_button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:lottie/lottie.dart';
+import '../../../shared/presentation/widgets/rounded_button_widget.dart';
 
 class ForgorPasswordPageTwo extends StatelessWidget {
   const ForgorPasswordPageTwo({Key? key}) : super(key: key);

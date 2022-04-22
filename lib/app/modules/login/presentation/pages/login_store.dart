@@ -1,6 +1,6 @@
-import 'package:camp_final/app/shared/store/user/user_store.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_triple/flutter_triple.dart';
+import '../../../../shared/store/user/user_store.dart';
 import '../../../../shared/domain/helpers/errors/failure.dart';
 import '../../../../shared/domain/usecases/set_token_usecase.dart';
 import '../../domain/entities/authenticate_entity.dart';

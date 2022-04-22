@@ -1,12 +1,11 @@
-import 'package:camp_final/app/modules/home/domain/entities/activities_description_entity.dart';
-import 'package:camp_final/app/modules/home/domain/entities/event_description_entity.dart';
-import 'package:camp_final/app/modules/home/infra/datasources/user_remote_datasource.dart';
-import 'package:camp_final/app/shared/domain/entites/disabilities_enity.dart';
-import 'package:camp_final/app/shared/domain/entites/user_enity.dart';
 import 'package:dartz/dartz.dart';
-
+import '../../../../shared/domain/entites/disabilities_enity.dart';
+import '../../../../shared/domain/entites/user_enity.dart';
 import '../../../../shared/domain/helpers/errors/failure.dart';
+import '../../domain/entities/activities_description_entity.dart';
+import '../../domain/entities/event_description_entity.dart';
 import '../../domain/repositories/user_repositoy.dart';
+import '../datasources/user_remote_datasource.dart';
 
 class UserRepositoryImpl implements UserRepository {
   final UserRemoteDataSource _remoteDataSource;

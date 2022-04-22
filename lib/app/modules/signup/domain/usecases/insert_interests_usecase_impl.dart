@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-
 import '../entities/user_interests_entity.dart';
 import '../repositories/interests_repository.dart';
 import '../../../../shared/domain/helpers/errors/failure.dart';

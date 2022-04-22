@@ -1,8 +1,7 @@
-import 'package:camp_final/app/shared/domain/entites/city_entity.dart';
-import 'package:camp_final/app/shared/domain/helpers/errors/failure.dart';
-import 'package:camp_final/app/shared/domain/repositories/ibge_repository.dart';
 import 'package:dartz/dartz.dart';
-
+import '../entites/city_entity.dart';
+import '../helpers/errors/failure.dart';
+import '../repositories/ibge_repository.dart';
 import 'fetch_cities_usecase.dart';
 
 class FetchCitiesIbgeUsecaseImpl implements FetchCitiesUsecase {

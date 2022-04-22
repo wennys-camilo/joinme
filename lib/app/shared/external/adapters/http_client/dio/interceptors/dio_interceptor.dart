@@ -37,9 +37,11 @@ class CustomInterceptors extends InterceptorsWrapper {
     ErrorInterceptorHandler handler,
   ) {
     HttpClientError failure;
+
     if (err.response?.statusCode == 401) {
       failure = HttpClientError(
-          message: 'Falha ao realizar requisição.',
+          message: err.response?.data['message'] ??
+              'Ocorreu um erro na requisição com o servidor',
           requestOptions: err.requestOptions,
           statusCode: err.response?.statusCode,
           stackTrace: err.stackTrace,
@@ -49,14 +51,16 @@ class CustomInterceptors extends InterceptorsWrapper {
           response: err.response);
     } else {
       failure = HttpClientError(
-          requestOptions: err.requestOptions,
-          statusCode: err.response?.statusCode,
-          stackTrace: err.stackTrace,
-          type: err.type,
-          data: err.requestOptions.data,
-          error: err,
-          response: err.response,
-          message: 'Ocorreu um erro na requisição com o servidor');
+        requestOptions: err.requestOptions,
+        statusCode: err.response?.statusCode,
+        stackTrace: err.stackTrace,
+        type: err.type,
+        data: err.requestOptions.data,
+        error: err,
+        response: err.response,
+        message: err.response?.data['message'] ??
+            'Ocorreu um erro na requisição com o servidor',
+      );
     }
 
     handler.next(failure);

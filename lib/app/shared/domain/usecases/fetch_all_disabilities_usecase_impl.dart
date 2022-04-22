@@ -1,8 +1,8 @@
-import 'package:camp_final/app/shared/domain/entites/disabilities_enity.dart';
-import 'package:camp_final/app/shared/domain/repositories/disabilities_repository.dart';
-import 'package:camp_final/app/shared/domain/usecases/fetch_all_disabilities_usecase.dart';
 import 'package:dartz/dartz.dart';
+import '../entites/disabilities_enity.dart';
 import '../helpers/errors/failure.dart';
+import '../repositories/disabilities_repository.dart';
+import 'fetch_all_disabilities_usecase.dart';
 
 class FetchAllDisabilitiesUsecaseImpl implements FetchAllDisabilitiesUsecase {
   final DisabilitiesRepository _repository;

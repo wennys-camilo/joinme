@@ -1,4 +1,3 @@
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lottie/lottie.dart';
 import 'onboard_controller.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +16,6 @@ class _OnboardPageVerifyState extends State<OnboardPageVerify> {
 
   @override
   void initState() {
-    //loadPictures();
     super.initState();
     controller.observer(
       onState: (state) {
@@ -30,26 +28,6 @@ class _OnboardPageVerifyState extends State<OnboardPageVerify> {
       },
     );
     controller.load();
-  }
-
-  loadPictures() {
-    Future.wait([
-      precachePicture(
-        ExactAssetPicture(SvgPicture.svgStringDecoderOutsideViewBoxBuilder,
-            AppTheme.images.boardOne),
-        null,
-      ),
-      precachePicture(
-        ExactAssetPicture(SvgPicture.svgStringDecoderOutsideViewBoxBuilder,
-            AppTheme.images.boardTwo),
-        null,
-      ),
-      precachePicture(
-        ExactAssetPicture(SvgPicture.svgStringDecoderOutsideViewBoxBuilder,
-            AppTheme.images.boardThree),
-        null,
-      ),
-    ]);
   }
 
   @override

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_triple/flutter_triple.dart';
-import 'package:camp_final/app/modules/home/presentation/home/home_state.dart';
-import 'package:camp_final/app/shared/presentation/pages/reload_error_page.dart';
 import '../../../../shared/domain/helpers/errors/failure.dart';
+import '../../../../shared/presentation/pages/reload_error_page.dart';
 import '../../../../shared/presentation/themes/app_theme.dart';
 import '../../../../shared/presentation/utils/extension/string_extension_capitalize.dart';
 import '../widgets/categories_title_widget.dart';
@@ -11,6 +10,7 @@ import '../widgets/custom_filter_chip_widget.dart';
 import '../widgets/event_item_card_tile.dart';
 import '../widgets/insights_card_tile.dart';
 import '../widgets/mood_dialog_widget.dart';
+import 'home_state.dart';
 import 'home_store.dart';
 
 class HomePage extends StatefulWidget {
@@ -89,8 +89,8 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                     child: Row(
                       children: [
                         ClipOval(
-                          child: Image.network(
-                            'https://i.ibb.co/d2CzTcn/Vector-8.png',
+                          child: Image.asset(
+                            AppTheme.images.luma,
                             width: 60,
                             height: 60,
                             fit: BoxFit.cover,
@@ -128,21 +128,24 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                                   color: AppTheme.colors.primary,
                                 ),
                               ),
-                              Positioned(
-                                top: 2,
-                                right: 1,
-                                child: Container(
-                                  child: const Center(
-                                    child: Text(
-                                      '9',
-                                      style: TextStyle(color: Colors.white),
+                              Visibility(
+                                visible: false,
+                                child: Positioned(
+                                  top: 2,
+                                  right: 1,
+                                  child: Container(
+                                    child: const Center(
+                                      child: Text(
+                                        '9',
+                                        style: TextStyle(color: Colors.white),
+                                      ),
                                     ),
-                                  ),
-                                  height: 16,
-                                  width: 16,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: AppTheme.colors.red,
+                                    height: 16,
+                                    width: 16,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: AppTheme.colors.red,
+                                    ),
                                   ),
                                 ),
                               )
@@ -412,9 +415,7 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                           ),
                         )
                       : Container(),
-                  const SizedBox(
-                    height: 24,
-                  )
+                  const SizedBox(height: 24)
                 ],
               ),
             ),

@@ -82,7 +82,9 @@ class AddEventStore extends StreamStore<Failure, AddEventState> {
   }
 
   onChangePrice(String value) {
-    update(state.copyWith(price: double.parse(value.replaceAll(',', '.'))));
+    update(state.copyWith(
+        price:
+            double.parse(value.replaceFirst('.', '').replaceFirst(',', '.'))));
   }
 
   onChangeUrl(String value) {

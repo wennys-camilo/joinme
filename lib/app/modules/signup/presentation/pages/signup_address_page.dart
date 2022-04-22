@@ -1,10 +1,10 @@
-import 'package:camp_final/app/modules/signup/presentation/pages/signup_store.dart';
-import 'package:camp_final/app/shared/domain/entites/city_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:validatorless/validatorless.dart';
+import '../../../../shared/domain/entites/city_entity.dart';
 import '../../../../shared/presentation/themes/app_theme.dart';
 import '../../../../shared/presentation/widgets/rounded_button_widget.dart';
+import 'signup_store.dart';
 
 class SignupAddressPage extends StatefulWidget {
   const SignupAddressPage({Key? key}) : super(key: key);

@@ -1,6 +1,6 @@
-import 'package:camp_final/app/modules/home/domain/entities/activities_description_entity.dart';
-import 'package:camp_final/app/shared/domain/entites/disabilities_enity.dart';
-import 'package:camp_final/app/shared/domain/entites/user_enity.dart';
+import '../../../domain/entities/activities_description_entity.dart';
+import '../../../../../shared/domain/entites/disabilities_enity.dart';
+import '../../../../../shared/domain/entites/user_enity.dart';
 
 class ProfileState {
   final UserEntity userEntity;
@@ -11,6 +11,9 @@ class ProfileState {
     required this.interestsUserList,
     required this.disabilitiesList,
   });
+
+  bool get hasAboutMe =>
+      userEntity.aboutMe != null && userEntity.aboutMe!.isNotEmpty;
 
   ProfileState copyWith({
     UserEntity? userEntity,

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'package:camp_final/app/shared/presentation/themes/app_theme.dart';
+import '../../../../../shared/presentation/themes/app_theme.dart';
 
 class EventTitleInfoWidget extends StatelessWidget {
   final String titleInfo;

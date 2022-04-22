@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../shared/presentation/themes/app_theme.dart';
 import '../../domain/entities/event_description_entity.dart';
 import '../utils/extension/category_type_extension.dart';
+import 'circle_avatar_widget.dart';
 import 'custom_chip_label_widget.dart';
 
 class EventItemCardTile extends StatelessWidget {
@@ -17,7 +18,7 @@ class EventItemCardTile extends StatelessWidget {
     return SizedBox(
       width: MediaQuery.of(context).size.width * 0.9,
       child: Card(
-        elevation: 0,
+        elevation: 2,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.0),
         ),
@@ -134,70 +135,70 @@ class EventItemCardTile extends StatelessWidget {
                             ),
                           )
                         : Container(),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 15, top: 10),
-                      child: Row(
-                        children: [
-                          SizedBox(
-                            height: 24,
-                            width: 48,
-                            child: Stack(
+                    event.numParticipants > 0
+                        ? Padding(
+                            padding: const EdgeInsets.only(left: 0, top: 10),
+                            child: Row(
                               children: [
-                                Positioned(
-                                  right: 0,
-                                  child: Container(
-                                    clipBehavior: Clip.antiAlias,
-                                    height: 24,
-                                    width: 24,
-                                    decoration: BoxDecoration(
-                                        color: Colors.pink,
-                                        border: Border.all(
-                                            color: AppTheme.colors.grey),
-                                        shape: BoxShape.circle),
+                                SizedBox(
+                                  height: 24,
+                                  width: event.numParticipants <= 1 ? 30 : 60,
+                                  child: Stack(
+                                    children: [
+                                      event.numParticipants >= 1
+                                          ? Positioned(
+                                              left: 10,
+                                              child: CircleAvatarWidget(
+                                                image: AppTheme.images.person1,
+                                              ),
+                                            )
+                                          : Container(),
+                                      event.numParticipants >= 2
+                                          ? Positioned(
+                                              right: 10,
+                                              child: CircleAvatarWidget(
+                                                image: AppTheme.images.person2,
+                                              ),
+                                            )
+                                          : Container(),
+                                      event.numParticipants >= 3
+                                          ? Positioned(
+                                              right: -5,
+                                              child: CircleAvatarWidget(
+                                                image: AppTheme.images.person3,
+                                              ),
+                                            )
+                                          : Container(),
+                                    ],
                                   ),
                                 ),
-                                Positioned(
-                                  child: Center(
-                                    child: Container(
-                                      height: 24,
-                                      width: 24,
-                                      decoration: BoxDecoration(
-                                          color: Colors.pink,
-                                          border: Border.all(
-                                              color: AppTheme.colors.grey),
-                                          shape: BoxShape.circle),
-                                    ),
-                                  ),
+                                SizedBox(
+                                  width: event.numParticipants < 1 ? 0 : 6,
                                 ),
-                                Positioned(
-                                  child: Container(
-                                    height: 24,
-                                    width: 24,
-                                    decoration: BoxDecoration(
-                                        color: Colors.green,
-                                        border: Border.all(
-                                            color: AppTheme.colors.grey),
-                                        shape: BoxShape.circle),
-                                  ),
+                                Text(
+                                  event.numParticipants > 1
+                                      ? '${event.numParticipants} confirmados'
+                                      : '${event.numParticipants} confirmado',
+                                  style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w400,
+                                      color: AppTheme.colors.black
+                                          .withOpacity(0.5)),
                                 ),
                               ],
                             ),
+                          )
+                        : Padding(
+                            padding: const EdgeInsets.only(left: 15),
+                            child: Text(
+                              'Sem confirmados',
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w400,
+                                  color:
+                                      AppTheme.colors.black.withOpacity(0.5)),
+                            ),
                           ),
-                          const SizedBox(
-                            width: 6,
-                          ),
-                          Text(
-                            event.numParticipants > 1
-                                ? '${event.numParticipants} confirmados'
-                                : '${event.numParticipants} confirmado',
-                            style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w400,
-                                color: AppTheme.colors.black.withOpacity(0.5)),
-                          ),
-                        ],
-                      ),
-                    ),
                     Padding(
                       padding: const EdgeInsets.only(left: 10, top: 10),
                       child: Row(

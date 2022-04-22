@@ -28,6 +28,11 @@ abstract class AppImages {
   String get boredSelected;
   String get savedIcon;
   String get nonSavedIcon;
+  String get luma;
+  String get moods;
+  String get person1;
+  String get person2;
+  String get person3;
 }
 
 class AppImagesImpl implements AppImages {
@@ -117,4 +122,19 @@ class AppImagesImpl implements AppImages {
 
   @override
   String get nonSavedIcon => "assets/images/save_event1.svg";
+
+  @override
+  String get luma => "assets/images/luma.png";
+
+  @override
+  String get moods => "assets/images/mood-graphic.svg";
+
+  @override
+  String get person1 => "assets/images/person1.png";
+
+  @override
+  String get person2 => "assets/images/person2.png";
+
+  @override
+  String get person3 => "assets/images/person3.png";
 }

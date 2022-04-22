@@ -17,7 +17,6 @@ class EventsRemoteDatasourceImpl implements EventsRemoteDatasource {
   Future<List<AccessibilitiesEntity>> accessibilities() async {
     try {
       final response = await _httpClient.get('/disabilities/list');
-      print(response.data);
       return (response.data as List)
           .map((e) => AccessibilitiesMapper().to(e))
           .toList();
@@ -35,7 +34,6 @@ class EventsRemoteDatasourceImpl implements EventsRemoteDatasource {
   Future<List<EventCategorieEntity>> categories() async {
     try {
       final response = await _httpClient.get('/activities/list');
-      print(response.data);
       return (response.data as List)
           .map((e) => EventCategorieMapper().to(e))
           .toList();

@@ -1,6 +1,5 @@
-import 'package:camp_final/app/shared/domain/entites/city_entity.dart';
 import 'package:dartz/dartz.dart';
-
+import '../../domain/entites/city_entity.dart';
 import '../../domain/helpers/errors/failure.dart';
 import '../../domain/repositories/ibge_repository.dart';
 import '../datasources/ibge_remote_datasource.dart';

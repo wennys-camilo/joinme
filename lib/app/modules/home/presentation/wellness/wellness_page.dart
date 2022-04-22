@@ -1,9 +1,9 @@
-import 'package:camp_final/app/modules/home/presentation/home/home_store.dart';
-import 'package:camp_final/app/modules/home/presentation/widgets/insights_card_tile.dart';
-import 'package:camp_final/app/shared/presentation/themes/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import '../../../../shared/presentation/themes/app_theme.dart';
 import '../../domain/entities/wellness_entity.dart';
+import '../home/home_store.dart';
+import '../widgets/insights_card_tile.dart';
 
 class WellnessPage extends StatefulWidget {
   final List<WellnessEntity> tipList;
@@ -39,7 +39,7 @@ class _WellnessPageState extends ModularState<WellnessPage, HomeStore> {
         ),
         body: GridView.builder(
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              childAspectRatio: 160 / 140,
+              childAspectRatio: 160 / 160,
               crossAxisCount: 2,
               mainAxisSpacing: 4),
           itemCount: widget.tipList.length,

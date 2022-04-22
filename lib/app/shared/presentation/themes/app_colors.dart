@@ -30,7 +30,7 @@ class AppColorsImpl implements AppColors {
   Color get white => const Color.fromARGB(255, 255, 255, 255);
 
   @override
-  Color get black => const Color.fromARGB(255, 0, 0, 0);
+  Color get black => const Color(0xff252627);
 
   @override
   Color get transparent => const Color.fromARGB(0, 0, 0, 0);

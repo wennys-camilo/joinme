@@ -11,6 +11,7 @@ abstract class AppIcons {
   String get savedsSelected;
   String get user;
   String get userSelected;
+  String get medal;
 }
 
 class AppIconsImpl implements AppIcons {
@@ -49,4 +50,7 @@ class AppIconsImpl implements AppIcons {
 
   @override
   String get userSelected => "assets/icons/user_selected.svg";
+
+  @override
+  String get medal => "assets/icons/medal_icon.svg";
 }

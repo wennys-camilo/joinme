@@ -1,14 +1,12 @@
-import 'package:camp_final/app/modules/home/presentation/home/home_state.dart';
-import 'package:camp_final/app/modules/home/presentation/home/home_store.dart';
-import 'package:camp_final/app/shared/presentation/themes/app_theme.dart';
 import 'package:flutter/material.dart';
-
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import "package:camp_final/app/modules/home/presentation/utils/extension/mood_icon_type_extension.dart";
 import 'package:flutter_triple/flutter_triple.dart';
-
+import "../utils/extension/mood_icon_type_extension.dart";
 import '../../../../shared/domain/helpers/errors/failure.dart';
+import '../../../../shared/presentation/themes/app_theme.dart';
+import '../home/home_state.dart';
+import '../home/home_store.dart';
 
 class MoodDialogWidget extends StatefulWidget {
   final bool barrierDismissible;

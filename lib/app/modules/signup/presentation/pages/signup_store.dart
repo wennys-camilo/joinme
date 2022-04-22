@@ -140,7 +140,6 @@ class SignupStore extends StreamStore<Failure, SignupState> {
     final response = await _insertInterestsUsecase(
         UserInterestsEntity(activityIds: state.selectedInterests));
     response.fold(setError, (r) {
-      //TODO: PASSAR O USUARIO PARA A USERSTORE
       Modular.get<UserStore>().setUser(
         UserEntity(
           name: state.userSignupResponse.name,
@@ -179,7 +178,6 @@ class SignupStore extends StreamStore<Failure, SignupState> {
     });
   }
 
-//TODO:
   Future<void> inserDisabilities() async {
     final response = await _insertDisabilitiesUsecase(
         UserDisabilitiesEntity(disabilityIds: state.selectedsIdsDisabilities));

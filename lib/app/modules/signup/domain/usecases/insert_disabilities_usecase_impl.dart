@@ -1,8 +1,7 @@
-import 'package:camp_final/app/modules/signup/domain/entities/user_disabilities_entity.dart';
-import 'package:camp_final/app/modules/signup/domain/repositories/signup_repository.dart';
 import 'package:dartz/dartz.dart';
-
 import '../../../../shared/domain/helpers/errors/failure.dart';
+import '../entities/user_disabilities_entity.dart';
+import '../repositories/signup_repository.dart';
 import 'insert_disabilities_usecase.dart';
 
 class InsertDisabilitiesUsecaseImpl implements InsertDisabilitiesUsecase {

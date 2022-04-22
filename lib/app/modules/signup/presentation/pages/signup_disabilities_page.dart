@@ -1,15 +1,14 @@
-import 'package:camp_final/app/modules/signup/presentation/pages/signup_state.dart';
-import 'package:camp_final/app/modules/signup/presentation/pages/signup_store.dart';
-import 'package:camp_final/app/shared/domain/entites/disabilities_enity.dart';
-import 'package:camp_final/app/shared/presentation/pages/reload_error_page.dart';
-import 'package:camp_final/app/shared/presentation/themes/app_theme.dart';
-import 'package:camp_final/app/shared/presentation/widgets/rounded_button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_triple/flutter_triple.dart';
-
+import '../../../../shared/domain/entites/disabilities_enity.dart';
 import '../../../../shared/domain/helpers/errors/failure.dart';
+import '../../../../shared/presentation/pages/reload_error_page.dart';
+import '../../../../shared/presentation/themes/app_theme.dart';
+import '../../../../shared/presentation/widgets/rounded_button_widget.dart';
+import 'signup_state.dart';
+import 'signup_store.dart';
 
 class DisabilitiesPage extends StatefulWidget {
   const DisabilitiesPage({Key? key}) : super(key: key);
@@ -68,7 +67,7 @@ class _DisabilitiesPageState extends State<DisabilitiesPage> {
                     decoration: const InputDecoration(
                       border: InputBorder.none,
                     ),
-                    options: triple.disabilitiesList
+                    options: store.state.disabilitiesList
                         .map<FormBuilderFieldOption<DisabilitiesEntity>>(
                             (value) {
                       return FormBuilderFieldOption<DisabilitiesEntity>(

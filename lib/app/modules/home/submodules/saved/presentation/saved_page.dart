@@ -1,10 +1,9 @@
-import 'package:camp_final/app/modules/home/presentation/widgets/event_item_card_tile.dart';
-import 'package:camp_final/app/shared/presentation/pages/reload_error_page.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_triple/flutter_triple.dart';
+import '../../../../../shared/presentation/pages/reload_error_page.dart';
 import '../../../../../shared/presentation/themes/app_theme.dart';
+import '../../../presentation/widgets/event_item_card_tile.dart';
 import 'saved_store.dart';
 
 class SavedPage extends StatefulWidget {
