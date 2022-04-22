@@ -24,7 +24,11 @@ class CustomChipLabelWidget extends StatelessWidget {
         ),
         child: Padding(
           padding: const EdgeInsets.all(5.0),
-          child: Center(child: Text(label)),
+          child: Center(
+              child: Text(
+            label,
+            style: const TextStyle(fontSize: 12),
+          )),
         ),
       ),
     );

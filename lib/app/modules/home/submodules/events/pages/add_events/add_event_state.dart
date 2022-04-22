@@ -26,6 +26,9 @@ class AddEventState {
   final String referencePoint;
   final String userId;
   final List<String> selectedsIdsAccessibilities;
+  final bool isFree;
+  final bool eventAddedSucess;
+
   AddEventState({
     required this.accessibilities,
     required this.categories,
@@ -50,6 +53,8 @@ class AddEventState {
     required this.referencePoint,
     required this.userId,
     required this.selectedsIdsAccessibilities,
+    required this.isFree,
+    required this.eventAddedSucess,
   });
 
   factory AddEventState.empty() {
@@ -59,7 +64,7 @@ class AddEventState {
       selectedsAccessibilities: [],
       categories: [
         EventCategorieEntity(
-            active: true, name: 'Selecione uma Categoria', id: "CATEGORIA")
+            active: true, name: 'Categoria do evento', id: "CATEGORIA")
       ],
       isOnline: false,
       maxParticipants: 0,
@@ -80,6 +85,8 @@ class AddEventState {
       endTime: '',
       street: '',
       selectedsIdsAccessibilities: [],
+      isFree: false,
+      eventAddedSucess: false,
     );
   }
 
@@ -107,6 +114,8 @@ class AddEventState {
     String? referencePoint,
     String? userId,
     List<String>? selectedsIdsAccessibilities,
+    bool? isFree,
+    bool? eventAddedSucess,
   }) {
     return AddEventState(
       accessibilities: accessibilities ?? this.accessibilities,
@@ -134,6 +143,8 @@ class AddEventState {
       userId: userId ?? this.userId,
       selectedsIdsAccessibilities:
           selectedsIdsAccessibilities ?? this.selectedsIdsAccessibilities,
+      isFree: isFree ?? this.isFree,
+      eventAddedSucess: eventAddedSucess ?? this.eventAddedSucess,
     );
   }
 }

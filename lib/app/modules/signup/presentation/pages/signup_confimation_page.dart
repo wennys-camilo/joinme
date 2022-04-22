@@ -36,8 +36,11 @@ class _SignupConfirmationPageState extends State<SignupConfirmationPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Center(
-            child: SvgPicture.asset(
-              AppTheme.images.confirmation,
+            child: SizedBox(
+              height: MediaQuery.of(context).size.height * 0.5,
+              child: SvgPicture.asset(
+                AppTheme.images.confirmation,
+              ),
             ),
           ),
           const SizedBox(

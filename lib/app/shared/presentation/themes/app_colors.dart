@@ -43,7 +43,7 @@ class AppColorsImpl implements AppColors {
   Color get blueLight => const Color(0xffDEDAF0);
 
   @override
-  Color get pink => const Color(0xffDF3083);
+  Color get pink => const Color(0xffCC0085);
 
   @override
   Color get green => const Color(0xff00B200);

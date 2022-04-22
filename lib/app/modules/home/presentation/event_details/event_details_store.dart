@@ -34,6 +34,7 @@ class EventDetailsStore extends StreamStore<Failure, EventDetailsState> {
   Future<void> favorite(String id) async {
     final response = await _setAttendeesStatusUsecase(
         AttendeesEntity(status: 'SAVED', eventId: id));
+    update(state.copyWith(isFavorite: true));
     response.fold(setError, (result) {
       update(state.copyWith(isFavorite: true));
     });

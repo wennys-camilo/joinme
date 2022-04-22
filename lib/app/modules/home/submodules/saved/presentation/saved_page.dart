@@ -52,7 +52,7 @@ class _SavedPageState extends ModularState<SavedPage, SavedStore> {
                                 .pushNamed('/home/eventPage', arguments: event);
                           },
                           child: SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.30,
+                            height: MediaQuery.of(context).size.height * 0.26,
                             child: EventItemCardTile(
                               event: event!,
                               favorite: true,

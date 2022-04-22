@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../shared/presentation/themes/app_theme.dart';
 import '../../domain/entities/event_description_entity.dart';
 import '../utils/extension/category_type_extension.dart';
@@ -80,15 +81,18 @@ class EventItemCardTile extends StatelessWidget {
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 20, 0, 8),
+                      padding: const EdgeInsets.only(left: 20),
                       child: Text(
                         event.name,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: AppTheme.colors.black,
                         ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
                     Padding(
@@ -119,12 +123,14 @@ class EventItemCardTile extends StatelessWidget {
                     ),
                     !event.isOnline
                         ? Padding(
-                            padding: const EdgeInsets.only(left: 15),
+                            padding: const EdgeInsets.only(left: 28),
                             child: Text(
                               event.addresses.first.city,
                               style: TextStyle(
                                 color: AppTheme.colors.black.withOpacity(0.5),
                               ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
                             ),
                           )
                         : Container(),
@@ -205,16 +211,13 @@ class EventItemCardTile extends StatelessWidget {
                               : Container(),
                           const Spacer(),
                           Padding(
-                            padding: const EdgeInsets.only(right: 10),
+                            padding: const EdgeInsets.only(right: 20),
                             child: GestureDetector(
-                                onTap: () {},
-                                child: Icon(
-                                  favorite
-                                      ? Icons.bookmark
-                                      : Icons.bookmark_outline,
-                                  color: AppTheme.colors.primary,
-                                  size: 30,
-                                )),
+                              onTap: () {},
+                              child: SvgPicture.asset(favorite
+                                  ? AppTheme.images.savedIcon
+                                  : AppTheme.images.nonSavedIcon),
+                            ),
                           ),
                         ],
                       ),

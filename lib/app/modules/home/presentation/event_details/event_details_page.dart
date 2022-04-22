@@ -1,5 +1,7 @@
 import 'package:brasil_fields/brasil_fields.dart';
 import 'package:camp_final/app/modules/home/presentation/event_details/event_details_state.dart';
+import 'package:camp_final/app/shared/presentation/widgets/rounded_button_widget.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_triple/flutter_triple.dart';
 import '../../../../shared/domain/helpers/errors/failure.dart';
 import 'event_details_store.dart';
@@ -36,7 +38,6 @@ class _EventDetailsPageState
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
           child: Stack(
             children: <Widget>[
               Hero(
@@ -279,76 +280,115 @@ class _EventDetailsPageState
                                 ),
                                 const Flexible(
                                   child: EventDataInfoWidget(
-                                      titleData:
-                                          'Evento acessível a pessoas com deficiência?'),
+                                    titleData:
+                                        'Evento acessível a pessoas com deficiência?',
+                                    boldFont: true,
+                                  ),
                                 ),
                               ],
                             ),
                             widget.event.eventAccessibilities.isEmpty
-                                ? const Text(
-                                    'Infelizmente, não! :/',
-                                    textAlign: TextAlign.start,
-                                  )
-                                : Row(
-                                    children: [
-                                      Text(
-                                        'Sim!',
-                                        textAlign: TextAlign.start,
+                                ? const Padding(
+                                    padding: EdgeInsets.only(left: 40, top: 5),
+                                    child: Text(
+                                      'Infelizmente, não! :/',
+                                      textAlign: TextAlign.start,
+                                      style: TextStyle(
+                                        fontSize: 16,
                                       ),
-                                    ],
+                                    ),
+                                  )
+                                : Padding(
+                                    padding:
+                                        const EdgeInsets.only(left: 40, top: 5),
+                                    child: Row(
+                                      children: [
+                                        const Text(
+                                          'Sim!',
+                                          textAlign: TextAlign.start,
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                          ),
+                                        ),
+                                        ...List.generate(
+                                          widget.event.eventAccessibilities
+                                              .length,
+                                          (index) {
+                                            return Text(
+                                              "${widget.event.eventAccessibilities[index].accessibilities.name}${widget.event.eventAccessibilities.length == index + 1 ? '.' : ', '}",
+                                              style: const TextStyle(
+                                                  fontSize: 16,
+                                                  overflow:
+                                                      TextOverflow.ellipsis),
+                                            );
+                                          },
+                                        ),
+                                      ],
+                                    ),
                                   ),
+                            const SizedBox(
+                              height: 15,
+                            ),
                             Row(
                               children: [
                                 Icon(
-                                  Icons.location_on,
+                                  Icons.pets,
                                   color: AppTheme.colors.primary,
                                 ),
                                 const SizedBox(
                                   width: 16,
                                 ),
                                 const EventDataInfoWidget(
-                                  titleData: 'Evento Presencial',
+                                  titleData:
+                                      'Evento aceita animais de estimação?',
+                                  boldFont: true,
                                 )
                               ],
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 40, top: 5),
+                              child: Text(
+                                widget.event.isPetFriendly
+                                    ? "Sim! Aceita! :)"
+                                    : 'Infelizmente, não! :/',
+                                textAlign: TextAlign.start,
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 15,
                             ),
                             Row(
                               children: [
                                 Icon(
-                                  Icons.people,
+                                  widget.event.isOnline
+                                      ? Icons.public
+                                      : Icons.location_on,
                                   color: AppTheme.colors.primary,
                                 ),
                                 const SizedBox(
                                   width: 15,
                                 ),
-                                const EventDataInfoWidget(
-                                    titleData: 'Evento Gratuito')
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 31,
-                            ),
-                            Align(
-                                child: Column(
-                              children: const [
-                                Align(
-                                    alignment: Alignment.bottomLeft,
-                                    child: EventTitleInfoWidget(
-                                        titleInfo: 'Local:')),
-                                SizedBox(
-                                  height: 10,
-                                ),
                                 EventDataInfoWidget(
-                                    titleData:
-                                        'Gramado do Centro de Vivência, Campus I da Universidade, Belo Horizonte, MG')
+                                  titleData: widget.event.isOnline
+                                      ? 'Link do Evento'
+                                      : 'Local do evento',
+                                  boldFont: true,
+                                )
                               ],
-                            )),
-                            const SizedBox(
-                              height: 26,
                             ),
-                            Container(
-                              width: double.infinity,
-                              height: 182,
-                              color: Colors.white,
+                            Padding(
+                              padding: const EdgeInsets.only(left: 40, top: 5),
+                              child: Text(
+                                widget.event.isOnline
+                                    ? widget.event.url
+                                    : "${widget.event.addresses.first.street}, ${widget.event.addresses.first.number}, ${widget.event.addresses.first.city} \n${widget.event.addresses.first.state}.",
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                ),
+                              ),
                             ),
                             const SizedBox(
                               height: 26,
@@ -360,52 +400,56 @@ class _EventDetailsPageState
                             const SizedBox(
                               height: 7,
                             ),
-                            Row(
-                              children: [
-                                const Flexible(
-                                  child: EventDataInfoWidget(
-                                      titleData:
-                                          'Sua dúvida poderá ser respondida pelo organiza-dor ou participantes já confirmados.'),
-                                ),
-                                Container(
-                                  width: 46,
-                                  height: 46,
-                                  decoration: BoxDecoration(
-                                      color: AppTheme.colors.grey,
-                                      shape: BoxShape.circle),
-                                ),
-                              ],
-                            ),
+                            const EventDataInfoWidget(
+                                titleData:
+                                    'Sua dúvida poderá ser respondida pelo organiza-dor ou participantes já confirmados.'),
                             const SizedBox(
                               height: 28,
                             ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Column(
-                                  children: const [
-                                    Icon(Icons.abc),
-                                    EventDataInfoWidget(titleData: 'Denunciar')
-                                  ],
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 30),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Column(
+                                    children: const [
+                                      Icon(Icons.abc),
+                                      EventDataInfoWidget(
+                                          titleData: 'Denunciar')
+                                    ],
+                                  ),
+                                  Column(
+                                    children: const [
+                                      Icon(Icons.abc),
+                                      EventDataInfoWidget(
+                                          titleData: 'Copiar link')
+                                    ],
+                                  ),
+                                  Column(
+                                    children: [
+                                      Icon(
+                                        Icons.share,
+                                        color: AppTheme.colors.primary,
+                                      ),
+                                      const EventDataInfoWidget(
+                                          titleData: 'Compartilhar')
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 20),
+                              child: RoundedButtonWidget(
+                                width: MediaQuery.of(context).size.width,
+                                onPressed: () {},
+                                textButton: 'QUERO PARTICIPAR',
+                                styleText: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: AppTheme.colors.white,
                                 ),
-                                Column(
-                                  children: const [
-                                    Icon(Icons.abc),
-                                    EventDataInfoWidget(
-                                        titleData: 'Copiar link')
-                                  ],
-                                ),
-                                Column(
-                                  children: [
-                                    Icon(
-                                      Icons.share,
-                                      color: AppTheme.colors.primary,
-                                    ),
-                                    const EventDataInfoWidget(
-                                        titleData: 'Compartilhar')
-                                  ],
-                                ),
-                              ],
+                              ),
                             ),
                           ],
                         ),
@@ -431,13 +475,10 @@ class _EventDetailsPageState
                           onPressed: () async {
                             await store.favorite(widget.event.id);
                           },
-                          icon: Icon(
-                            triple.state.isFavorite ?? false
-                                ? Icons.bookmark
-                                : Icons.bookmark_outline,
-                            size: 30,
-                            color: AppTheme.colors.primary,
-                          ),
+                          icon: SvgPicture.asset(
+                              triple.state.isFavorite ?? false
+                                  ? AppTheme.images.savedIcon
+                                  : AppTheme.images.nonSavedIcon),
                         ),
                       ),
                     );

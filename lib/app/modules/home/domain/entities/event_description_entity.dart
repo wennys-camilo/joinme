@@ -1,4 +1,6 @@
 import 'package:intl/intl.dart';
+import 'event_acessibilitie_entity.dart';
+
 import '../enums/category_type.dart';
 import 'activities_description_entity.dart';
 import 'address_description_entity.dart';
@@ -22,7 +24,7 @@ class EventDescriptionEntity {
   final String createdAt;
   final ActivitiesDescriptionEntity activities;
   final List<AddressDescriptionEntity> addresses;
-  final List<dynamic> eventAccessibilities;
+  final List<EventAccessibilitieEntity> eventAccessibilities;
   final int numParticipants;
   final CategorieType typeImage;
   final String eventCreatorName;

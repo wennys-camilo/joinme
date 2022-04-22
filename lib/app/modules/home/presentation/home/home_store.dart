@@ -1,3 +1,4 @@
+import 'package:camp_final/app/modules/home/domain/usecases/fetch_tips_usecase.dart';
 import 'package:camp_final/app/modules/home/domain/usecases/fetch_user_events_usecase.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_triple/flutter_triple.dart';
@@ -15,7 +16,6 @@ import 'home_state.dart';
 
 class HomeStore extends NotifierStore<Failure, HomeState> {
   final UserStore userStore;
-
   final FetchAllEventsUsecase _fetchAllEventsUsecase;
   final FetchAllStatusEventsAttendeesUsecase
       _fetchAllStatusEventsAttendeesUsecase;
@@ -24,6 +24,7 @@ class HomeStore extends NotifierStore<Failure, HomeState> {
   final SetAcessMoodUsecase _setAcessMoodUsecase;
   final VerifyShowMoodUsecase _verifyShowMoodUsecase;
   final FetchUserEventsUsecase _fetchUserEventsUsecase;
+  final FetchTipsUsecase _fetchTipsUsecase;
 
   HomeStore(
     this.userStore,
@@ -34,6 +35,7 @@ class HomeStore extends NotifierStore<Failure, HomeState> {
     this._setAcessMoodUsecase,
     this._verifyShowMoodUsecase,
     this._fetchUserEventsUsecase,
+    this._fetchTipsUsecase,
   ) : super(
           HomeState(
             events: [],
@@ -44,6 +46,7 @@ class HomeStore extends NotifierStore<Failure, HomeState> {
             onlineEvents: [],
             selectedMood: null,
             showMood: false,
+            tipsList: [],
           ),
         );
 
@@ -123,6 +126,15 @@ class HomeStore extends NotifierStore<Failure, HomeState> {
     final reponse = await _fetchUserEventsUsecase();
     reponse.fold(setError, (response) {
       update(state.copyWith(userDrivenEventsList: response));
+    });
+    setLoading(false);
+  }
+
+  Future<void> fetchTips() async {
+    setLoading(true);
+    final response = await _fetchTipsUsecase();
+    response.fold(setError, (response) {
+      update(state.copyWith(tipsList: response));
     });
     setLoading(false);
   }

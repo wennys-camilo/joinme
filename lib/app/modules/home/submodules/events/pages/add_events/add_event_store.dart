@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_triple/flutter_triple.dart';
 import 'package:intl/intl.dart';
 import '../../../../../../shared/store/user/user_store.dart';
@@ -110,6 +113,10 @@ class AddEventStore extends StreamStore<Failure, AddEventState> {
     update(state.copyWith(referencePoint: value));
   }
 
+  onChangeisFree(bool value) {
+    update(state.copyWith(isFree: value));
+  }
+
   Future<void> accessibilities() async {
     final response = await _fetchAccessibilitiesEventsUsecase();
     response.fold(setError, (result) {
@@ -125,7 +132,7 @@ class AddEventStore extends StreamStore<Failure, AddEventState> {
         state.copyWith(
           categories: [
             EventCategorieEntity(
-                active: true, name: 'Selecione uma Categoria', id: "CATEGORIA"),
+                active: true, name: 'Categoria do evento', id: "CATEGORIA"),
             ...result
           ],
         ),
@@ -150,7 +157,7 @@ class AddEventStore extends StreamStore<Failure, AddEventState> {
           isPetFriendly: state.isPetFriendly,
           maxParticipants: state.maxParticipants,
           name: state.eventName,
-          price: state.price,
+          price: state.isFree ? 0.0 : state.price,
           startTime: state.startTime,
           userIdentity: state.cpforCnpj,
           url: state.url,
@@ -169,7 +176,10 @@ class AddEventStore extends StreamStore<Failure, AddEventState> {
       ),
     );
     response.fold(setError, (result) {
-      update(state.copyWith());
+      update(state.copyWith(eventAddedSucess: true));
+      Timer(const Duration(seconds: 2), () {
+        Modular.to.navigate('/home/homePage');
+      });
     });
     setLoading(false);
   }

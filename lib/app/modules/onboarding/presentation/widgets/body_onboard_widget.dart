@@ -23,56 +23,52 @@ class BodyOnboardingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          SvgPicture.asset(image),
-          Container(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height * 0.5,
-            decoration: BoxDecoration(
-              color: AppTheme.colors.white,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(30),
-                  child: Text(
-                    title,
-                    style: TextStyle(
-                      color: AppTheme.colors.black,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    textAlign: TextAlign.center,
+    return SafeArea(
+      child: Scaffold(
+        body: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                padding: const EdgeInsets.only(top: 40),
+                height: MediaQuery.of(context).size.height * 0.5,
+                child: SvgPicture.asset(image),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(30),
+                child: Text(
+                  title,
+                  style: TextStyle(
+                    color: AppTheme.colors.black,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
                   ),
+                  textAlign: TextAlign.center,
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 20, right: 20),
-                  child: Text(
-                    subtitle,
-                    style:
-                        TextStyle(color: AppTheme.colors.black, fontSize: 15),
-                    textAlign: TextAlign.center,
-                  ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 20, right: 20),
+                child: Text(
+                  subtitle,
+                  style: TextStyle(color: AppTheme.colors.black, fontSize: 15),
+                  textAlign: TextAlign.center,
                 ),
-                StepsOnboardingWidget(
-                  numPage: numBoard,
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                RoundedButtonWidget(
-                  onPressed: onPressed,
-                  textButton: 'PRÓXIMO',
-                  width: MediaQuery.of(context).size.width * 0.85,
-                ),
-              ],
-            ),
-          )
-        ],
+              ),
+              StepsOnboardingWidget(
+                numPage: numBoard,
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              RoundedButtonWidget(
+                onPressed: onPressed,
+                textButton: 'PRÓXIMO',
+                width: MediaQuery.of(context).size.width * 0.85,
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

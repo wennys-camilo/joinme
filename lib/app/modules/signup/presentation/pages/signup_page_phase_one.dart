@@ -104,35 +104,14 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(30, 8, 30, 20),
-                  child: Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(right: 8),
-                        child: CheckboxWidget(
-                          onChanged: store.onChangePoliciesTerms,
-                        ),
-                      ),
-                      Flexible(
-                        child: RichText(
-                          textAlign: TextAlign.start,
-                          text: TextSpan(
-                            text: 'Li e concordo com os',
-                            style: TextStyle(
-                                fontSize: 16, color: AppTheme.colors.black),
-                            children: [
-                              TextSpan(
-                                text:
-                                    ' Termos e Condições e Politica de Privacidade',
-                                style: TextStyle(
-                                  color: AppTheme.colors.primary,
-                                  fontSize: 15,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
+                  child: CheckboxWidget(
+                    onChanged: store.onChangePoliciesTerms,
+                    validator: (value) {
+                      if (!value!) {
+                        return 'Você deve aceitar os termos e condições para continuar';
+                      }
+                      return null;
+                    },
                   ),
                 ),
                 Padding(

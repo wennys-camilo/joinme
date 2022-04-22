@@ -26,6 +26,8 @@ abstract class AppImages {
   String get motivatedSelected;
   String get sadSelected;
   String get boredSelected;
+  String get savedIcon;
+  String get nonSavedIcon;
 }
 
 class AppImagesImpl implements AppImages {
@@ -109,4 +111,10 @@ class AppImagesImpl implements AppImages {
 
   @override
   String get motivatedSelected => "assets/images/motivado2.svg";
+
+  @override
+  String get savedIcon => "assets/images/save_event2.svg";
+
+  @override
+  String get nonSavedIcon => "assets/images/save_event1.svg";
 }

@@ -1,11 +1,11 @@
 import 'package:brasil_fields/brasil_fields.dart';
-import 'package:camp_final/app/shared/presentation/pages/reload_error_page.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_switch/flutter_switch.dart';
 import 'package:flutter_triple/flutter_triple.dart';
-
 import 'package:validatorless/validatorless.dart';
 import '../../../../../../shared/domain/helpers/errors/failure.dart';
 import '../../../../../../shared/presentation/themes/app_theme.dart';
@@ -34,11 +34,19 @@ class _AddEventPageState extends State<AddEventPage> {
   void initState() {
     super.initState();
     store = Modular.get<AddEventStore>();
-    store.observer(
-      onLoading: (isLoading) => const Center(
-        child: CircularProgressIndicator(),
-      ),
-    );
+    store.observer(onState: ((state) {
+      if (state.eventAddedSucess) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: const Text('Evento adicionado com successo!'),
+          backgroundColor: AppTheme.colors.green,
+        ));
+      }
+    }), onError: (error) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(error.message),
+        backgroundColor: AppTheme.colors.red,
+      ));
+    });
     fetchCategoriesAndAccessibilities();
   }
 
@@ -57,10 +65,14 @@ class _AddEventPageState extends State<AddEventPage> {
         return SafeArea(
           child: Scaffold(
             appBar: AppBar(
-              title: Text(
-                'Criar novo Evento',
-                style: TextStyle(
-                    color: AppTheme.colors.black, fontWeight: FontWeight.bold),
+              title: Padding(
+                padding: const EdgeInsets.only(left: 10),
+                child: Text(
+                  'Criar novo Evento',
+                  style: TextStyle(
+                      color: AppTheme.colors.black,
+                      fontWeight: FontWeight.bold),
+                ),
               ),
               backgroundColor: AppTheme.colors.transparent,
               automaticallyImplyLeading: false,
@@ -74,6 +86,8 @@ class _AddEventPageState extends State<AddEventPage> {
                     store: store,
                     builder: (context, triple) {
                       return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           InputTextWidget(
                             labelText: 'Nome do evento',
@@ -126,7 +140,7 @@ class _AddEventPageState extends State<AddEventPage> {
                             onChanged: (value) =>
                                 store.onChangeCategorie(value),
                             validator: (value) {
-                              if (triple.state.selectedCategorie!.id ==
+                              if (triple.state.selectedCategorie?.id ==
                                   "CATEGORIA") {
                                 return 'Selecione uma categoria';
                               }
@@ -151,103 +165,23 @@ class _AddEventPageState extends State<AddEventPage> {
                             onChanged: (value) =>
                                 store.onChangemodalityEvent(value),
                           ),
-                          triple.state.isOnline
-                              ? InputTextWidget(
-                                  labelText: 'Link',
-                                  hintText: 'https://linkdoevento.com.br',
-                                  onChanged: (value) =>
-                                      store.onChangeUrl(value),
-                                  validator: Validatorless.required(
-                                      'Campo obrigatório'),
-                                )
-                              : Container(),
-                          InputTextWidget(
-                              labelText: 'Máximo de participantes: ',
-                              suffixText: 'Participantes',
-                              keyboardType: TextInputType.number,
-                              inputFormatters: [
-                                FilteringTextInputFormatter.digitsOnly,
-                                LengthLimitingTextInputFormatter(6),
-                              ],
-                              validator:
-                                  Validatorless.required('Campo Obrigatório'),
-                              onChanged: (value) {
-                                if (value.isNotEmpty) {
-                                  store.onChangemMaxParticipants(value);
-                                }
-                              }),
-                          !triple.state.isOnline
-                              ? Column(
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Expanded(
-                                          flex: 6,
-                                          child: InputTextWidget(
-                                            paddding: const EdgeInsets.only(
-                                                top: 8, bottom: 8, left: 30),
-                                            labelText: 'Rua',
-                                            onChanged: (value) =>
-                                                store.onChangeStreet(value),
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          width: 10,
-                                        ),
-                                        Expanded(
-                                          flex: 4,
-                                          child: InputTextWidget(
-                                            paddding: const EdgeInsets.only(
-                                                top: 8, bottom: 8, right: 30),
-                                            labelText: 'N°',
-                                            inputFormatters: [
-                                              FilteringTextInputFormatter
-                                                  .digitsOnly
-                                            ],
-                                            keyboardType: TextInputType.number,
-                                            onChanged: (value) =>
-                                                store.onChangeNumber(value),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    InputTextWidget(
-                                      labelText: 'Cidade',
-                                      onChanged: (value) =>
-                                          store.onChangeCity(value),
-                                    ),
-                                    InputTextWidget(
-                                      labelText: 'Estado',
-                                      onChanged: (value) =>
-                                          store.onChangeState(value),
-                                    ),
-                                    InputTextWidget(
-                                      labelText: 'CEP',
-                                      inputFormatters: [
-                                        FilteringTextInputFormatter.digitsOnly,
-                                        CepInputFormatter()
-                                      ],
-                                      keyboardType: TextInputType.number,
-                                      onChanged: (value) =>
-                                          store.onChangeZipCode(value),
-                                    ),
-                                    InputTextWidget(
-                                      labelText: 'Ponto de referência',
-                                      onChanged: (value) =>
-                                          store.onChangeReferencePoint(value),
-                                    ),
-                                  ],
-                                )
-                              : Container(),
-                          InputTextWidget(
-                            prefixText: "R\$ ",
-                            labelText: 'Preço: ',
-                            keyboardType: TextInputType.number,
-                            inputFormatters: [
-                              FilteringTextInputFormatter.digitsOnly,
-                              CentavosInputFormatter()
+                          DropDownWidget(
+                            labelText: "Aceita animais de estimação?",
+                            value: triple.state.isPetFriendly,
+                            labelStyle:
+                                TextStyle(color: AppTheme.colors.primary),
+                            items: const [
+                              DropdownMenuItem(
+                                child: Text('Não'),
+                                value: false,
+                              ),
+                              DropdownMenuItem(
+                                child: Text('Sim'),
+                                value: true,
+                              ),
                             ],
-                            onChanged: (value) => store.onChangePrice(value),
+                            onChanged: (value) =>
+                                store.onChangeisPetFriendly(value),
                           ),
                           InputDateWidget(
                             labelText: 'Data:',
@@ -285,63 +219,197 @@ class _AddEventPageState extends State<AddEventPage> {
                               }
                             },
                           ),
-                          DropDownWidget(
-                            labelText: "Pet Friendly:",
-                            value: triple.state.isPetFriendly,
-                            labelStyle:
-                                TextStyle(color: AppTheme.colors.primary),
-                            items: const [
-                              DropdownMenuItem(
-                                child: Text('Não'),
-                                value: false,
+                          InputTextWidget(
+                              labelText: 'Número máximo de participantes: ',
+                              suffixText: 'Participantes',
+                              keyboardType: TextInputType.number,
+                              inputFormatters: [
+                                FilteringTextInputFormatter.digitsOnly,
+                                LengthLimitingTextInputFormatter(6),
+                              ],
+                              validator:
+                                  Validatorless.required('Campo Obrigatório'),
+                              onChanged: (value) {
+                                if (value.isNotEmpty) {
+                                  store.onChangemMaxParticipants(value);
+                                }
+                              }),
+                          triple.state.isOnline
+                              ? InputTextWidget(
+                                  labelText: 'URL do evento (online)',
+                                  hintText: 'https://linkdoevento.com.br',
+                                  onChanged: (value) =>
+                                      store.onChangeUrl(value),
+                                  validator: Validatorless.required(
+                                      'Campo obrigatório'),
+                                )
+                              : Container(),
+                          !triple.state.isOnline
+                              ? Column(
+                                  children: [
+                                    InputTextWidget(
+                                      paddding: const EdgeInsets.only(
+                                          top: 8,
+                                          bottom: 8,
+                                          left: 30,
+                                          right: 30),
+                                      labelText: 'Rua',
+                                      onChanged: (value) =>
+                                          store.onChangeStreet(value),
+                                    ),
+                                    InputTextWidget(
+                                      paddding: const EdgeInsets.only(
+                                          top: 8,
+                                          bottom: 8,
+                                          right: 30,
+                                          left: 30),
+                                      labelText: 'N°',
+                                      inputFormatters: [
+                                        FilteringTextInputFormatter.digitsOnly
+                                      ],
+                                      keyboardType: TextInputType.number,
+                                      onChanged: (value) =>
+                                          store.onChangeNumber(value),
+                                    ),
+                                    InputTextWidget(
+                                      labelText: 'Cidade',
+                                      onChanged: (value) =>
+                                          store.onChangeCity(value),
+                                    ),
+                                    InputTextWidget(
+                                      labelText: 'Estado',
+                                      onChanged: (value) =>
+                                          store.onChangeState(value),
+                                    ),
+                                    InputTextWidget(
+                                      labelText: 'CEP',
+                                      inputFormatters: [
+                                        FilteringTextInputFormatter.digitsOnly,
+                                        CepInputFormatter()
+                                      ],
+                                      keyboardType: TextInputType.number,
+                                      onChanged: (value) =>
+                                          store.onChangeZipCode(value),
+                                    ),
+                                    InputTextWidget(
+                                      labelText: 'Ponto de referência',
+                                      onChanged: (value) =>
+                                          store.onChangeReferencePoint(value),
+                                    ),
+                                  ],
+                                )
+                              : Container(),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const SizedBox(
+                                height: 5,
                               ),
-                              DropdownMenuItem(
-                                child: Text('Sim'),
-                                value: true,
+                              Padding(
+                                padding: const EdgeInsets.only(left: 30),
+                                child: Text(
+                                  'Evento acessível a pessoas com deficiência?',
+                                  style: TextStyle(
+                                      color: AppTheme.colors.neutralDark,
+                                      fontSize: 16),
+                                ),
+                              ),
+                              Theme(
+                                data: ThemeData.light().copyWith(
+                                  chipTheme: ChipThemeData(
+                                    shape: StadiumBorder(
+                                      side: BorderSide(
+                                          color: AppTheme.colors.pink,
+                                          width: 2),
+                                    ),
+                                  ),
+                                ),
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(30, 0, 30, 8),
+                                  child: FormBuilderFilterChip(
+                                    padding: const EdgeInsets.all(10),
+                                    spacing: 3,
+                                    selectedColor: AppTheme.colors.pink,
+                                    checkmarkColor: AppTheme.colors.white,
+                                    backgroundColor: AppTheme.colors.white,
+                                    name: 'choice_chip',
+                                    showCheckmark: false,
+                                    decoration: const InputDecoration(
+                                      border: InputBorder.none,
+                                    ),
+                                    options: triple.state.accessibilities.map<
+                                        FormBuilderFieldOption<
+                                            AccessibilitiesEntity>>((value) {
+                                      return FormBuilderFieldOption<
+                                          AccessibilitiesEntity>(
+                                        value: value,
+                                        child: Text(
+                                          value.name
+                                              .replaceAll("Deficiência", ""),
+                                          style: TextStyle(
+                                            color: triple.state
+                                                    .selectedsIdsAccessibilities
+                                                    .contains(value.id)
+                                                ? AppTheme.colors.white
+                                                : AppTheme.colors.pink,
+                                          ),
+                                        ),
+                                      );
+                                    }).toList(),
+                                    onChanged: (value) {
+                                      store.onChangeSelectedsAccessibilities(
+                                          value as List<AccessibilitiesEntity>);
+                                    },
+                                  ),
+                                ),
                               ),
                             ],
-                            onChanged: (value) =>
-                                store.onChangeisPetFriendly(value),
+                          ),
+                          InputTextWidget(
+                            prefixText: "R\$ ",
+                            labelText: 'Qual o valor do evento?: ',
+                            keyboardType: TextInputType.number,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.digitsOnly,
+                              CentavosInputFormatter()
+                            ],
+                            onChanged: (value) => store.onChangePrice(value),
+                            validator: (_) {
+                              if (!triple.state.isFree) {
+                                return 'Insira o valor do evento';
+                              }
+                              return null;
+                            },
                           ),
                           Padding(
                             padding: const EdgeInsets.fromLTRB(30, 8, 30, 8),
-                            child: Column(
+                            child: Row(
                               children: [
-                                const Text(
-                                  'Evento acessível a pessoas com deficiência?',
-                                  style: TextStyle(fontSize: 18),
+                                FlutterSwitch(
+                                  activeColor: AppTheme.colors.primary,
+                                  width: 35.0,
+                                  height: 20.0,
+                                  valueFontSize: 12.0,
+                                  toggleSize: 18.0,
+                                  value: triple.state.isFree,
+                                  padding: 2,
+                                  onToggle: (value) =>
+                                      store.onChangeisFree(value),
                                 ),
-                                FormBuilderFilterChip(
-                                  padding: const EdgeInsets.all(10),
-                                  spacing: 3,
-                                  selectedColor:
-                                      AppTheme.colors.primary.withOpacity(0.9),
-                                  checkmarkColor: AppTheme.colors.white,
-                                  backgroundColor:
-                                      AppTheme.colors.black.withOpacity(0.5),
-                                  name: 'choice_chip',
-                                  decoration: const InputDecoration(
-                                    border: InputBorder.none,
+                                const SizedBox(
+                                  width: 20,
+                                ),
+                                Text(
+                                  'Evento gratuito',
+                                  style: TextStyle(
+                                      color: AppTheme.colors.neutralDark,
+                                      fontSize: 16),
+                                ),
+                                const Expanded(
+                                  child: SizedBox(
+                                    width: 20,
                                   ),
-                                  options: triple.state.accessibilities.map<
-                                      FormBuilderFieldOption<
-                                          AccessibilitiesEntity>>((value) {
-                                    return FormBuilderFieldOption<
-                                        AccessibilitiesEntity>(
-                                      value: value,
-                                      child: Text(
-                                        value.name
-                                            .replaceAll("Deficiência", ""),
-                                        style: TextStyle(
-                                          color: AppTheme.colors.white,
-                                        ),
-                                      ),
-                                    );
-                                  }).toList(),
-                                  onChanged: (value) {
-                                    store.onChangeSelectedsAccessibilities(
-                                        value as List<AccessibilitiesEntity>);
-                                  },
                                 ),
                               ],
                             ),
@@ -370,7 +438,7 @@ class _AddEventPageState extends State<AddEventPage> {
                                         await store.createEvent();
                                       }
                                     },
-                                    textButton: 'Criar evento e Publicar',
+                                    textButton: 'CRIAR EVENTO E PUBLICAR',
                                   ),
                                 )
                         ],

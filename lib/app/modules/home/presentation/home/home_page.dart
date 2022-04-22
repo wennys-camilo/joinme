@@ -30,7 +30,8 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
   }
 
   void fetchEvents() {
-    Future.wait([store.fetchEvents(), store.userDrivenEvents()]);
+    Future.wait(
+        [store.fetchEvents(), store.userDrivenEvents(), store.fetchTips()]);
   }
 
   Future<void> verifyMood() async {
@@ -224,7 +225,7 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                     height: 8,
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.30,
+                    height: MediaQuery.of(context).size.height * 0.25,
                     child: ListView.builder(
                       physics: const BouncingScrollPhysics(),
                       scrollDirection: Axis.horizontal,
@@ -255,7 +256,7 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                   ),
                   triple.state.userDrivenEventsList.isEmpty
                       ? SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.30,
+                          height: MediaQuery.of(context).size.height * 0.25,
                           child: ListView.builder(
                             physics: const BouncingScrollPhysics(),
                             scrollDirection: Axis.horizontal,
@@ -275,7 +276,7 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                           ),
                         )
                       : SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.30,
+                          height: MediaQuery.of(context).size.height * 0.25,
                           child: ListView.builder(
                             physics: const BouncingScrollPhysics(),
                             scrollDirection: Axis.horizontal,
@@ -307,7 +308,7 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                   ),
                   triple.state.onlineEvents.isNotEmpty
                       ? SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.30,
+                          height: MediaQuery.of(context).size.height * 0.25,
                           child: ListView.builder(
                             physics: const BouncingScrollPhysics(),
                             scrollDirection: Axis.horizontal,
@@ -334,12 +335,32 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                   const SizedBox(
                     height: 8,
                   ),
-                  const SizedBox(
-                      height: 168,
-                      child: InsightsHorizontalGridView(
-                        title: 'Playlist para estudos',
-                        description: 'sons para focar e relaxar',
-                      )),
+                  triple.state.tipsList.isNotEmpty
+                      ? SizedBox(
+                          height: 168,
+                          child: GridView.builder(
+                            physics: const BouncingScrollPhysics(),
+                            scrollDirection: Axis.horizontal,
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                                    childAspectRatio: 160 / 168,
+                                    crossAxisCount: 1,
+                                    mainAxisSpacing: 4),
+                            itemCount: triple.state.tipsList.length,
+                            itemBuilder: (context, index) {
+                              final tip = triple.state.tipsList[index];
+                              return GestureDetector(
+                                onTap: (() {}),
+                                child: InsightsHorizontalGridView(
+                                  title: tip.title,
+                                  description: tip.description,
+                                  image: tip.imageUrl,
+                                ),
+                              );
+                            },
+                          ),
+                        )
+                      : Container(),
                   const SizedBox(
                     height: 24,
                   )

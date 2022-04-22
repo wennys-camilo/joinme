@@ -1,3 +1,4 @@
+import 'package:camp_final/app/modules/home/domain/entities/wellness_entity.dart';
 import "../../domain/entities/attendees_response_entity.dart";
 import '../../domain/entities/event_description_entity.dart';
 import '../../domain/entities/mood_entity.dart';
@@ -11,6 +12,7 @@ class HomeState {
   final List<MoodEntity> moods;
   final MoodEntity? selectedMood;
   final bool showMood;
+  final List<WellnessEntity> tipsList;
 
   HomeState({
     required this.events,
@@ -21,6 +23,7 @@ class HomeState {
     required this.showMood,
     required this.userDrivenEventsList,
     required this.onlineEvents,
+    required this.tipsList,
   });
 
   HomeState copyWith({
@@ -32,6 +35,7 @@ class HomeState {
     List<MoodEntity>? moods,
     MoodEntity? selectedMood,
     bool? showMood,
+    List<WellnessEntity>? tipsList,
   }) {
     return HomeState(
       events: events ?? this.events,
@@ -42,6 +46,7 @@ class HomeState {
       moods: moods ?? this.moods,
       selectedMood: selectedMood ?? this.selectedMood,
       showMood: showMood ?? this.showMood,
+      tipsList: tipsList ?? this.tipsList,
     );
   }
 }

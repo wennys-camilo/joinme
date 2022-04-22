@@ -53,7 +53,7 @@ class _TabPageState extends State<TabPage> {
                       Modular.to.navigate('/home/calendar');
                       break;
                     case 2:
-                      Modular.to.navigate('/home/add_events');
+                      Modular.to.navigate('/home/add_events/');
                       break;
                     case 3:
                       Modular.to.navigate('/home/saved/');
