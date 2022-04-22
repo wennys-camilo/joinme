@@ -4,7 +4,6 @@ import 'package:camp_final/app/shared/presentation/widgets/rounded_button_widget
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_triple/flutter_triple.dart';
 import 'package:validatorless/validatorless.dart';
 
 class ForgotPasswordPageOne extends StatelessWidget {
@@ -16,7 +15,7 @@ class ForgotPasswordPageOne extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           leading: GestureDetector(
-              onTap: () => Modular.to.pushReplacementNamed('./login'),
+              onTap: () => Modular.to.navigate('/login/'),
               child: Icon(
                 Icons.arrow_back,
                 color: AppTheme.colors.primary,
@@ -38,11 +37,7 @@ class ForgotPasswordPageOne extends StatelessWidget {
                 padding: EdgeInsets.fromLTRB(30, 8, 30, 9),
                 child: Text(
                   'Esqueceu a senha?',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w700
-
-                  ),
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
                 ),
               ),
               const Padding(
