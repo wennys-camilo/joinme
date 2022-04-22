@@ -35,7 +35,10 @@ class RoundedButtonWidget extends StatelessWidget {
           children: [
             Text(
               textButton ?? '',
-              style: styleText ?? TextStyle(color: AppTheme.colors.white),
+              style: styleText ??
+                  TextStyle(
+                      color: AppTheme.colors.white,
+                      fontWeight: FontWeight.bold),
             ),
             googleButton
                 ? Padding(

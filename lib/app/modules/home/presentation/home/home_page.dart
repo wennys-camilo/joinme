@@ -1,15 +1,15 @@
-import 'package:camp_final/app/modules/home/presentation/home/home_state.dart';
-import 'package:camp_final/app/shared/presentation/pages/reload_error_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_triple/flutter_triple.dart';
+import 'package:camp_final/app/modules/home/presentation/home/home_state.dart';
+import 'package:camp_final/app/shared/presentation/pages/reload_error_page.dart';
 import '../../../../shared/domain/helpers/errors/failure.dart';
 import '../../../../shared/presentation/themes/app_theme.dart';
 import '../../../../shared/presentation/utils/extension/string_extension_capitalize.dart';
 import '../widgets/categories_title_widget.dart';
 import '../widgets/custom_filter_chip_widget.dart';
 import '../widgets/event_item_card_tile.dart';
-import '../widgets/insights_horizontal_grid_view.dart';
+import '../widgets/insights_card_tile.dart';
 import '../widgets/mood_dialog_widget.dart';
 import 'home_store.dart';
 
@@ -122,7 +122,7 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                                 width: 50,
                                 decoration: BoxDecoration(
                                     shape: BoxShape.circle,
-                                    color: AppTheme.colors.greyBoard),
+                                    color: AppTheme.colors.greyLight),
                                 child: Icon(
                                   Icons.notifications,
                                   color: AppTheme.colors.primary,
@@ -186,15 +186,30 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                   const SizedBox(
                     height: 8,
                   ),
-                  SizedBox(
-                    height: 40,
-                    child: ListView.builder(
-                      itemCount: 10,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
-                        return CustomFilterChipWidget(
-                            chipColor: AppTheme.colors.primary);
-                      },
+                  Padding(
+                    padding: const EdgeInsets.only(right: 8),
+                    child: SizedBox(
+                      height: 40,
+                      child: ListView.builder(
+                        itemCount: triple.state.filterCategory.length,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                          final categorie = triple.state.filterCategory[index];
+                          return CustomFilterChipWidget(
+                            selectedColor: AppTheme.colors.primary,
+                            colorText: triple.state.selecTedCategory
+                                    .contains(categorie)
+                                ? AppTheme.colors.white
+                                : AppTheme.colors.primary,
+                            chipColor: AppTheme.colors.primary,
+                            label: categorie,
+                            onSelected: (value) =>
+                                store.selectedChangeCategorie(categorie),
+                            selected: triple.state.selecTedCategory
+                                .contains(categorie),
+                          );
+                        },
+                      ),
                     ),
                   ),
                   const SizedBox(
@@ -204,14 +219,28 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                   const SizedBox(
                     height: 8,
                   ),
-                  SizedBox(
+                  Container(
+                    padding: const EdgeInsets.only(right: 8),
                     height: 40,
                     child: ListView.builder(
-                      itemCount: 10,
+                      itemCount: triple.state.filterAccessibility.length,
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
+                        final accessibility =
+                            triple.state.filterAccessibility[index];
                         return CustomFilterChipWidget(
-                            chipColor: AppTheme.colors.pink);
+                          chipColor: AppTheme.colors.pink,
+                          selectedColor: AppTheme.colors.pink,
+                          colorText: triple.state.selectedAccessibility
+                                  .contains(accessibility)
+                              ? AppTheme.colors.white
+                              : AppTheme.colors.pink,
+                          label: accessibility,
+                          onSelected: (value) =>
+                              store.selectedChangeAccessibility(accessibility),
+                          selected: triple.state.selectedAccessibility
+                              .contains(accessibility),
+                        );
                       },
                     ),
                   ),
@@ -331,7 +360,29 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                   const SizedBox(
                     height: 16,
                   ),
-                  const CategoriesTitleWidget(title: 'Insights'),
+                  Row(
+                    children: [
+                      const CategoriesTitleWidget(title: 'Dicas e bem estar'),
+                      const Expanded(
+                          child: SizedBox(
+                        width: 5,
+                      )),
+                      GestureDetector(
+                        onTap: () => Modular.to.pushNamed('./wellness',
+                            arguments: triple.state.tipsList),
+                        child: Padding(
+                          padding: const EdgeInsets.only(right: 10),
+                          child: Text(
+                            'Ver todas',
+                            style: TextStyle(
+                                color: AppTheme.colors.primary,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 17),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
                   const SizedBox(
                     height: 8,
                   ),
@@ -351,7 +402,7 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                               final tip = triple.state.tipsList[index];
                               return GestureDetector(
                                 onTap: (() {}),
-                                child: InsightsHorizontalGridView(
+                                child: InsightsCardTile(
                                   title: tip.title,
                                   description: tip.description,
                                   image: tip.imageUrl,

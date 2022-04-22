@@ -17,6 +17,8 @@ class AtendeesMapper {
         status: map['status'] ?? '',
         userId: map['userId'] ?? '',
         eventId: map['eventId'] ?? '',
-        event: EventDescriptionMapper().to(map['event']));
+        event: map['event'] != null
+            ? EventDescriptionMapper().to(map['event'])
+            : null);
   }
 }

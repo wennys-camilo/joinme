@@ -22,8 +22,15 @@ class _ProfilePageState extends ModularState<ProfilePage, ProfileStore> {
   @override
   void initState() {
     super.initState();
-    store.fetchProfile();
-    store.fetchInterest();
+    fetch();
+  }
+
+  void fetch() {
+    Future.wait([
+      store.fetchProfile(),
+      store.fetchInterest(),
+      store.fetchUserDisabilities()
+    ]);
   }
 
   @override
@@ -178,56 +185,56 @@ class _ProfilePageState extends ModularState<ProfilePage, ProfileStore> {
                                 final interest =
                                     triple.interestsUserList[index];
                                 return Padding(
-                                  padding: const EdgeInsets.only(right: 8),
-                                  child: Chip(
-                                    label: Text(
-                                      interest.name,
-                                      style: TextStyle(
-                                          color: AppTheme.colors.primary,
-                                          fontWeight: FontWeight.bold),
+                                    padding: const EdgeInsets.only(
+                                      right: 8,
                                     ),
-                                    backgroundColor: AppTheme.colors.white,
-                                    shape: StadiumBorder(
-                                      side: BorderSide(
-                                        color: AppTheme.colors.primary,
-                                        width: 2,
-                                      ),
-                                    ),
-                                  ),
-                                );
+                                    child: CustomFilterChipWidget(
+                                      chipColor: AppTheme.colors.primary,
+                                      label: interest.name,
+                                      onSelected: (value) {},
+                                      selected: false,
+                                    ));
                               },
                             ),
                           )
-                        : Container(),
+                        : CustomFilterChipWidget(
+                            chipColor: AppTheme.colors.primary,
+                            label: 'Nenhum',
+                            onSelected: (value) {},
+                            selected: false,
+                          ),
                     const SizedBox(
-                      height: 10,
+                      height: 5,
                     ),
-                    Row(
-                      children: [
-                        const SubtitleText(
-                            subtitle: 'Possui alguma deficiência ?'),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Icon(Icons.create_rounded,
-                            color: AppTheme.colors.black.withOpacity(0.6)),
-                      ],
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 20),
-                      child: SizedBox(
-                        height: 50,
-                        child: ListView.builder(
-                          physics: const BouncingScrollPhysics(),
-                          itemCount: 10,
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (context, index) {
-                            return CustomFilterChipWidget(
-                                chipColor: AppTheme.colors.pink);
-                          },
-                        ),
-                      ),
-                    ),
+                    const SubtitleText(subtitle: 'Possui alguma deficiência ?'),
+                    triple.disabilitiesList.isEmpty
+                        ? CustomFilterChipWidget(
+                            chipColor: AppTheme.colors.pink,
+                            label: 'Nenhuma',
+                            onSelected: (value) {},
+                            selected: false,
+                          )
+                        : Padding(
+                            padding: const EdgeInsets.only(bottom: 20),
+                            child: SizedBox(
+                              height: 50,
+                              child: ListView.builder(
+                                physics: const BouncingScrollPhysics(),
+                                itemCount: triple.disabilitiesList.length,
+                                scrollDirection: Axis.horizontal,
+                                itemBuilder: (context, index) {
+                                  final disabilitie =
+                                      triple.disabilitiesList[index];
+                                  return CustomFilterChipWidget(
+                                    chipColor: AppTheme.colors.pink,
+                                    label: disabilitie.name,
+                                    onSelected: (value) {},
+                                    selected: false,
+                                  );
+                                },
+                              ),
+                            ),
+                          ),
                   ],
                 ),
               ),

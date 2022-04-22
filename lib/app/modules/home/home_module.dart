@@ -1,7 +1,9 @@
+import 'package:camp_final/app/modules/home/presentation/wellness/wellness_page.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'domain/usecases/fetch_all_events_usecase_impl.dart';
 import 'domain/usecases/fetch_all_status_events_attendees_usecase_impl.dart';
 import 'domain/usecases/fetch_tips_usecase_impl.dart';
+import 'domain/usecases/fetch_user_disabilities_usecase_impl.dart';
 import 'domain/usecases/fetch_user_events_usecase_impl.dart';
 import 'domain/usecases/fetch_user_interests_usecase_impl.dart';
 import 'domain/usecases/fetch_user_usecase_impl.dart';
@@ -49,6 +51,7 @@ class HomeModule extends Module {
     Bind((i) => FetchAllEventsUsecaseImpl(i.get())),
     Bind((i) => SetAttendeesStatusUsecaseImpl(i.get())),
     Bind((i) => FetchAllStatusEventsAttendeesUsecaseImpl(i.get())),
+    Bind((i) => FetchUserDisabilitiesUsecaseImpl(i.get())),
     Bind((i) => GetMoodUsecaseImpl(i.get())),
     Bind((i) => FetchTipsUsecaseImpl(i.get())),
     Bind((i) => HomeStore(i.get(), i.get(), i.get(), i.get(), i.get(), i.get(),
@@ -74,6 +77,10 @@ class HomeModule extends Module {
         ModuleRoute('/profile', module: ProfileModule()),
         ChildRoute('/eventPage',
             child: (context, args) => EventDetailsPage(event: args.data)),
+        ChildRoute('/wellness',
+            child: (context, args) => WellnessPage(
+                  tipList: args.data,
+                )),
       ],
     ),
   ];

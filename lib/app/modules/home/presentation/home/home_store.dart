@@ -47,6 +47,27 @@ class HomeStore extends NotifierStore<Failure, HomeState> {
             selectedMood: null,
             showMood: false,
             tipsList: [],
+            filterAccessibility: [
+              'Todas',
+              'Física',
+              'Visual',
+              'Auditiva',
+              'Múltipla',
+              'Intelectual'
+            ],
+            filterCategory: [
+              'Yoga',
+              'Futebol',
+              'Vôlei',
+              'Corrida',
+              'Meditação',
+              'Música',
+              'Arte',
+              'Cinema',
+              'Academia'
+            ],
+            selecTedCategory: [],
+            selectedAccessibility: [],
           ),
         );
 
@@ -69,6 +90,26 @@ class HomeStore extends NotifierStore<Failure, HomeState> {
     } else {
       return true;
     }
+  }
+
+  selectedChangeAccessibility(String value) {
+    List<String> accessibility = [];
+    if (state.selectedAccessibility.contains(value)) {
+      accessibility.addAll([...state.selectedAccessibility]..remove(value));
+    } else {
+      accessibility.addAll([...state.selectedAccessibility, value]);
+    }
+    update(state.copyWith(selectedAccessibility: accessibility));
+  }
+
+  selectedChangeCategorie(String value) {
+    List<String> categories = [];
+    if (state.selecTedCategory.contains(value)) {
+      categories.addAll([...state.selecTedCategory]..remove(value));
+    } else {
+      categories.addAll([...state.selecTedCategory, value]);
+    }
+    update(state.copyWith(selecTedCategory: categories));
   }
 
   Future<void> getFavorites() async {

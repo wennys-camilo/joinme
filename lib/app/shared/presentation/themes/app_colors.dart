@@ -6,7 +6,6 @@ abstract class AppColors {
   Color get white;
   Color get black;
   Color get transparent;
-  Color get greyBoard;
   Color get greyLight;
   Color get blueLight;
   Color get pink;
@@ -25,10 +24,7 @@ class AppColorsImpl implements AppColors {
   Color get greyLight => const Color(0xffE8E7E3);
 
   @override
-  Color get primary => const Color(0xff1A00D0);
-
-  @override
-  Color get greyBoard => const Color(0xffE8E7E3);
+  Color get primary => const Color(0xff1E00FC);
 
   @override
   Color get white => const Color.fromARGB(255, 255, 255, 255);
@@ -46,7 +42,7 @@ class AppColorsImpl implements AppColors {
   Color get pink => const Color(0xffCC0085);
 
   @override
-  Color get green => const Color(0xff00B200);
+  Color get green => const Color(0xff2CDA94);
 
   @override
   Color get red => const Color.fromARGB(255, 255, 0, 0);

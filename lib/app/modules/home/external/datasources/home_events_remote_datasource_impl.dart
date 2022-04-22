@@ -90,9 +90,8 @@ class HomeEventsRemoteDataSourceImpl implements HomeEventsRemoteDataSource {
   @override
   Future<List<WellnessEntity>> getWellness() async {
     try {
-      final response = await _httpClient.get(
-        '/wellness/list',
-      );
+      final response = await _httpClient
+          .get('/wellness/list', queryParameters: {'skip': 1, 'take': 10});
       return (response.data as List)
           .map((e) => WellnessMapper().to(e))
           .toList();

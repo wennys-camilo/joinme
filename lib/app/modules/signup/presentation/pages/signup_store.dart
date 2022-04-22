@@ -179,6 +179,7 @@ class SignupStore extends StreamStore<Failure, SignupState> {
     });
   }
 
+//TODO:
   Future<void> inserDisabilities() async {
     final response = await _insertDisabilitiesUsecase(
         UserDisabilitiesEntity(disabilityIds: state.selectedsIdsDisabilities));

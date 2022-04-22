@@ -1,6 +1,8 @@
 import 'package:camp_final/app/modules/home/domain/entities/activities_description_entity.dart';
 import 'package:camp_final/app/modules/home/external/mappers/activities_description_mapper.dart';
+import 'package:camp_final/app/shared/domain/entites/disabilities_enity.dart';
 import 'package:camp_final/app/shared/domain/entites/user_enity.dart';
+import 'package:camp_final/app/shared/external/mappers/disabilities_mapper.dart';
 import 'package:camp_final/app/shared/external/mappers/user_mapper.dart';
 import 'package:dio/dio.dart';
 import '../../../../shared/domain/helpers/errors/failure.dart';
@@ -67,6 +69,23 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
       final response = await _httpClient.get('/events/list/user');
       return (response.data as List)
           .map((e) => EventDescriptionMapper().to(e))
+          .toList();
+    } on Failure {
+      rethrow;
+    } on DioError catch (error, stackTrace) {
+      throw ApiFailure(stackTrace: stackTrace, message: error.message);
+    } catch (error, stackTrace) {
+      throw DatasourceFailure(
+          message: error.toString(), stackTrace: stackTrace);
+    }
+  }
+
+  @override
+  Future<List<DisabilitiesEntity>> disabilities() async {
+    try {
+      final response = await _httpClient.get('/users/disabilities/list');
+      return (response.data as List)
+          .map((e) => DisabilitiesMapper().to(e))
           .toList();
     } on Failure {
       rethrow;

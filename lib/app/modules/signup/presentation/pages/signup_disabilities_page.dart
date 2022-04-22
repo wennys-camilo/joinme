@@ -95,7 +95,7 @@ class _DisabilitiesPageState extends State<DisabilitiesPage> {
                 RoundedButtonWidget(
                   width: MediaQuery.of(context).size.width * 0.9,
                   onPressed: () async {
-                    if (triple.selectedsIdsDisabilities.isNotEmpty) {
+                    if (store.state.selectedsDisaibilities.isNotEmpty) {
                       await store.inserDisabilities();
                     } else {
                       Modular.to.navigate('./phaseFive');

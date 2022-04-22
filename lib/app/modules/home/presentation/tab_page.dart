@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_svg/svg.dart';
 import "../../../shared/presentation/themes/app_theme.dart";
 
 class TabPage extends StatefulWidget {
@@ -38,7 +39,7 @@ class _TabPageState extends State<TabPage> {
             ),
             child: BottomNavigationBar(
               type: BottomNavigationBarType.fixed,
-              backgroundColor: AppTheme.colors.greyBoard,
+              backgroundColor: AppTheme.colors.greyLight,
               selectedItemColor: AppTheme.colors.pink,
               currentIndex: value,
               onTap: (value) {
@@ -66,41 +67,31 @@ class _TabPageState extends State<TabPage> {
                 }
                 _changeBar(value);
               },
-              items: const [
+              items: [
                 BottomNavigationBarItem(
-                  icon: Icon(
-                    Icons.home,
-                    size: 30,
-                  ),
+                  icon: SvgPicture.asset(AppTheme.icons.home),
                   label: 'Home',
+                  activeIcon: SvgPicture.asset(AppTheme.icons.homeSelected),
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(
-                    Icons.calendar_month,
-                    size: 30,
-                  ),
+                  icon: SvgPicture.asset(AppTheme.icons.calendar),
                   label: 'Calendário',
+                  activeIcon: SvgPicture.asset(AppTheme.icons.calendarSelected),
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(
-                    Icons.add_circle_outlined,
-                    size: 30,
-                  ),
-                  label: "Criar",
+                  icon: SvgPicture.asset(AppTheme.icons.event),
+                  label: 'Criar',
+                  activeIcon: SvgPicture.asset(AppTheme.icons.eventSelected),
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(
-                    Icons.bookmark,
-                    size: 30,
-                  ),
+                  icon: SvgPicture.asset(AppTheme.icons.saveds),
                   label: 'Salvos',
+                  activeIcon: SvgPicture.asset(AppTheme.icons.savedsSelected),
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(
-                    Icons.person,
-                    size: 30,
-                  ),
+                  icon: SvgPicture.asset(AppTheme.icons.user),
                   label: 'Perfil',
+                  activeIcon: SvgPicture.asset(AppTheme.icons.userSelected),
                 ),
               ],
             ),

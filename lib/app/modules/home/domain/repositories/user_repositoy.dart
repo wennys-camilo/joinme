@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import '../../../../shared/domain/entites/disabilities_enity.dart';
 import '../../../../shared/domain/entites/user_enity.dart';
 import '../../../../shared/domain/helpers/errors/failure.dart';
 import '../entities/activities_description_entity.dart';
@@ -9,4 +10,5 @@ abstract class UserRepository {
   Future<Either<Failure, UserEntity>> fetch();
   Future<Either<Failure, List<ActivitiesDescriptionEntity>>> fetchInterest();
   Future<Either<Failure, List<EventDescriptionEntity>>> fetchEventsUser();
+  Future<Either<Failure, List<DisabilitiesEntity>>> fetchDisabilitiesUser();
 }
