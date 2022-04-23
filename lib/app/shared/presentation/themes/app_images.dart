@@ -34,6 +34,8 @@ abstract class AppImages {
   String get person2;
   String get person3;
   String get map;
+  String get neutral;
+  String get neutralSelected;
 }
 
 class AppImagesImpl implements AppImages {
@@ -141,4 +143,10 @@ class AppImagesImpl implements AppImages {
 
   @override
   String get map => "assets/images/map.png";
+
+  @override
+  String get neutral => "assets/images/neutral.svg";
+
+  @override
+  String get neutralSelected => "assets/images/neutral.SVG";
 }

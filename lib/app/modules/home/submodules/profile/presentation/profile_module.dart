@@ -1,5 +1,6 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'profile_page.dart';
+import 'profile_settings.dart';
 import 'profile_store.dart';
 
 class ProfileModule extends Module {
@@ -11,5 +12,6 @@ class ProfileModule extends Module {
   @override
   final List<ModularRoute> routes = [
     ChildRoute('/', child: (_, args) => const ProfilePage()),
+    ChildRoute('/settings', child: (_, args) => const ProfileSettings()),
   ];
 }

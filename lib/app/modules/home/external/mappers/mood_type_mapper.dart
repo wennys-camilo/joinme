@@ -12,11 +12,14 @@ class MoodTypeMapper {
       case "Entediado":
         return MoodType.bored;
 
-      case "Motivado":
+      case "Muito Feliz":
         return MoodType.motivated;
 
+      case "Neutro":
+        return MoodType.neutral;
+
       default:
-        throw UnimplementedError();
+        return MoodType.happy;
     }
   }
 }

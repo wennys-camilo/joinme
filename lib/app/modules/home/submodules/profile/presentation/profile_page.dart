@@ -58,15 +58,18 @@ class _ProfilePageState extends ModularState<ProfilePage, ProfileStore> {
                               fontWeight: FontWeight.bold,
                               color: AppTheme.colors.black),
                         ),
-                        Container(
-                          width: 35,
-                          height: 35,
-                          decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: AppTheme.colors.grey.withOpacity(0.6)),
-                          child: Icon(
-                            Icons.settings,
-                            color: AppTheme.colors.primary,
+                        GestureDetector(
+                          onTap: () => Modular.to.pushNamed('./settings'),
+                          child: Container(
+                            width: 35,
+                            height: 35,
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: AppTheme.colors.grey.withOpacity(0.6)),
+                            child: Icon(
+                              Icons.settings,
+                              color: AppTheme.colors.primary,
+                            ),
                           ),
                         )
                       ],

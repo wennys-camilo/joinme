@@ -3,4 +3,5 @@ enum MoodType {
   bored,
   happy,
   sad,
+  neutral,
 }

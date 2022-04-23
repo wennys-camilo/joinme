@@ -16,8 +16,11 @@ extension MoodTypeExtension on MoodType {
       case MoodType.motivated:
         return AppTheme.images.motivated;
 
+      case MoodType.neutral:
+        return AppTheme.images.neutral;
+
       default:
-        throw UnimplementedError();
+        return AppTheme.images.happy;
     }
   }
 
@@ -35,8 +38,11 @@ extension MoodTypeExtension on MoodType {
       case MoodType.motivated:
         return AppTheme.images.motivatedSelected;
 
+      case MoodType.neutral:
+        return AppTheme.images.neutralSelected;
+
       default:
-        throw UnimplementedError();
+        return AppTheme.images.happySelected;
     }
   }
 }

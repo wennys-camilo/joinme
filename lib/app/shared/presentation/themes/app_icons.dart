@@ -12,6 +12,11 @@ abstract class AppIcons {
   String get user;
   String get userSelected;
   String get medal;
+  String get look;
+  String get notification;
+  String get invite;
+  String get logout;
+  String get help;
 }
 
 class AppIconsImpl implements AppIcons {
@@ -53,4 +58,19 @@ class AppIconsImpl implements AppIcons {
 
   @override
   String get medal => "assets/icons/medal_icon.svg";
+
+  @override
+  String get look => "assets/icons/lock.svg";
+
+  @override
+  String get notification => "assets/icons/notification.svg";
+
+  @override
+  String get help => "assets/icons/help.svg";
+
+  @override
+  String get invite => "assets/icons/invite.svg";
+
+  @override
+  String get logout => "assets/icons/logout.svg";
 }
