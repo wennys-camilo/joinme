@@ -1,4 +1,4 @@
-import 'package:camp_final/app/modules/home/domain/enums/mood_type.dart';
+import '../../../domain/enums/mood_type.dart';
 import '../../../../../shared/presentation/themes/app_theme.dart';
 
 extension MoodTypeExtension on MoodType {

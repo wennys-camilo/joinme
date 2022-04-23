@@ -1,10 +1,10 @@
-import 'package:camp_final/app/modules/forgot_password/external/forgot_password_remote_datasource_impl.dart';
-import 'package:camp_final/app/modules/forgot_password/infra/repositories/forgot_password_repository_impl.dart';
-import 'package:camp_final/app/modules/forgot_password/presentation/forgot_password_store.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'domain/usecases/reset_password_usecase_impl.dart';
+import 'external/forgot_password_remote_datasource_impl.dart';
+import 'infra/repositories/forgot_password_repository_impl.dart';
 import 'presentation/forgot_passsword_page_one.dart';
 import 'presentation/forgot_password_page_two.dart';
-import 'package:flutter_modular/flutter_modular.dart';
+import 'presentation/forgot_password_store.dart';
 
 class ForgotPasswordModule extends Module {
   @override

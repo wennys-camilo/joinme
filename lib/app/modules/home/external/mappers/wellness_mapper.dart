@@ -1,4 +1,4 @@
-import 'package:camp_final/app/modules/home/domain/entities/wellness_entity.dart';
+import '../../domain/entities/wellness_entity.dart';
 
 class WellnessMapper {
   WellnessEntity to(Map<String, dynamic> map) {

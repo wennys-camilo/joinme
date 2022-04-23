@@ -33,6 +33,7 @@ abstract class AppImages {
   String get person1;
   String get person2;
   String get person3;
+  String get map;
 }
 
 class AppImagesImpl implements AppImages {
@@ -137,4 +138,7 @@ class AppImagesImpl implements AppImages {
 
   @override
   String get person3 => "assets/images/person3.png";
+
+  @override
+  String get map => "assets/images/map.png";
 }

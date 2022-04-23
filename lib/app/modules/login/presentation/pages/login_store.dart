@@ -13,7 +13,7 @@ class LoginStore extends StreamStore<Failure, LoginState> {
 
   LoginStore(this._loginUsecase, this._setTokenUsecase)
       : super(LoginState(
-            email: '', password: '', obscurePass: true, rememberMe: false));
+            email: '', password: '', obscurePass: true, rememberMe: true));
 
   Future<void> login() async {
     setLoading(true);

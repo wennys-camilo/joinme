@@ -1,4 +1,3 @@
-import 'package:camp_final/app/modules/home/presentation/wellness/wellness_page.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'domain/usecases/fetch_all_events_usecase_impl.dart';
 import 'domain/usecases/fetch_all_status_events_attendees_usecase_impl.dart';
@@ -23,6 +22,7 @@ import 'presentation/event_details/event_details_store.dart';
 import 'presentation/home/home_page.dart';
 import 'presentation/home/home_store.dart';
 import 'presentation/tab_page.dart';
+import 'presentation/wellness/wellness_page.dart';
 import 'submodules/calendar/presentation/calendar_page.dart';
 import 'submodules/events/domain/usecases/create_event_usecase_impl.dart';
 import 'submodules/events/domain/usecases/fetch_accessibilities_events_usecase_impl.dart';

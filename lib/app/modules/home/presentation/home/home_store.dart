@@ -1,5 +1,3 @@
-import 'package:camp_final/app/modules/home/domain/usecases/fetch_tips_usecase.dart';
-import 'package:camp_final/app/modules/home/domain/usecases/fetch_user_events_usecase.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_triple/flutter_triple.dart';
 import '../../../../shared/domain/helpers/errors/failure.dart';
@@ -8,6 +6,8 @@ import '../../domain/entities/event_description_entity.dart';
 import '../../domain/entities/mood_entity.dart';
 import '../../domain/usecases/fetch_all_events_usecase.dart';
 import '../../domain/usecases/fetch_all_status_events_attendees_usecase.dart';
+import '../../domain/usecases/fetch_tips_usecase.dart';
+import '../../domain/usecases/fetch_user_events_usecase.dart';
 import '../../domain/usecases/get_mood_usecase.dart';
 import '../../domain/usecases/post_mood_user_usecase.dart';
 import '../../domain/usecases/set_acess_mood_usecase.dart';

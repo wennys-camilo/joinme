@@ -1,10 +1,10 @@
-import 'package:camp_final/app/modules/home/domain/entities/attendees_entity.dart';
-import 'package:camp_final/app/modules/home/domain/entities/attendees_response_entity.dart';
-import 'package:camp_final/app/modules/home/domain/entities/mood_entity.dart';
-import 'package:camp_final/app/modules/home/domain/entities/wellness_entity.dart';
 import 'package:dartz/dartz.dart';
 import '../../../../shared/domain/helpers/errors/failure.dart';
+import '../../domain/entities/attendees_entity.dart';
+import '../../domain/entities/attendees_response_entity.dart';
 import '../../domain/entities/event_description_entity.dart';
+import '../../domain/entities/mood_entity.dart';
+import '../../domain/entities/wellness_entity.dart';
 import '../../domain/repositories/home_events_repository.dart';
 import '../datasources/home_events_datasource.dart';
 

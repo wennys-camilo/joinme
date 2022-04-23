@@ -1,5 +1,5 @@
-import 'package:camp_final/app/modules/home/domain/entities/mood_entity.dart';
-import 'package:camp_final/app/modules/home/external/mappers/mood_type_mapper.dart';
+import '../../domain/entities/mood_entity.dart';
+import 'mood_type_mapper.dart';
 
 class MoodResponseMapper {
   MoodEntity to(Map<String, dynamic> map) {

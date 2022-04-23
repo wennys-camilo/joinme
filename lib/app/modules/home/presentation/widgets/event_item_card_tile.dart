@@ -189,7 +189,8 @@ class EventItemCardTile extends StatelessWidget {
                             ),
                           )
                         : Padding(
-                            padding: const EdgeInsets.only(left: 15),
+                            padding: const EdgeInsets.only(
+                                left: 28, top: 5, bottom: 5),
                             child: Text(
                               'Sem confirmados',
                               style: TextStyle(
@@ -205,9 +206,8 @@ class EventItemCardTile extends StatelessWidget {
                         children: [
                           CustomChipLabelWidget(label: event.activities.name),
                           event.price.toInt() == 0
-                              ? CustomChipLabelWidget(
+                              ? const CustomChipLabelWidget(
                                   label: 'Grátis',
-                                  color: AppTheme.colors.green,
                                 )
                               : Container(),
                           const Spacer(),

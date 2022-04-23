@@ -1,6 +1,6 @@
-import 'package:camp_final/app/modules/home/submodules/profile/presentation/profile_page.dart';
-import 'package:camp_final/app/modules/home/submodules/profile/presentation/profile_store.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'profile_page.dart';
+import 'profile_store.dart';
 
 class ProfileModule extends Module {
   @override

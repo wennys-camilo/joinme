@@ -1,5 +1,4 @@
-import 'package:camp_final/app/modules/home/external/mappers/event_description_mapper.dart';
-
+import 'event_description_mapper.dart';
 import '../../domain/entities/attendees_entity.dart';
 import '../../domain/entities/attendees_response_entity.dart';
 

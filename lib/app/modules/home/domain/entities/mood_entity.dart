@@ -1,4 +1,4 @@
-import 'package:camp_final/app/modules/home/domain/enums/mood_type.dart';
+import '../enums/mood_type.dart';
 
 class MoodEntity {
   final String id;

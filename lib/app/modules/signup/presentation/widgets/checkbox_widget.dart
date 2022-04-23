@@ -46,7 +46,7 @@ class _CheckboxWidgetState extends State<CheckboxWidget> {
           data: ThemeData.light().copyWith(
             checkboxTheme: CheckboxThemeData(
               side: MaterialStateBorderSide.resolveWith(
-                  (_) => const BorderSide(width: 0.25)),
+                  (_) => const BorderSide(width: 0.60)),
             ),
           ),
           child: FormBuilderCheckbox(
@@ -74,14 +74,6 @@ class _CheckboxWidgetState extends State<CheckboxWidget> {
             validator: widget.validator,
           ),
         );
-
-        /*Checkbox(
-          value: value,
-          onChanged: _changeCheck,
-          side: const BorderSide(width: 0.25),
-          checkColor: AppTheme.colors.white,
-          activeColor: AppTheme.colors.primary,
-        );*/
       },
     );
   }

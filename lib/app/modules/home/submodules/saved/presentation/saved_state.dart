@@ -1,4 +1,4 @@
-import 'package:camp_final/app/modules/home/domain/entities/attendees_response_entity.dart';
+import '../../../domain/entities/attendees_response_entity.dart';
 
 class SavedState {
   final List<AttendeesReponseEntity> attendes;

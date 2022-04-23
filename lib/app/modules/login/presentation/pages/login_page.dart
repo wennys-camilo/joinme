@@ -133,9 +133,9 @@ class _LoginPageState extends ModularState<LoginPage, LoginStore> {
                   googleButton: true,
                   backgroundColor: AppTheme.colors.blueLight,
                   onPressed: () async {
-                    /*   if (_formKey.currentState!.validate()) {
-                      await store.login();
-                    }*/
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      content: Text('Em breve!'),
+                    ));
                   },
                   textButton: 'ACESSAR COM O GMAIL',
                   styleText: TextStyle(

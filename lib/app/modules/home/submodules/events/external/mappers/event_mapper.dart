@@ -1,4 +1,4 @@
-import 'package:camp_final/app/modules/home/submodules/events/domain/entities/event_entity.dart';
+import '../../domain/entities/event_entity.dart';
 
 class EventMapper {
   Map<String, dynamic> to(EventEntity event) {

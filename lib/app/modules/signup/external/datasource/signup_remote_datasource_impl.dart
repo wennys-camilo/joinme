@@ -1,10 +1,10 @@
-import 'package:camp_final/app/modules/signup/domain/entities/user_disabilities_entity.dart';
-import 'package:camp_final/app/modules/signup/external/mappers/user_disabilities_mapper.dart';
 import 'package:dio/dio.dart';
 import '../../../../shared/domain/helpers/errors/failure.dart';
 import '../../../../shared/external/adapters/http_client/http_client_adapter.dart';
+import '../../domain/entities/user_disabilities_entity.dart';
 import '../../domain/entities/user_signup_entity.dart';
 import '../../infra/datasources/signup_remote_datasource.dart';
+import '../mappers/user_disabilities_mapper.dart';
 import '../mappers/user_signup_mapper.dart';
 
 class SignupRemoteDatasourceImpl implements SignupRemoteDatasource {

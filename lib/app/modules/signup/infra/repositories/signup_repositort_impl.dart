@@ -1,6 +1,6 @@
-import 'package:camp_final/app/modules/signup/domain/entities/user_disabilities_entity.dart';
 import 'package:dartz/dartz.dart';
 import '../../../../shared/domain/helpers/errors/failure.dart';
+import '../../domain/entities/user_disabilities_entity.dart';
 import '../../domain/entities/user_signup_entity.dart';
 import '../../domain/repositories/signup_repository.dart';
 import '../datasources/signup_remote_datasource.dart';

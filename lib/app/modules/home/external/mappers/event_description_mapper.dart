@@ -1,6 +1,5 @@
-import 'package:camp_final/app/modules/home/external/mappers/category_type_mapper.dart';
-import 'package:camp_final/app/modules/home/external/mappers/event_acessibilite_mapper.dart';
-
+import 'category_type_mapper.dart';
+import 'event_acessibilite_mapper.dart';
 import '../../domain/entities/address_description_entity.dart';
 import '../../domain/entities/event_acessibilitie_entity.dart';
 import '../../domain/entities/event_description_entity.dart';

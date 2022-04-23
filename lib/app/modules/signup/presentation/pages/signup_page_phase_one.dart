@@ -118,7 +118,11 @@ class _SignUpPageState extends State<SignUpPage> {
                   padding: const EdgeInsets.fromLTRB(30, 8, 30, 5),
                   child: RoundedButtonWidget(
                     googleButton: true,
-                    onPressed: () {},
+                    onPressed: () {
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content: Text('Em breve!'),
+                      ));
+                    },
                     textButton: 'CONTINUAR COM O GMAIL',
                     backgroundColor: AppTheme.colors.blueLight,
                     styleText: TextStyle(
@@ -134,7 +138,6 @@ class _SignUpPageState extends State<SignUpPage> {
                             padding: const EdgeInsets.fromLTRB(30, 8, 30, 20),
                             child: RoundedButtonWidget(
                               onPressed: () async {
-                                //Modular.to.navigate('./phaseThree');
                                 if (_formKey.currentState!.validate() &&
                                     store.state.policiesTerms) {
                                   await store.signup();

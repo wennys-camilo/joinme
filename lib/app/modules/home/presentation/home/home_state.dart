@@ -1,5 +1,4 @@
-import 'package:camp_final/app/modules/home/domain/entities/wellness_entity.dart';
-
+import '../../domain/entities/wellness_entity.dart';
 import "../../domain/entities/attendees_response_entity.dart";
 import '../../domain/entities/event_description_entity.dart';
 import '../../domain/entities/mood_entity.dart';

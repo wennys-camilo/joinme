@@ -70,7 +70,6 @@ class _SignupAddressPageState
                   return TextFormField(
                     controller: controller,
                     focusNode: focusNode,
-                    //onEditingComplete: onEditingComplete,
                     textAlign: TextAlign.left,
                     decoration: InputDecoration(
                       contentPadding: const EdgeInsets.symmetric(

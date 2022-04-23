@@ -1,4 +1,3 @@
-import 'package:camp_final/app/modules/signup/presentation/pages/signup_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_triple/flutter_triple.dart';
@@ -6,6 +5,7 @@ import '../../../../shared/domain/helpers/errors/failure.dart';
 import '../../../../shared/presentation/themes/app_theme.dart';
 import '../../../../shared/presentation/widgets/rounded_button_widget.dart';
 import '../widgets/interests_widget.dart';
+import 'signup_state.dart';
 import 'signup_store.dart';
 
 class SignupInterestPage extends StatefulWidget {

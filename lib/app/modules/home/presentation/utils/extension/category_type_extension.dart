@@ -41,7 +41,7 @@ extension CategoryTypeExtension on CategorieType {
         return AppTheme.images.technology;
 
       default:
-        throw UnimplementedError();
+        return AppTheme.images.music;
     }
   }
 }
