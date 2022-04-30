@@ -18,7 +18,7 @@ Utilizado para o tratamento de exceções com o Either do Dartz retornamos dois 
 Ao utilizar um usecase utilizamos o fold para obter os retornos (Falha e Sucesso):
 
 ```dart
-final response = fetchAllEventsUsecase();
+final response = await fetchAllEventsUsecase();
    response.fold((failure){
    //TODO: FALHA 
    }, (result) {
